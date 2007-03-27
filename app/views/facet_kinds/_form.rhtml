@@ -1,0 +1,14 @@
+
+<% facebook_form_for @facet_kind do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :service_url %>
+  <p>
+    The following info may be parameterised. 
+    The parameters you add here can be filled in by users when they use this facet kind.
+    When the info is rendered, the parameters are substituted from the user's values.
+  </p>
+  <%= f.text_field :title %>
+  <%= f.text_field :site %>
+  <%= f.text_field :feed %>
+  <%= f.submit %>
+<% end %>
