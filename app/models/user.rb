@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
     [self.affiliations, stub_affiliations].flatten
   end
   
+  def visitor?
+    !regular?
+  end
+  
   def ensure_affiliation(params={})
     return nil unless params[:group_id]
     
@@ -97,8 +101,12 @@ class User < ActiveRecord::Base
     linked = params.delete(:linked)
     linked = !(linked == 'false' || linked.blank?)
     
-    params[:regular] = true unless [:regular, :presenter, :visitor].any? {|k| params[k]}
+    visitor = params.delete(:visitor)
     
+    unless params[:regular].blank? and visitor.blank?
+      params[:regular] = visitor.blank?
+    end
+
     if affiliation
       
       unless linked
@@ -107,7 +115,6 @@ class User < ActiveRecord::Base
         affiliation = Affiliation.new(params)
       else
         affiliation.presenter = params[:presenter]
-        affiliation.visitor   = params[:visitor]
         affiliation.regular   = params[:regular]
       end
     

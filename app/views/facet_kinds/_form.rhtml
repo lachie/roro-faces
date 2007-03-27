@@ -3,9 +3,12 @@
   <%= f.text_field :name %>
   <%= f.text_field :service_url %>
   <p>
-    The following info may be parameterised. 
-    The parameters you add here can be filled in by users when they use this facet kind.
-    When the info is rendered, the parameters are substituted from the user's values.
+    Title, site and feed are parameterisable. 
+  </p>
+  <p>
+    To specify a <strong>user_id</strong> parameter, use ${user_id}.
+    When someone uses this facet kind, they can fill in the parameter with their user id for that facet.
+    When the facet is rendered, all parameters are substituted with values provided by the user. 
   </p>
   <%= f.text_field :title %>
   <%= f.text_field :site %>

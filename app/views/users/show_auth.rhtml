@@ -20,9 +20,9 @@ var Rules = {
       parameters['linked']    = false
     } else {
       parameters['linked']    = true
-      parameters['visitor']   = $F("group_"+id+"_visitor")
       parameters['presenter'] = $F("group_"+id+"_presenter")
-      parameters['regular'] = $F("group_"+id+"_regular")
+      parameters['regular'] = $F("group_"+id+"_kind_regular")
+      parameters['visitor'] = $F("group_"+id+"_kind_visitor")
     }
 
     new Ajax.Request("/users/<%= @user.id %>;link_affiliation",

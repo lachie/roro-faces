@@ -4,7 +4,7 @@ class FacetKindsController < ApplicationController
   
   def authorized?
     return true if %w{new create}.include? action_name
-    
+    current_user.admin?
   end
   
   def index
