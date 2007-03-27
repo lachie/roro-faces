@@ -1,0 +1,10 @@
+<div id="tabs">
+  <%= link_to 'schooner', users_path() %>
+</div>
+
+<div id="grid">
+<% @users.each do |user| %>
+  <div>
+    <%= link_to(image_tag(user.thumbnail_public_path), user_path(user)) %>
+  </div>
+<% end %>

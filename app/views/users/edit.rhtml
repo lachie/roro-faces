@@ -1,0 +1,4 @@
+<h1><%=@user.nick%></h1>
+<%= link_to "Go back to #{@user.nick}'s page", user_path(@user) %>.
+
+<%= render :partial => 'form' %>

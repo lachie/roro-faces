@@ -1,0 +1,53 @@
+<h1><%= @user.nick %></h1>
+
+<div id="info-container">
+
+<p class="minor">
+  <% if authorised? %>
+  <%= link_to "Show #{@user.nick}", user_path(@user) %>
+  &middot;
+  <%= link_to "Edit #{@user.nick}", edit_user_path(@user) %>
+  &middot;
+  <% end %>
+  <%= link_to "Back to the schooner", users_path %>
+</p>
+
+<p class="mugshot">
+  <%= image_tag @user.mugshot.public_filename if @user.mugshot %>
+</p>
+
+<p>
+<strong><%= @user.name %></strong><br/>
+<%= "<em>a.k.a</em> #{@user.aliases}" unless @user.aliases.blank? %>
+</p>
+
+
+<% unless @user.blurb.blank? %>
+<p class="blurb">
+  <em><%= @user.blurb %></em>
+</p>
+<% end %>
+<p>
+<%= link_to @user.site_name, @user.site_url %>
+</p>
+
+<% if @user.affiliations.size > 0 %>
+<div id="affiliations">
+<h2>groups</h2>
+  <ul>
+    <%= render :partial => 'affiliation_show', :collection => @user.affiliations %>
+  </ul>
+</div>
+<% end %>
+
+
+<div id="lists">
+  <h2>facets</h2>of <%= @user.nick %>'s web presence.
+  <div class="list">
+    <ul id="facet-list">
+      <%= render :partial => 'facet_show', :collection => @user.facets %>
+    </ul>
+  </div>
+</div>
+
+</div>

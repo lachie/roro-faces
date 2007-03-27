@@ -1,0 +1,3 @@
+<div id="<%=dom_id(user)%>" class="<%=dom_class(user)%>">
+  <%= link_to image_tag(user.mugshot ? user.mugshot.public_filename(:thumb) : 'no-mugshot.png'), user_path(user) %>
+</div>

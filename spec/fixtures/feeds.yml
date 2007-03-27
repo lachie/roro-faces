@@ -1,0 +1,11 @@
+--- 
+lachie_blog: 
+  url: http://blog.lachie.info/feed/atom.xml
+  id: 2
+  user_id: 1
+  aggregate: true
+lachie_tumble: 
+  url: http://lachie.info/entries/rss
+  id: 1
+  user_id: 1
+  aggregate: false

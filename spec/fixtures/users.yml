@@ -1,0 +1,31 @@
+--- 
+lachie: 
+  name: Lachlan Cox
+  updated_at: 0
+  flickr_uid: lachie
+  password_salt: 31c31e4d9247bebdf28b7592c06c194459a6e31c
+  mugshot_id: 1
+  id: 1
+  password_hash: 5900431e4582dedea5632179583ecf9dc884f188
+  aliases: Brother RSpec,Lachie
+  delicious_uid: lachie
+  irc_nick: lachie
+  blurb: He's just this guy, you know?
+  email: lachie@gmail.com
+  location: Normanhurst
+  created_at: !ruby/object:Bignum 1173129498
+bob: 
+  name: Bob Smith
+  updated_at: !ruby/object:Bignum 1173043098
+  flickr_uid: 
+  password_salt: 06e9b4097a023f6340b4835dcc0f3262af37eee3
+  id: 2
+  password_hash: 18679f7e22a1ab12cf1e6a8d49cfa3f9ef88c4db
+  mugshot: 
+  aliases: 
+  delicious_uid: 
+  irc_nick: 
+  blurb: 
+  email: 
+  location: 
+  created_at: !ruby/object:Bignum 1172956698

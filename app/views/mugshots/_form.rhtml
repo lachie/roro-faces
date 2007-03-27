@@ -1,0 +1,6 @@
+<% facebook_form_for @mugshot, :html => {:multipart => true} do |f| %>
+  <%= hidden_field_tag :user_id, params[:user_id] %>
+  <%= f.file_field :uploaded_data %>
+  <%= f.submit 'upload', 'upload' %>
+<% end %>
+  

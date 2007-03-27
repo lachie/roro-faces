@@ -1,0 +1,15 @@
+<h1>edit facet kind</h1>
+<%= error_messages_for :facet_kind %>
+<%= flash[:notice] %>
+
+<p>
+  <%= link_to 'Back to list of facet kinds', facet_kinds_path %>
+</p>
+<p>
+  This kind is being used by <%= pluralize(@facet_kind.facets.count,"facet") %>.
+  <% if @facet_kind.facets.count > 0 %>Please be careful changing this info, other people are using it.<% end %>
+</p>
+<p>
+</p>
+
+<%= render :partial => 'form' %>

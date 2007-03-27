@@ -1,0 +1,1 @@
+page.insert_html :bottom, 'facet-list', :partial => 'users/facet', :object => @link

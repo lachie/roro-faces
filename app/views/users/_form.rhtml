@@ -1,0 +1,21 @@
+<% facebook_form_for @user do |f| %>
+  <%= f.text_field :irc_nick %>
+  <%= f.text_field :name, :mandatory => true %>
+  
+  <%= f.text_field :email, :mandatory => true %>
+  
+  
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+  
+  <%= f.text_area :blurb %>
+  
+  <%= f.text_field :site_url %>
+  <%= f.text_field :site_name %>
+  
+  <%= f.text_field :aliases %>
+  
+  <p>
+  <%= submit_tag 'save' %>
+  </p>
+<% end %>

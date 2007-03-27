@@ -1,0 +1,1 @@
+page.replace dom_id(@affiliation.group), :partial => 'affiliation', :object => @affiliation

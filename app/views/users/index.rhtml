@@ -1,0 +1,14 @@
+
+<%= javascript_tag "Glass.users = #{@users_for_glass.to_json}"%>
+
+<div id="tabs">
+  <%= link_to 'pinboard', users_path(:simple => true) %>
+</div>
+
+<div id="floaters">
+  <img src="/images/beertop.png" class="beerhead" />
+  <img src="/images/beerbase.png" class="beerbase" />
+  <img src="/images/croppedbeer.png" class="bg" />
+</div>
+
+<div id="name-box" style="display:none"></div>

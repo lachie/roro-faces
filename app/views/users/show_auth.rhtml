@@ -1,0 +1,109 @@
+<script>
+var Rules = {
+  "#feed-list input:change": function(e) {
+    var value = e.id.match(/aggregate_feed_(\d+)/)
+    if(!value) return;
+    
+    var parameters = $H({'feed[aggregate]': $F(e)})
+    new Ajax.Request("/feeds/"+value[1],{method:'put',parameters:parameters,asynchronous:true,evalScripts:true});
+  },
+  "#affiliations input:change": function(e) {
+    var value = e.id.match(/^group_(\d+)/)
+    
+    if(!value) return;
+    var id = value[1]
+    var parameters = $H({
+      group_id:  id
+    });
+    
+    if(e.id.match(/^group_(\d+)_linked$/) && !$F("group_"+id+"_linked")) {
+      parameters['linked']    = false
+    } else {
+      parameters['linked']    = true
+      parameters['visitor']   = $F("group_"+id+"_visitor")
+      parameters['presenter'] = $F("group_"+id+"_presenter")
+      parameters['regular'] = $F("group_"+id+"_regular")
+    }
+
+    new Ajax.Request("/users/<%= @user.id %>;link_affiliation",
+      {method:'post',parameters:parameters,asynchronous:true,evalScripts:true});
+  },
+  "#facet_kind:change": function(e) {
+    var value = $F(e);
+    console.log(value);
+    
+    if( value == '-1') {
+      Element.replace('facet_kind_form','<div id="facet_kind_form"></div>');
+    } else if( value == '0' ) {
+      document.location = "/facet_kinds/new";
+    } else if( value == '-2' ) {
+      document.location = "/facet_kinds";
+    } else {
+      var parameters = { user_id: <%=@user.id%>, facet_kind_id: value };
+      new Ajax.Request('/facets/new',{method:'get',parameters:parameters,evalScripts:true});
+    }
+    return false;
+  }
+};
+</script>
+
+<h1><%= @user.nick %></h1>
+
+<div id="info-container">
+
+<p class="minor">
+  <%= link_to "Preview #{@user.nick}", user_path(:id => @user, :preview => true) %>
+  &middot;
+  <%= link_to "Edit #{@user.nick}", edit_user_path(@user) %>
+  &middot;
+  <%= link_to "Back to the schooner", users_path %>
+</p>
+
+<p class="mugshot">
+  <% unless @user.mugshot %>
+    hey, <%= link_to 'upload a mugshot', new_mugshot_path(:user_id => @user.id) %>
+  <% else %>
+    <%= image_tag @user.mugshot.public_filename if @user.mugshot %><br/>
+    <%= link_to 'change your mugshot', edit_mugshot_path(@user.mugshot)%><br/>
+    <%= link_to_remote 'remove your mugshot', :url => mugshot_path(@user.mugshot), :method => :delete %>
+  <% end %>
+</p>
+
+<p>
+<strong><%= @user.name %></strong><br/>
+<%= "<em>a.k.a</em> #{@user.aliases}" unless @user.aliases.blank? %>
+</p>
+
+
+<% unless @user.blurb.blank? %>
+<p class="blurb">
+  <em><%= @user.blurb %></em>
+</p>
+<% end %>
+<p>
+<%= link_to @user.site_name, @user.site_url %>
+</p>
+
+
+<div id="affiliations">
+<h2>affiliations</h2>
+  <ul>
+    <%= render :partial => 'affiliation', :collection => @user.all_affiliations %>
+  </ul>
+</div>
+
+
+<div id="lists">
+  <h2>facets</h2>of your web presence.
+  <div class="list">
+    <ul id="facet-list">
+      <%= render :partial => 'facet', :collection => @user.facets %>
+    </ul>
+    <%= select_tag( :facet_kind, 
+      options_for_select(@facet_kinds)
+    ) %>
+    <div id="facet_kind_form"></div>
+  </div>
+</div>
+
+</div>

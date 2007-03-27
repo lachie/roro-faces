@@ -1,0 +1,6 @@
+<li id="<%=dom_id(affiliation.group)%>">
+  <%= check_box_tag "#{dom_id(affiliation.group)}_linked"   , true, affiliation.user %> <%= affiliation.group.name %>
+  <%= check_box_tag "#{dom_id(affiliation.group)}_regular"  , true, affiliation.regular? %> regular
+  <%= check_box_tag "#{dom_id(affiliation.group)}_presenter", true, affiliation.presenter? %> presenter
+  <%= check_box_tag "#{dom_id(affiliation.group)}_visitor"  , true, affiliation.visitor? %> visitor
+</li>
