@@ -10,6 +10,11 @@
     When someone uses this facet kind, they can fill in the parameter with their user id for that facet.
     When the facet is rendered, all parameters are substituted with values provided by the user. 
   </p>
+  <p>
+    For example, you provide the template link http://www.flickr.com/photos/${user}/. When a user creates a facet 
+    from this facet kind, they're presented with a text field for each parameter used in title, site or feed -- in this
+    case "user".
+  </p>
   <%= f.text_field :title %>
   <%= f.text_field :site %>
   <%= f.text_field :feed %>
