@@ -6,7 +6,7 @@ class MugshotsController < ApplicationController
   append_before_filter :login_required, :except => [:show]
   
   def authorized?
-    (@user || @mugshot.user) == current_user
+    (@user || @mugshot.user) == current_user rescue true
   end
   
   def show
@@ -56,6 +56,11 @@ class MugshotsController < ApplicationController
     raise $!
     flash[:notice] = "Failed to create mugshot. #{$!} #{$!.backtrace * '<br/>'}"
     render :action => :new
+  end
+  
+  def update_all_thumbnails
+    Mugshot.find(:all, :conditions => {:parent_id => nil}).each { |a| a.update_thumbnails }
+    redirect_to '/'
   end
   
   protected

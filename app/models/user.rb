@@ -125,6 +125,10 @@ class User < ActiveRecord::Base
     affiliation.save! if linked   
     affiliation
   end
+  
+  def self.regenerate_all_thumbnails
+    User.find(:all).each {|u| u.mugshot.regenerate_thumbnails if u.mugshot rescue nil }
+  end
 
   protected
     # before filter 

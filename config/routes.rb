@@ -8,7 +8,8 @@ ActionController::Routing::Routes.draw do |map|
       :link_affiliation => :post
     }
   
-  map.resources :mugshots
+  map.resources :mugshots, 
+    :collection => { :update_all_thumbnails => :get }
   
   map.logout 'accounts/logout', :controller => 'accounts', :action => 'logout'
   map.login  'accounts/login', :controller => 'accounts', :action => 'login'

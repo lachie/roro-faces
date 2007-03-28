@@ -48,18 +48,18 @@ require 'RMagick'
             size = [size, size] if size.is_a?(Fixnum)
             size = [size.first,size.first] if size.is_a?(Array) and size.length == 1
             
-            image = Magick::Image.new(*size)
+            # image = Magick::Image.new(*size)
             
-            gc = Magick::Draw.new
+            #gc = Magick::Draw.new
             
-            gc.fill('#B8691088')
-            gc.rectangle(0,0,*size)
+            #gc.fill('#B8691088')
+            #gc.rectangle(0,0,*size)
             
             # gc.fill('#f00')
             # gc.circle(size[0],size[0],10,10)
             
             img.crop_resized!(*size)
-            gc.draw(img)
+            #gc.draw(img)
             
             
             # img.mask = image

@@ -1,9 +1,4 @@
 class Mugshot < ActiveRecord::Base
-  # --- HornsbyBuilder-associations start
-	
-	has_many :users
-  # --- HornsbyBuilder-associations end
-  
   has_one :user
   attr_accessor :user_id
     
@@ -16,5 +11,10 @@ class Mugshot < ActiveRecord::Base
     :processor => 'Bubble'
     
   validates_as_attachment
+  
+  def regenerate_thumbnails
+    temp_file = temp_path.blank? ? create_temp_file : temp_path
+    attachment_options[:thumbnails].each { |suffix, size| create_or_update_thumbnail(temp_file, suffix, *size) }
+  end
   
 end
