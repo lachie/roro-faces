@@ -55,7 +55,7 @@ var Rules = {
   &middot;
   <%= link_to "Edit #{@user.nick}", edit_user_path(@user) %>
   &middot;
-  <%= link_to "Back to the schooner", users_path %>
+  <%= link_to "Back to the schooner", users_path %> | <%= link_to "pinboard", users_path(:simple => true) %>
 </p>
 
 <p class="mugshot">

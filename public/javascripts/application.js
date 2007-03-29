@@ -17,7 +17,7 @@ Object.extend(Bubble.prototype,{
     
     this.floating = true;
     this.wiggle_tweak = Math.clamped_random(20,40);
-    this.wiggle_period = Math.clamped_random(50,70); // 50
+    this.wiggle_period = Math.clamped_random(50,70);
     
     
     this.cumulative_time = 0;
@@ -74,10 +74,8 @@ Object.extend(Bubble.prototype,{
       return;
     }
     
-    this.element.setStyle({
-      top: this.glass.scale_y(this.height-this.y)+'px',
-      left: (this.wiggle()+this.glass.scale_x(this.x,this.y))+'px'
-    });
+    this.element.style['top']  = this.glass.scale_y(this.height-this.y)+'px';
+    this.element.style['left'] = (this.wiggle()+this.glass.scale_x(this.x,this.y))+'px';
   },
   
   wiggle: function() {
@@ -93,10 +91,8 @@ Object.extend(Bubble.prototype,{
     this.y = y;
     this.x = x;
     
-    this.element.setStyle({
-      top: this.glass.scale_y(this.height-y)+'px',
-      left: this.glass.scale_x(x)+'px'
-    });
+    this.element.style['top'] = this.glass.scale_y(this.height-y)+'px';
+    this.element.style['left'] = this.glass.scale_x(x)+'px';
   },
   set_velocity: function(v) {
     this.velocity = v;
