@@ -2,7 +2,7 @@
 <%= javascript_tag "Glass.users = #{@users_for_glass.to_json}"%>
 
 <div id="tabs">
-  <%= link_to 'pinboard', users_path(:simple => true) %>
+  <%= link_to 'pinboard', pinboard_users_path() %>
 </div>
 
 <div id="floaters">

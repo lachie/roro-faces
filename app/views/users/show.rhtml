@@ -10,27 +10,15 @@
   &middot;
   <% end %>
   <%= link_to "Back to the schooner", users_path %>
-   | <%= link_to "pinboard", users_path(:simple => true) %>
+   | <%= link_to "pinboard", pinboard_users_path %>
 </p>
 
 <p class="mugshot">
   <%= image_tag @user.mugshot.public_filename if @user.mugshot %>
 </p>
 
-<p>
-<strong><%= @user.name %></strong><br/>
-<%= "<em>a.k.a</em> #{@user.aliases}" unless @user.aliases.blank? %>
-</p>
+<%= render :partial => 'show_common' %>
 
-
-<% unless @user.blurb.blank? %>
-<p class="blurb">
-  <em><%= @user.blurb %></em>
-</p>
-<% end %>
-<p>
-<%= link_to @user.site_name, @user.site_url %>
-</p>
 
 <% if @user.affiliations.size > 0 %>
 <div id="affiliations">
@@ -42,13 +30,13 @@
 <% end %>
 
 
-<div id="lists">
+<% if @user.facets.size > 0 %>
+<div id="facets">
   <h2>facets</h2>of <%= @user.nick %>'s web presence.
-  <div class="list">
-    <ul id="facet-list">
-      <%= render :partial => 'facet_show', :collection => @user.facets %>
-    </ul>
-  </div>
+  <ul id="facet-list">
+    <%= render :partial => 'facet_show', :collection => @user.facets %>
+  </ul>
 </div>
+<% end %>
 
 </div>

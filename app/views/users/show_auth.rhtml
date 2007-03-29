@@ -55,7 +55,7 @@ var Rules = {
   &middot;
   <%= link_to "Edit #{@user.nick}", edit_user_path(@user) %>
   &middot;
-  <%= link_to "Back to the schooner", users_path %> | <%= link_to "pinboard", users_path(:simple => true) %>
+  <%= link_to "Back to the schooner", users_path %> | <%= link_to "pinboard", pinboard_users_path %>
 </p>
 
 <p class="mugshot">
@@ -68,21 +68,7 @@ var Rules = {
   <% end %>
 </p>
 
-<p>
-<strong><%= @user.name %></strong><br/>
-<%= "<em>a.k.a</em> #{@user.aliases}" unless @user.aliases.blank? %>
-</p>
-
-
-<% unless @user.blurb.blank? %>
-<p class="blurb">
-  <em><%= @user.blurb %></em>
-</p>
-<% end %>
-<p>
-<%= link_to @user.site_name, @user.site_url %>
-</p>
-
+<%= render :partial => 'show_common' %>
 
 <div id="affiliations">
 <h2>affiliations</h2>

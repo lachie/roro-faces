@@ -1,0 +1,30 @@
+<p>
+<strong><%= @user.name %></strong>
+<%= "<br/><em>a.k.a</em> #{@user.aliases}" unless @user.aliases.blank? %>
+<%= "<br/><em>in</em> #{@user.location}" unless @user.location.blank? %>
+</p>
+
+
+<% unless @user.blurb.blank? %>
+<p class="blurb">
+  <em><%= textilize_without_paragraph @user.blurb %></em>
+</p>
+<% end %>
+
+<% unless @user.site_url.blank? %>
+<p>
+<%= link_to @user.site_name, @user.site_url %>
+</p>
+<% end %>
+
+<% unless @user.working_at.blank? %>
+  <p>
+    <em>working at</em> <%= @user.working_at_url.blank? ? @user.working_at : link_to(@user.working_at, clean_link(@user.working_at_url)) %>
+  </p>
+<% end %>
+
+<% unless @user.working_on.blank? %>
+  <p>
+    <em>working on</em><br/><%= textilize_without_paragraph @user.working_on %>
+  </p>
+<% end %>

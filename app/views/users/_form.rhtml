@@ -1,20 +1,27 @@
 <% facebook_form_for @user do |f| %>
   <%= f.text_field :irc_nick %>
-  <%= f.text_field :name, :mandatory => true %>
+  <%= f.text_field :name %>
   
   <%= f.text_field :email, :mandatory => true %>
-  
-  
-  <%= f.password_field :password %>
-  <%= f.password_field :password_confirmation %>
-  
-  <%= f.text_area :blurb %>
+  <p>your email address is your login, so change with care</p>
   
   <%= f.text_field :site_url %>
   <%= f.text_field :site_name %>
   
   <%= f.text_field :aliases %>
   
+  <%= f.text_area :blurb, :rows => 7 %>
+  
+  <%= f.text_field :location %>
+  
+  <%= f.text_field :working_at %>
+  <%= f.text_field :working_at_url %>
+  <%= f.text_area :working_on, :rows => 7 %>
+
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+  <p>(leave blank to keep current password)</p>
+    
   <p>
   <%= submit_tag 'save' %>
   </p>

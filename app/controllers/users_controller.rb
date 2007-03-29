@@ -10,9 +10,13 @@ class UsersController < ApplicationController
   def index
     @users = User.find(:all)
     @users_for_glass = @users.map(&:for_glass)
-    render :action => (params[:simple] ? 'index_simple' : 'index')
+    render :action => 'index'
   end
   
+  def pinboard
+    @users = User.find(:all)
+    render :action => 'index_simple'
+  end  
   
   def edit 
   end

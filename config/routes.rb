@@ -6,6 +6,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users,
     :member => {
       :link_affiliation => :post
+    },
+    :collection => {
+      :pinboard => :get
     }
   
   map.resources :mugshots, 

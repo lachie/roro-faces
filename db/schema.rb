@@ -2,13 +2,14 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 11) do
 
   create_table "affiliations", :force => true do |t|
     t.column "user_id",   :integer
     t.column "group_id",  :integer
     t.column "visitor",   :boolean
     t.column "presenter", :boolean
+    t.column "regular",   :boolean
   end
 
   create_table "facet_kinds", :force => true do |t|
@@ -16,6 +17,8 @@ ActiveRecord::Schema.define(:version => 10) do
     t.column "site",         :string
     t.column "feed",         :string
     t.column "aggregatable", :boolean
+    t.column "title",        :string
+    t.column "service_url",  :string
   end
 
   create_table "facets", :force => true do |t|
@@ -27,6 +30,7 @@ ActiveRecord::Schema.define(:version => 10) do
 
   create_table "groups", :force => true do |t|
     t.column "name", :string
+    t.column "url",  :string
   end
 
   create_table "mugshots", :force => true do |t|
@@ -55,8 +59,11 @@ ActiveRecord::Schema.define(:version => 10) do
     t.column "aliases",                   :string
     t.column "location",                  :string
     t.column "name",                      :string
-    t.column "site",                      :string
+    t.column "site_url",                  :string
     t.column "site_name",                 :string
+    t.column "admin",                     :integer,  :limit => 4,  :default => 0, :null => false
+    t.column "working_at",                :string
+    t.column "working_on",                :string
   end
 
 end
