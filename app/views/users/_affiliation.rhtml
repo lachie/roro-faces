@@ -1,8 +1,11 @@
 <li id="<%=dom_id(affiliation.group)%>">
   <%= check_box_tag "#{dom_id(affiliation.group)}_linked"   , true, affiliation.user %> <%= affiliation.group.name %>
   
-  <%= radio_button_tag "#{dom_id(affiliation.group)}_kind",  'regular', (!affiliation.new_record? && affiliation.regular?) %> regular
-  <%= radio_button_tag "#{dom_id(affiliation.group)}_kind",  'visitor', (!affiliation.new_record? && !affiliation.regular?) %> visitor
+  <%= radio_button_tag "#{dom_id(affiliation.group)}_kind",  'regular', 
+    (!affiliation.new_record? && affiliation.regular?) %> regular
+    
+  <%= radio_button_tag "#{dom_id(affiliation.group)}_kind",  'visitor', 
+    (!affiliation.new_record? && !affiliation.regular?) %> visitor
   
   <%= check_box_tag "#{dom_id(affiliation.group)}_presenter", true, affiliation.presenter? %> presenter
 </li>

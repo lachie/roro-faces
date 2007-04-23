@@ -6,6 +6,11 @@ module AuthenticatedSystem
       current_user != :false
     end
     
+    # If there is a current_user, are they an admin?
+    def admin?
+      logged_in? and current_user.admin?
+    end
+    
     # Accesses the current user from the session.
     def current_user
       @current_user ||= (session[:user] && User.find_by_id(session[:user])) || :false
@@ -32,6 +37,7 @@ module AuthenticatedSystem
     def authorized?
       true
     end
+    
 
     # Filter method to enforce a login requirement.
     #

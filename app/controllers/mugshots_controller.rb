@@ -6,7 +6,7 @@ class MugshotsController < ApplicationController
   append_before_filter :login_required, :except => [:show]
   
   def authorized?
-    (@user || @mugshot.user) == current_user rescue true
+    (@user || (@mugshot.user rescue nil)) == current_user or admin?
   end
   
   def show

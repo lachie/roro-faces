@@ -1,5 +1,5 @@
 <li id="<%=dom_id(facet)%>">
-  <%= image_tag facet.favicon %>
+  <%#= image_tag facet.favicon %>
   <%= link_to facet.link_text, clean_link(facet.link) %>
   <%= link_to 'feed', clean_link(facet.feed) unless facet.feed.blank? %>
   [<%= link_to_remote 'x', :url => facet_path(facet), :method => 'delete' %>]

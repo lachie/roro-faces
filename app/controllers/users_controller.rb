@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   append_before_filter :login_required, :only => [ :edit, :update ]
   
   def authorized?
-    current_user == @user
+    current_user == @user or admin?
   end
   
   def index

@@ -31,16 +31,19 @@ Object.extend(Bubble.prototype,{
     e.setAttribute('class','user');
     e.setAttribute('src',this.image);
     
-    
     Event.observe(e,'mouseover',this.mouseover.bindAsEventListener(this));
     Event.observe(e,'mouseout',this.mouseout.bindAsEventListener(this));
     Event.observe(e,'click',this.click.bindAsEventListener(this));
+  },
+  
+  setup_shape: function() {
+    this.element.setStyle({position: 'absolute'});
     
-    e.setStyle({position: 'absolute'});
-    
-    this.dimensions = e.getDimensions();
+    this.dimensions = this.element.getDimensions();
     this.height = this.dimensions.height
     this.width  = this.dimensions.width
+    
+    //alert("dim:"+this.dimensions.height+" w:"+this.dimensions.width);
   },
   
   mouseover: function(e) {
@@ -69,11 +72,12 @@ Object.extend(Bubble.prototype,{
     
     this.cumulative_time += position;
     
-    if( this.y >= this.glass.height-80 ) {
+    if( this.y >= this.glass.height-40 ) {
       this.remove();
       return;
     }
     
+
     this.element.style['top']  = this.glass.scale_y(this.height-this.y)+'px';
     this.element.style['left'] = (this.wiggle()+this.glass.scale_x(this.x,this.y))+'px';
   },
@@ -91,7 +95,7 @@ Object.extend(Bubble.prototype,{
     this.y = y;
     this.x = x;
     
-    this.element.style['top'] = this.glass.scale_y(this.height-y)+'px';
+    this.element.style['top']  = this.glass.scale_y(this.height-y)+'px';
     this.element.style['left'] = this.glass.scale_x(x)+'px';
   },
   set_velocity: function(v) {
@@ -106,7 +110,9 @@ Glass = {
     
     Glass.dimensions = Glass.container.getDimensions();
     
-    Glass.height = Glass.dimensions.height - 48
+    var delta = Position.positionedOffset(Glass.container);
+    
+    Glass.height = Glass.dimensions.height - delta[1] - 48
     Glass.width  = Glass.dimensions.width  - 48
     
     Glass.mid_x = Math.round(Glass.height / 2);
@@ -165,10 +171,12 @@ Glass = {
     var x = Math.clamped_random(-106,106);
     var v = Math.clamped_random(0.02,0.05);
     
-    b.set_position(x,2);
+    b.set_position(x,14);
     b.set_velocity(v);
     
     this.add_bubble(b);
+    
+    b.setup_shape();
   },
   
   scale_x: function(x,y) {

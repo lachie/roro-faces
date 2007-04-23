@@ -7,7 +7,7 @@ var Rules = {
     var parameters = $H({'feed[aggregate]': $F(e)})
     new Ajax.Request("/feeds/"+value[1],{method:'put',parameters:parameters,asynchronous:true,evalScripts:true});
   },
-  "#affiliations input:change": function(e) {
+  "#affiliations input[type!=radio]:change, #affiliations input[type=radio]:click": function(e) {
     var value = e.id.match(/^group_(\d+)/)
     
     if(!value) return;

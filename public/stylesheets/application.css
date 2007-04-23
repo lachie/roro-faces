@@ -56,7 +56,6 @@ body.users-index #content {
   width: 500px;
   border: 1px solid black;
   position: relative;
-  background: url('/images/croppedbeer.png') no-repeat;
 }
 
 #floaters img.beerhead {
