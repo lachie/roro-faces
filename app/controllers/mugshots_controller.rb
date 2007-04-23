@@ -2,7 +2,7 @@
 class MugshotsController < ApplicationController
   
   append_before_filter :load_user, :only => [:create,:new]
-  append_before_filter :load_mugshot, :only => [:show,:edit,:update]
+  append_before_filter :load_mugshot, :only => [:show,:edit,:update,:destroy]
   append_before_filter :login_required, :except => [:show]
   
   def authorized?
@@ -21,8 +21,10 @@ class MugshotsController < ApplicationController
   
   def destroy
     mugshot = @mugshot.destroy
+    
     if mugshot.user
-      redirect_to user_url(mugshot.user)
+      @user = mugshot.user
+      render(:update) {|p| p.replace_html :mugshot, :partial => 'users/mugshot'}
     end
   end
   

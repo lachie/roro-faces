@@ -83,6 +83,7 @@ set :mongrel_address, "0.0.0.0"
 
 desc "Link up database.yml."
 task :after_deploy, :roles => [:app, :web] do
+  run "rm -rf #{shared_path}/public/mugshots"
   symlink_public
  run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
 end

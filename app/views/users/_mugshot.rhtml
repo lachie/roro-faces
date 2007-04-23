@@ -1,0 +1,7 @@
+<% unless @user.mugshot %>
+  hey, <%= link_to 'upload a mugshot', new_mugshot_path(:user_id => @user.id) %>
+<% else %>
+  <%= image_tag @user.mugshot.public_filename if @user.mugshot %><br/>
+  <%= link_to 'change your mugshot', edit_mugshot_path(@user.mugshot)%><br/>
+  <%= link_to_remote 'remove your mugshot', :url => mugshot_path(@user.mugshot), :method => :delete %>
+<% end %>
