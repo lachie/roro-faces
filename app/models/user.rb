@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   # facebook stuff
   
   def nick
-    @nick ||= [irc_nick, name, email].reject {|s| s.blank?}.first || "no username!"
+    @nick ||= [irc_nick, name, email.sub('@','(a)')].reject {|s| s.blank?}.first || "no username!"
   end
   
   SCHEME_RE = /^\w+:\/\//
