@@ -200,6 +200,13 @@ p.minor {
   float: left;
 }
 
+#grid .pinuser {
+  margin-left: .2em;
+  margin-bottom: 1.2em;
+}
+
+/*
 #grid img {
   border: 1px solid #aaa;
 }
+*/
