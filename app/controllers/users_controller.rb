@@ -8,14 +8,28 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.find(:all)
-    @users_for_glass = @users.map(&:for_glass)
-    render :action => 'index'
+        
+    respond_to do |wants|
+      wants.html do
+        @users = User.find(:all)
+        @users_for_glass = @users.map(&:for_glass)
+        render :action => 'index'
+      end
+      wants.rss { do_index_rss }
+    end
+    
   end
   
   def pinboard
-    @users = User.find(:all)
-    render :action => 'index_simple'
+    
+    respond_to do |wants|
+      wants.html do
+        @users = User.find(:all)
+        render :action => 'index_simple'
+      end
+      wants.rss { do_index_rss }
+    end
+    
   end  
   
   def edit 
@@ -67,6 +81,21 @@ class UsersController < ApplicationController
   protected
   def load_user
     @user = User.find(params[:id])
+  end
+  
+  def do_index_rss
+    users = User.find(:all,:order => 'updated_at desc')
+    options = {
+      :feed => {
+        :title => "roro facebook",
+        :description => "The real faces of Rails Oceania people!"
+      },
+      :item => {
+        :title => :nick,
+        :description => :feed_description
+      }
+    }
+    render_rss_feed_for users, options
   end
 
 end

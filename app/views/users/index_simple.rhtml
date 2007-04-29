@@ -1,3 +1,6 @@
+<% content_for :feed_tags do %>
+<%= auto_discovery_link_tag(:rss, formatted_users_path(:rss) ) %>
+<% end %>
 <script>
 var Rules = {
   'div.pinuser:mouseover': function(e) {

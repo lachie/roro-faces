@@ -73,6 +73,14 @@ class User < ActiveRecord::Base
     site[SCHEME_RE] ? site : "http://#{site}" unless site.blank?
   end
   
+  def feed_description
+    if updated_at == created_at
+      "#{nick} created a profile."
+    else
+      "#{nick} updated their profile."
+    end
+  end
+  
   def thumbnail_public_path
     self.mugshot ? self.mugshot.public_filename(:thumb) : '/images/no-mugshot.png'
   end
@@ -80,6 +88,7 @@ class User < ActiveRecord::Base
   def for_glass
     [id,nick,thumbnail_public_path]
   end
+  
   
   def all_affiliations
     my_groups = self.groups
