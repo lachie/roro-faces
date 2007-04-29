@@ -6,6 +6,8 @@ class FacetKind < ActiveRecord::Base
   has_many :users, :through => :facets
   
   before_save :get_favicon
+  
+  validates_presence_of :name, :title, :site
     
   def self.find_for_select
     find(:all,:order => 'name').collect {|f| [f.name,f.id]}

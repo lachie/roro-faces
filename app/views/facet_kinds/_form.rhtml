@@ -1,6 +1,9 @@
 
 <% facebook_form_for @facet_kind do |f| %>
-  <%= f.text_field :name %>
+  <p>
+    Note that while anyone can create a new facet kind, only an admin can edit them.
+  </p>
+  <%= f.text_field :name, :mandatory => true %>
   <%= f.text_field :service_url %>
   <p>
     Title, site and feed are parameterisable. 
@@ -15,8 +18,8 @@
     from this facet kind, they're presented with a text field for each parameter used in title, site or feed -- in this
     case "user".
   </p>
-  <%= f.text_field :title %>
-  <%= f.text_field :site %>
+  <%= f.text_field :title, :mandatory => true %>
+  <%= f.text_field :site, :mandatory => true %>
   <%= f.text_field :feed %>
   <%= f.submit %>
 <% end %>
