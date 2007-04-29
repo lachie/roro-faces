@@ -5,7 +5,8 @@ module ApplicationHelper
   class FacebookFormBuilder < ActionView::Helpers::FormBuilder
     def wrap(name,content,options={})
       mand = options.delete(:mandatory) ? '<strong class="mand">*</strong>' : ''
-      @template.content_tag('p',"#{name.to_s.humanize}#{mand}<br/>#{content}")
+      extras = options.delete(:extras)
+      @template.content_tag('p',"#{name.to_s.humanize}#{mand} #{extras}<br/>#{content}")
     end
     
     # dry!

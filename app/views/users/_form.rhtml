@@ -10,13 +10,13 @@
   
   <%= f.text_field :aliases %>
   
-  <%= f.text_area :blurb, :rows => 7 %>
+  <%= f.text_area :blurb, :rows => 7, :extras => "(use textile: #{link_to('quick ref', 'http://hobix.com/textile/quick.html')})" %>
   
   <%= f.text_field :location %>
   
   <%= f.text_field :working_at %>
   <%= f.text_field :working_at_url %>
-  <%= f.text_area :working_on, :rows => 7 %>
+  <%= f.text_area :working_on, :rows => 7, :extras => "(use textile: #{link_to('quick ref', 'http://hobix.com/textile/quick.html')})" %>
 
   <%= f.password_field :password %>
   <%= f.password_field :password_confirmation %>
