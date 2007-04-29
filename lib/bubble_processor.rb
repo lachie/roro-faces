@@ -48,27 +48,24 @@ require 'RMagick'
             size = [size, size] if size.is_a?(Fixnum)
             size = [size.first,size.first] if size.is_a?(Array) and size.length == 1
             
-            # image = Magick::Image.new(*size)
-            
-            #gc = Magick::Draw.new
-            
-            #gc.fill('#B8691088')
-            #gc.rectangle(0,0,*size)
-            
-            # gc.fill('#f00')
-            # gc.circle(size[0],size[0],10,10)
-            
             img.crop_resized!(*size)
-            #gc.draw(img)
             
-            
-            # img.mask = image
-            # img.matte = true
+            mask = Magick::Image.new(48,48) { self.background_color = 'black' }
+            gc = Magick::Draw.new
+            gc.fill_color('white')
+            gc.roundrectangle(0,0,48,48,10,10)
+            gc.draw(mask)
+
+            mask.matte = false
+            img.matte = true
+            img.composite!(mask, Magick::CenterGravity, Magick::CopyOpacityCompositeOp)
+            self.temp_path = write_to_temp_file(img.to_blob { self.format = 'PNG' })
           else
             img.change_geometry(size.to_s) { |cols, rows, image| image.resize!(cols, rows) }
+            self.temp_path = write_to_temp_file(img.to_blob)
           end
           
-          self.temp_path = write_to_temp_file(img.to_blob)
+
         end
       end
       

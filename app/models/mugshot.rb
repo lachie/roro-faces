@@ -17,4 +17,13 @@ class Mugshot < ActiveRecord::Base
     attachment_options[:thumbnails].each { |suffix, size| create_or_update_thumbnail(temp_file, suffix, *size) }
   end
   
+  def thumbnail_name_for(thumbnail = nil)
+    return filename if thumbnail.blank?
+    ext = nil
+    basename = filename.gsub /\.\w+$/ do |s|
+      ext = s; ''
+    end
+    "#{basename}_#{thumbnail}.png"
+  end
+  
 end
