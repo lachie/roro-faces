@@ -11,7 +11,8 @@ var Rules = {
       Position.clone(e, uname, {
         setHeight: false,
         setWidth: false,
-        offsetTop: e.offsetHeight
+        offsetTop: (e.offsetHeight-8),
+        offsetLeft: 7
       });
     }
     Element.show(uname);
