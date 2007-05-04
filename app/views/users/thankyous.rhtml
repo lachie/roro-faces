@@ -1,6 +1,6 @@
 <script>
 var reasons = <%= @users.map {|u| u.thankyous_to}.flatten.inject({}) do |rs,r|
-    rs[r.id.to_s] = "#{r.reason} #{r.nick}" 
+    rs[r.id.to_s] = "#{r.reason} from #{r.from.nick}" 
     rs
   end.to_json rescue '{}' %>;
 var Rules = {
