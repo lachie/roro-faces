@@ -39,6 +39,10 @@ module ApplicationHelper
     @controller.authorized?
   end
   
+  def logged_in_but_other_user?
+    @controller.logged_in_but_other_user?
+  end
+  
   def redirect_to_current_user
     redirect_to (logged_in? ? user_path(current_user) : users_path)
   end

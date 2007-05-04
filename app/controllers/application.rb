@@ -10,4 +10,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   before_filter :login_from_cookie
 
+  def logged_in_but_other_user?
+    admin? or (@user and logged_in? and current_user != @user)
+  end
 end

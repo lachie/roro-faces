@@ -30,7 +30,13 @@ class UsersController < ApplicationController
       wants.rss { do_index_rss }
     end
     
-  end  
+  end
+  
+  def thankyous
+    conditions = ['thankyous.created_at > ?', params[:since]] if params[:since]
+    us = User.find(:all,:include => [:thankyous_to], :conditions => conditions)
+    @users = us.reject {|u| u.thankyous_to.empty?}.sort_by {|u| u.thankyous_to.length}.reverse
+  end
   
   def edit 
   end

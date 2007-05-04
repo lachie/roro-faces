@@ -1,0 +1,21 @@
+Sexy Migrations
+===============
+
+Sexy migrations.
+
+class SexyRight < ActiveRecord::Migration
+  def self.up
+    create_table :users do 
+      string      :name
+      foreign_key :group
+      timestamps!
+    end
+  end
+
+  def self.down
+    drop_table :users
+  end
+end
+
+>> Chris Wanstrath
+=> chris[at]ozmm[dot]org

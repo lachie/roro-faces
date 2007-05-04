@@ -1,0 +1,26 @@
+<script>
+var reasons = <%= @users.map {|u| u.thankyous_to}.flatten.inject({}) do |rs,r|
+    rs[r.id.to_s] = "#{r.reason} #{r.nick}"
+    rs
+  end.to_json rescue '{}' %>;
+var Rules = {
+  'img.beer:mouseover': function(e) {
+    var m = e.id.match(/(u_\d+)_(\d+)/);
+    $(m[1]).innerHTML = reasons[m[2]];
+  },
+  'img.beer:mouseout': function(e) {
+    var m = e.id.match(/(u_\d+)_\d+/);
+    $(m[1]).innerHTML = '';
+  }
+};
+</script>
+<h1>hey, beers</h1>
+<p class="minor">
+  <%= "since #{params[:since]} &middot; " if params[:since] %>
+  <%= link_to 'always', thankyous_users_path %>
+  &middot;
+  <%= link_to 'last month', thankyous_users_path(:since => 1.month.ago.to_date.to_s(:db)) %>
+</p>
+<ul class="bare-list">
+  <%= render :partial => 'thankyou', :collection => @users %>
+</ul>

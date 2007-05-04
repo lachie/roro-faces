@@ -16,4 +16,6 @@ module UsersHelper
   def link_to_group(group)
     link_to group.name, group.url
   end
+  
+
 end

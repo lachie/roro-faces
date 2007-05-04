@@ -1,0 +1,10 @@
+<h1>beers owed<%= " to #{@to.nick}" if @to %></h1>
+<p class="minor">
+  <%= link_to "hey, beers", thankyous_users_path %>
+  &middot;
+  <%= link_to "show #{@to.nick}", user_path(@to) if @to %>
+</p>
+
+<ul class="beers">
+  <%= render :partial => 'thankyou', :collection => @thankyous %>
+</ul>

@@ -1,10 +1,20 @@
 require 'digest/sha1'
+
+module ThankyouExt
+  def last_month
+    # find(:all, :conditions => 'date(updated_at) > cur_date()-1')
+  end
+end
+
 class User < ActiveRecord::Base
 	belongs_to :mugshot
 	has_many :facets
   
   has_many :affiliations
   has_many :groups, :through => :affiliations
+  
+  has_many :thankyous_by, :class_name => 'Thankyou', :foreign_key => 'from_id', :order => 'created_at desc'
+  has_many :thankyous_to, :class_name => 'Thankyou', :foreign_key => 'to_id'  , :order => 'created_at desc'
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password

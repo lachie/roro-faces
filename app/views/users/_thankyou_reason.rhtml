@@ -1,0 +1,10 @@
+<% remote_form_for @thankyou, :url => thankyous_path, :method => :post do |f| %>
+<strong><%= @thankyou.errors.full_messages * ', ' %></strong>
+<%= f.hidden_field :to_id %>
+<%= f.hidden_field :from_id %>
+
+Why <%= f.text_field :reason %>
+
+<%= link_to 'cancel', user_path(@thankyou.to_id) %>
+<%= submit_tag 'owe' %>
+<% end %>

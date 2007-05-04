@@ -1,0 +1,7 @@
+<%= link_to_remote("owe #{@user.nick} a beer",:url => new_thankyou_path(:to_id => @user), :method => :get) if logged_in_but_other_user? %>
+<br/>
+<% if (count = @user.thankyous_to.count) < 1 %>
+No beers owed to <%= @user.nick %>.
+<% else %>
+<%= pluralize(@user.thankyous_to.count,'beer') %> owed to <%= @user.nick %>. <%= link_to 'list', thankyous_path(:to_id => @user) %>
+<% end %>
