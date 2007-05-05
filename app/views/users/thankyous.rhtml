@@ -9,7 +9,7 @@ var Rules = {
     var r = reasons[m[2]]
     $(m[1]).innerHTML = "<span class='byline'>for <strong>" + r[0] + "</strong> (from " 
                                        + r[1] + "&mdash;" 
-                                       + r[2] + ")</span>";
+                                       + r[2] + " ago)</span>";
   },
   'img.beer:mouseout': function(e) {
     var m = e.id.match(/(u_\d+)_\d+/);
