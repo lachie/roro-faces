@@ -148,6 +148,10 @@ class User < ActiveRecord::Base
   def self.regenerate_all_thumbnails
     User.find(:all).each {|u| u.mugshot.regenerate_thumbnails if u.mugshot rescue nil }
   end
+  
+  def feed_sort_date
+    updated_at
+  end
 
   protected
     # before filter 

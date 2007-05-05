@@ -29,6 +29,6 @@
   </p>
 <% end %>
 
-<p id="thankyous">
+<p id="thankyous" <%= logged_in_but_other_user? ? "class='highlighted'" : '' %>>
 <%= render :partial => 'thankyous' %>
 </p>

@@ -121,8 +121,8 @@ body.users-index #content {
   background-color: #fcfcfc;
   color: #ccc;
   text-align: center;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: .8em;
+  margin-bottom: .4em;
   padding: 1em 0;
 }
 
@@ -136,7 +136,9 @@ p.minor {
   float:right;
   text-align: right;
   font-size: 80%;
+  margin-top: 0px;
 }
+
 
 #content p.clear {
   width: 100%;
@@ -163,6 +165,10 @@ p.minor {
   text-align: right;
 }
 
+#content p.highlighted {
+  border: 1px solid #aaa;
+}
+
 #content .list {
   float: left;
   padding: 0.1em 1em 1em 1em;
@@ -170,6 +176,18 @@ p.minor {
 
 #content div {
   float: left;
+}
+
+#content div#menu {
+  float: left;
+  width: 50%;
+}
+
+#content div#menu-minor {
+  float: right;
+  width: 50%;
+  text-align: right;
+  font-size: 80%;
 }
 
 #content p.mugshot {
@@ -205,6 +223,8 @@ p.minor {
   margin-bottom: 1.2em;
 }
 
+
+
 /*
 #grid img {
   border: 1px solid #aaa;
@@ -214,6 +234,10 @@ p.minor {
 span.byline {
   font-size: 80%;
   color: #e0e0e0;
+}
+
+span.byline strong {
+  color: #fff;
 }
 
 ul.beers {

@@ -1,16 +1,19 @@
 <script>
-var reasons = <%= @users.map {|u| u.thankyous_to}.flatten.inject({}) do |rs,r|
-    rs[r.id.to_s] = "#{r.reason} from #{r.from.nick}" 
+var reasons = <%= @users.map {|u| u.thankyous_to}.flatten.inject({}) do |rs,t|
+    rs[t.id.to_s] = [t.reason,t.from.nick,time_ago_in_words(t.created_at)]
     rs
   end.to_json rescue '{}' %>;
 var Rules = {
   'img.beer:mouseover': function(e) {
     var m = e.id.match(/(u_\d+)_(\d+)/);
-    $(m[1]).innerHTML = reasons[m[2]];
+    var r = reasons[m[2]]
+    $(m[1]).innerHTML = "<span class='byline'>for <strong>" + r[0] + "</strong> (from " 
+                                       + r[1] + "&mdash;" 
+                                       + r[2] + ")</span>";
   },
   'img.beer:mouseout': function(e) {
     var m = e.id.match(/(u_\d+)_\d+/);
-    $(m[1]).innerHTML = '';
+    $(m[1]).innerHTML = '&nbsp;';
   }
 };
 </script>

@@ -1,6 +1,8 @@
 <% u = thankyou %><li>
-  <%= link_to u.nick, user_path(u) %> <span id="u_<%=u.id%>"></span><br/>
+  <%= link_to u.nick, user_path(u) %><br/>
   <% u.thankyous_to.each do |t| %>
     <%= image_tag('lilbeer.gif', :title => t.reason, :id => "u_#{u.id}_#{t.id}", :class => 'beer') %>
   <% end %>
+  <br/>
+  <span id="u_<%=u.id%>">&nbsp;</span>
 </li>

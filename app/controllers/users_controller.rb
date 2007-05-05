@@ -90,18 +90,19 @@ class UsersController < ApplicationController
   end
   
   def do_index_rss
-    users = User.find(:all,:order => 'updated_at desc')
+    things = (User.find(:all,:order => 'updated_at desc') + Thankyou.find(:all,:order => 'created_at desc')).sort_by {|ut| ut.feed_sort_date}
     options = {
       :feed => {
         :title => "roro facebook",
         :description => "The real faces of Rails Oceania people!"
       },
       :item => {
-        :title => :nick,
-        :description => :feed_description
+        :title => [:nick,:feed_title],
+        :description => :feed_description,
+        :pub_date => :feed_sort_date
       }
     }
-    render_rss_feed_for users, options
+    render_rss_feed_for things, options
   end
 
 end

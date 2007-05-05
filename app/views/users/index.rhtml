@@ -4,11 +4,6 @@
 
 <%= javascript_tag "Glass.users = #{@users_for_glass.to_json}"%>
 
-<div id="tabs">
-  <%= link_to 'pinboard', pinboard_users_path() %>
-  &middot;
-  <%= link_to 'hey,beers', thankyous_users_path() %>
-</div>
 
 <div id="floaters">
   <img src="/images/beertop.png" class="beerhead" />

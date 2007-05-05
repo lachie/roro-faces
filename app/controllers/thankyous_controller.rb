@@ -38,4 +38,9 @@ class ThankyousController < ApplicationController
       @thankyous = Thankyou.find(:all,:order => 'updated_at desc')
     end
   end
+  
+  def show
+    @thankyou = Thankyou.find(params[:id])
+    redirect_to thankyous_path(:to_id => @thankyou.to_id)
+  end
 end
