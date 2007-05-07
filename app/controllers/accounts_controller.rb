@@ -1,3 +1,5 @@
+require 'base64'
+
 class AccountsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   #include AuthenticatedSystem
@@ -39,5 +41,23 @@ class AccountsController < ApplicationController
     reset_session
     flash[:notice] = "You have been logged out."
     redirect_back_or_default(users_path)
+  end
+  
+  def reset_password
+    user = User.find_by_email(params[:email])
+    raise "couldn't find user with email '#{params[:email]}'" unless user
+    
+    User.transaction do
+      user.password = user.password_confirmation = Base64.encode64(rand.to_s)[0,8].downcase
+      user.save!
+      ForgottenPassword.deliver_reset_password(user)
+    end
+    
+    flash[:notice] = "password reset message sent to #{params[:email]}"
+    redirect_to login_path
+  rescue
+    flash[:notice] = "failed to reset your password: #{$!}"
+    logger.warn $!
+    redirect_to login_path
   end
 end

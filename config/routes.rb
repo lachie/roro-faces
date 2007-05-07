@@ -20,7 +20,8 @@ ActionController::Routing::Routes.draw do |map|
   map.logout 'accounts/logout', :controller => 'accounts', :action => 'logout'
   map.login  'accounts/login', :controller => 'accounts', :action => 'login'
   map.signup 'accounts/signup', :controller => 'accounts', :action => 'signup'
-
+  map.reset_password 'accounts/reset_password', :controller => 'accounts', :action => 'reset_password'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   
   # Sample of regular route:
