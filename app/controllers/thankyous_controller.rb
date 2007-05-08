@@ -40,7 +40,7 @@ class ThankyousController < ApplicationController
       :from   => params[:from]
     }
     
-    hash = HashHasher.mk_hash(FacesConfig.shared_secret,args)
+    hash = HashHasher.mk_hash(SHARED_SECRET,args)
     
     #logger.debug "h1: #{hash}"
     #logger.debug "h2: #{params[:hash]}"
