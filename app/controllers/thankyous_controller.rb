@@ -45,19 +45,19 @@ class ThankyousController < ApplicationController
     #logger.debug "h1: #{hash}"
     #logger.debug "h2: #{params[:hash]}"
     
-    raise "shared secrets didn't match" if hash != params[:hash]
+    raise "n0 h4XX0rz" if hash != params[:hash]
     
     from = User.find_by_irc_nick(params[:from]) or raise "unknown from user #{params[:from]}"
     to   = User.find_by_irc_nick(params[:to]  ) or raise "unknown to user #{params[:to]}"
     
-    raise "wanking not allowed" if from == to
-    raise "you need a reason" if params[:reason].blank?
+    raise "no wanking" if from == to
+    raise "gimme a reason" if params[:reason].blank?
     
     t = Thankyou.create(:from => from, :to => to, :reason => params[:reason])
     
-    raise "failed to owe #{params[:to]}" unless t
+    raise "couldn't owe #{params[:to]} for some reason" unless t
     
-    render :text => "#{from.irc_nick} thanked #{to.irc_nick} for #{params[:reason]}"
+    render :text => "you owe a beer to #{to.irc_nick} for #{params[:reason]}"
   rescue
     logger.warn $!
     logger.warn $!.backtrace * $/
