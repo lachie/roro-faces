@@ -6,11 +6,22 @@ class ApplicationController < ActionController::Base
   session :session_key => '_facebook_session_id'
   
   include ApplicationHelper
-  
+
+  before_filter :redirect_from_lachie_dot_info
+    
   include AuthenticatedSystem
   before_filter :login_from_cookie
 
   def logged_in_but_other_user?
     admin? or (@user and logged_in? and current_user != @user)
   end
+  
+  protected
+    def redirect_from_lachie_dot_info
+      if request.host == "faces.lachie.info"
+        headers["Status"] = "301 Moved permanently, bruvva"
+        redirect_to :host => "faces.rubyonrails.com.au"
+        return false
+      end
+    end
 end
