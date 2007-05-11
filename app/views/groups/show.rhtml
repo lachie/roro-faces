@@ -1,0 +1,14 @@
+<h1><%= @group.name %></h1>
+
+<p class="minor">
+<%= link_to "Our homepage", @group.url %>
+</p>
+
+<h2>members</h2>
+<ul>
+<% @group.users.each do |user| %>
+<li>
+  <%= link_to user.nick, user_path(user) %>
+</li>
+<% end %>
+</ul>

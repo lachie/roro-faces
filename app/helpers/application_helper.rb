@@ -6,7 +6,9 @@ module ApplicationHelper
     def wrap(name,content,options={})
       mand = options.delete(:mandatory) ? '<strong class="mand">*</strong>' : ''
       extras = options.delete(:extras)
-      @template.content_tag('p',"#{name.to_s.humanize}#{mand} #{extras}<br/>#{content}")
+      byline = options[:byline].blank? ? '' : "<br/><span class='byline'>#{options.delete(:byline)}</span>"
+      
+      @template.content_tag('p',"#{name.to_s.humanize}#{mand} #{extras}<br/>#{content}#{byline}")
     end
     
     # dry!

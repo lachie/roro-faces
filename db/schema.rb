@@ -2,23 +2,23 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 13) do
+ActiveRecord::Schema.define(:version => 14) do
 
   create_table "affiliations", :force => true do |t|
     t.column "user_id",   :integer
     t.column "group_id",  :integer
+    t.column "regular",   :boolean
     t.column "visitor",   :boolean
     t.column "presenter", :boolean
-    t.column "regular",   :boolean
   end
 
   create_table "facet_kinds", :force => true do |t|
     t.column "name",         :string,  :default => "", :null => false
+    t.column "service_url",  :string
+    t.column "title",        :string
     t.column "site",         :string
     t.column "feed",         :string
     t.column "aggregatable", :boolean
-    t.column "title",        :string
-    t.column "service_url",  :string
   end
 
   create_table "facets", :force => true do |t|
@@ -29,8 +29,14 @@ ActiveRecord::Schema.define(:version => 13) do
   end
 
   create_table "groups", :force => true do |t|
-    t.column "name", :string
+    t.column "name", :string, :default => "", :null => false
     t.column "url",  :string
+  end
+
+  create_table "meetings", :force => true do |t|
+    t.column "when",     :datetime,                 :null => false
+    t.column "where",    :string,   :default => "", :null => false
+    t.column "group_id", :integer
   end
 
   create_table "mugshots", :force => true do |t|
@@ -69,8 +75,6 @@ ActiveRecord::Schema.define(:version => 13) do
     t.column "remember_token",            :string
     t.column "remember_token_expires_at", :datetime
     t.column "mugshot_id",                :integer
-    t.column "flickr_uid",                :string
-    t.column "delicious_uid",             :string
     t.column "irc_nick",                  :string
     t.column "blurb",                     :string
     t.column "aliases",                   :string
@@ -78,10 +82,10 @@ ActiveRecord::Schema.define(:version => 13) do
     t.column "name",                      :string
     t.column "site_url",                  :string
     t.column "site_name",                 :string
-    t.column "admin",                     :integer,  :limit => 4,  :default => 0, :null => false
+    t.column "admin",                     :boolean,                :default => false
     t.column "working_at",                :string
-    t.column "working_on",                :string
     t.column "working_at_url",            :string
+    t.column "working_on",                :string
   end
 
 end

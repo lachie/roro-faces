@@ -17,6 +17,12 @@ ActionController::Routing::Routes.draw do |map|
     
   map.resources :thankyous
   
+  map.resources :meetings
+  
+  map.resources :presentations
+  
+  map.resources :groups
+  
   map.logout 'accounts/logout', :controller => 'accounts', :action => 'logout'
   map.login  'accounts/login', :controller => 'accounts', :action => 'login'
   map.signup 'accounts/signup', :controller => 'accounts', :action => 'signup'

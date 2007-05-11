@@ -60,6 +60,15 @@ var Rules = {
   <%= render :partial => 'mugshot' %>
 </p>
 
+<% if @user.irc_nick.blank? %>
+<p>
+
+If you hang out on #ror_au<br/>
+<%= image_tag 'comments.png' %>
+<%= link_to 'you can set your IRC nick', edit_user_path(@user) %>.
+</p>
+<% end %>
+
 <%= render :partial => 'show_common' %>
 
 <div id="affiliations">
