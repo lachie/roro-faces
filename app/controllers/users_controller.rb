@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     
     respond_to do |wants|
       wants.html do
-        @users = User.find(:all)
+        @users = User.find(:all).sort_by {rand}
         render :action => 'index_simple'
       end
       wants.rss { do_index_rss }
