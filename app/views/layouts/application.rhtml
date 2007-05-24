@@ -15,26 +15,20 @@
   </script>
 </head>
 <body class="<%= controller.controller_name.downcase.dasherize %> <%= controller.controller_name.downcase.dasherize %>-<%= controller.action_name.downcase.dasherize %>">
-  <div id="content">
-    <div id="menu">
-    <% if logged_in? %>
-      Hi <%= link_to current_user.nick, user_path(current_user) %> &middot;
-      <%= link_to 'log out', logout_path %>
-    <% else %>
-      <%= link_to 'log in', login_path %>
-      &middot;
-      <%= link_to 'sign up', signup_path %>
-    <% end %>
+  
+  <div class="header">
+    <div class="login">
+      <%= render :partial => 'shared/menu' %>
     </div>
-    
-    <div id="menu-minor">[
-      <%= link_to_unless_current 'schooner', users_path%> &middot;
-      <%= link_to_unless_current 'pinboard', pinboard_users_path%> &middot;
-      <%= link_to_unless_current 'hey,beers', thankyous_users_path%>
-    ]</div>
-    
-    <%= yield %>
-    <p id="clear">&nbsp;</p>
+    <div class="header-inner">
+      <h1><%= @page_title || '&nbsp;' %></h1>
+    </div>
   </div>
+  
+  <div id="content">
+    <%= yield %>
+    <p class="clear">&nbsp;</p>
+  </div>
+  
 </body>
 </html>

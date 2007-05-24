@@ -1,10 +1,10 @@
 
 <% facebook_form_for @facet_kind do |f| %>
   <p>
-    Note that while anyone can create a new facet kind, only an admin can edit them.
+    Note that while anyone can create a new facet kind, <strong>only an admin can edit them</strong>.
   </p>
-  <%= f.text_field :name, :mandatory => true %>
-  <%= f.text_field :service_url %>
+  <%= f.text_field :name, :mandatory => true, :byline => 'e.g. delicious &mdash;the name that appears in the list of facet kinds' %>
+  <%= f.text_field :service_url, :byline => 'e.g. del.icio.us &mdash;the generic frontpage URL of the service' %>
   <p>
     Title, site and feed are parameterisable. 
   </p>
@@ -14,12 +14,18 @@
     When the facet is rendered, all parameters are substituted with values provided by the user. 
   </p>
   <p>
-    For example, you provide the template link http://www.flickr.com/photos/${user}/. When a user creates a facet 
-    from this facet kind, they're presented with a text field for each parameter used in title, site or feed -- in this
+    <em>For example</em>, you provide the template link http://del.icio.us/${user}/.
+    When a user creates a facet 
+    of this facet kind, they're presented with a text field for each parameter used in title, site or feed -- in this
     case "user".
   </p>
-  <%= f.text_field :title, :mandatory => true %>
-  <%= f.text_field :site, :mandatory => true %>
-  <%= f.text_field :feed %>
+  <%= f.text_field :title, :mandatory => true,
+    :byline => "e.g. ${user}'s del.icio.us links &mdash;the text of the facet link" %>
+    
+  <%= f.text_field :site, :mandatory => true,
+    :byline => "e.g. del.icio.us/${user} &mdash;the facet link itself" %>
+    
+  <%= f.text_field :feed,
+    :byline => "e.g. del.icio.us/rss/${user} &mdash;a feed associated with the facet if any.<br/>This will (one day) be used for opt-in aggregation of the facet-kind's feeds" %>
   <%= f.submit %>
 <% end %>

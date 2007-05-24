@@ -1,4 +1,4 @@
-<h1>beers owed<%= " to #{@to.nick}" if @to %></h1>
+<% @page_title = "beers owed" + (@to ? " to #{@to.nick}" : '')  %>
 <p class="minor">
   <%= link_to "hey, beers", thankyous_users_path %>
   &middot;

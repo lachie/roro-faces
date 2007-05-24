@@ -17,7 +17,7 @@ var Rules = {
   }
 };
 </script>
-<h1>hey, beers</h1>
+<% @page_title = "hey, beers" %>
 <p class="minor">
   <%= "since #{params[:since]} &middot; " if params[:since] %>
   <%= link_to 'always', thankyous_users_path %>
