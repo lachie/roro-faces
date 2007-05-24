@@ -71,7 +71,8 @@ If you hang out on #ror_au<br/>
 
 <%= render :partial => 'show_common' %>
 
-<div id="affiliations">
+
+<div id="affiliations" class="list">
 <h2>affiliations</h2>
   <ul>
     <%= render :partial => 'affiliation', :collection => @user.all_affiliations %>
@@ -79,17 +80,17 @@ If you hang out on #ror_au<br/>
 </div>
 
 
-<div id="lists">
+
+<div class="list">
   <h2>facets</h2>of your web presence.
-  <div class="list">
-    <ul id="facet-list">
-      <%= render :partial => 'facet', :collection => @user.facets %>
-    </ul>
-    <%= select_tag( :facet_kind, 
-      options_for_select(@facet_kinds)
-    ) %>
-    <div id="facet_kind_form"></div>
-  </div>
+  <ul id="facet-list">
+    <%= render :partial => 'facet', :collection => @user.facets %>
+  </ul>
+  <%= select_tag( :facet_kind, 
+    options_for_select(@facet_kinds)
+  ) %>
+  <div id="facet_kind_form"></div>
 </div>
+
 
 </div>

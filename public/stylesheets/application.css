@@ -7,19 +7,12 @@ body,html {
   height: 100%;
   font-family: Georgia;
   background: #003865;
-
 }
 
 a img {
   border: none;
 }
 
-.stripe {
-  width: 100%;
-  background:  url(/images/grainy-gray.png) #444;
-  color: #999;
-  /*border-bottom: 2px solid #957149;*/
-}
 
 .header {
   width: 100%;
@@ -28,25 +21,16 @@ a img {
   height: 96px;
 }
 
-.header .login {
-  float: right;
-  color: #aaa;
-  font-size: 80%;
-  text-align: right;
-}
 
-.header .login a {
-  color: #ccc;
-}
 
-.header-inner {
+.header .header-inner {
   width: 680px;
   height: 96px;
   margin: auto auto;
   background: url(/images/shadow_bg.gif) no-repeat top;
 }
 
-.header-inner h1 {
+.header .header-inner h1 {
   font-family: Helvetica,Arial,sans-serif;
   color: #ccc;
   width: 600px;
@@ -54,7 +38,18 @@ a img {
   background: url(/images/head.png) repeat-x top left;
   text-align: center;
   padding: 1em 0;
-  margin: 0 auto;
+  margin: 0 auto;
+}
+
+.header .login a {
+  color: #ccc;
+}
+
+.header .login {
+  float: right;
+  color: #aaa;
+  font-size: 80%;
+  text-align: right;
 }
 
 
@@ -195,6 +190,11 @@ p.minor {
   width: 100%;
 }
 
+#info-container .list {
+  padding: 0.1em 1em 1em 1em;
+  width: 100%;
+}
+
 #content p strong {
   font-size: 1.2em;
   font-weight: normal;
@@ -253,6 +253,8 @@ p.minor {
   padding: 0px 1em;
 }
 
+
+
 #tabs {
   text-align: left;
   float: left;
@@ -275,12 +277,6 @@ p.minor {
   float: left;
 }
 
-
-/*
-#grid img {
-  border: 1px solid #aaa;
-}
-*/
 
 span.byline {
   font-size: 80%;

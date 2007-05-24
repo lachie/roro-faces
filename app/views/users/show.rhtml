@@ -19,7 +19,7 @@
 
 
 <% if @user.affiliations.size > 0 %>
-<div id="affiliations">
+<div id="affiliations" class="list">
 <h2>groups</h2>
   <ul>
     <%= render :partial => 'affiliation_show', :collection => @user.affiliations %>
@@ -29,7 +29,7 @@
 
 
 <% if @user.facets.size > 0 %>
-<div id="facets">
+<div id="facets" class="list">
   <h2>facets</h2>of <%= @user.nick %>'s web presence.
   <ul id="facet-list">
     <%= render :partial => 'facet_show', :collection => @user.facets %>
