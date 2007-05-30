@@ -51,7 +51,6 @@ class FacetKind < ActiveRecord::Base
   end
   
   def get_favicon
-    # <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    # (Hpricot(open(site).read) / "//head/rel[@link='shortcut icon' || @link='icon']")
+    self.favicon_url = Favicon.from_url(service_url)
   end
 end

@@ -1,0 +1,955 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Language" content="en-us" />
+	<title>Twitter</title>
+
+  <link href="http://assets1.twitter.com/stylesheets/screen.css?1180506828" media="screen, projection" rel="Stylesheet" type="text/css" />
+	
+	<link rel="shortcut icon" href="http://assets0.twitter.com/images/favicon.ico?1180506828" type="image/x-icon" />
+  <script src="http://assets0.twitter.com/javascripts/prototype.js?1180506828" type="text/javascript"></script>
+<script src="http://assets2.twitter.com/javascripts/effects.js?1180506828" type="text/javascript"></script>
+<script src="http://assets1.twitter.com/javascripts/application.js?1180506828" type="text/javascript"></script>
+		 <link rel="alternate" type="application/rss+xml" title="Lachie Cox (RSS)" href="http://twitter.com/statuses/user_timeline/1945191.rss" />
+	 <link rel="alternate" type="application/atom+xml" title="Lachie Cox (Atom)" href="http://twitter.com/statuses/user_timeline/1945191.atom" />
+	 <link rel="alternate" type="application/rss+xml" title="Lachie Cox and friends (RSS)" href="http://twitter.com/statuses/friends_timeline/1945191.rss" />
+	 <link rel="alternate" type="application/atom+xml" title="Lachie Cox and friends (Atom)" href="http://twitter.com/statuses/friends_timeline/1945191.atom" />
+
+</head>
+<body class="account" id="home">
+	<style type="text/css">
+			a {color: #0000ff;}
+		body {
+			color: #000000;
+			background-color: #9ae4e8;
+						background: #9ae4e8 url(http://assets3.twitter.com/images/bg.gif?1180506828) fixed no-repeat top left;
+			      text-align: center; 
+      font: 0.75em/1.5 Helvetica, Arial, sans-serif; 
+		}
+		#side {
+			background-color: #e0ff92;
+			border: 1px solid #87bc44;
+		}
+		#side .notify {border: 1px solid #87bc44;}
+		#side .actions {border: 1px solid #87bc44;}
+		h2.thumb, h2.thumb a {color: #000000;}
+    </style>
+	
+	<ul id="accessibility">
+    <li>
+      On a mobile phone? Check out <a href="http://m.twitter.com/">m.twitter.com</a>!
+    </li>
+		<li>
+			<a href="#navigation" accesskey="2">Skip to navigation</a>
+		</li>
+		<li>
+			<a href="#side">Skip to sidebar</a>
+		</li>
+	</ul>
+	
+	<div id="container" >
+		<h1 id="header">
+	<a href="/" title="Twitter: home" accesskey="1">
+				<img alt="Twitter.com" height="49" src="http://assets3.twitter.com/images/twitter.png?1180506828" width="210" />
+			</a>
+</h1>
+		
+				
+		<div id="content"><div class="wrapper">	
+			
+
+
+
+<form action="/status/update" id="doingForm" method="post" name="f" onsubmit="new Ajax.Request('/status/update', {asynchronous:true, evalScripts:true, onComplete:function(request){$('status').value = ''; updateStatusTextCharCounter($('status').value);$('submit').disabled = false;$('submit_loading').style.display='none';Effect.Appear('chars_left_notice', {duration:0.5});}, onLoading:function(request){$('submit').disabled = true;Effect.Appear('submit_loading', {duration:0.3});$('chars_left_notice').style.display='none';}, parameters:Form.serialize(this)}); return false;">
+	<fieldset>
+		<div class="bar">
+			<h3><label for="doing">What are you doing?</label></h3>
+			<span id="chars_left_notice">
+				Characters available: <strong id="status-field-char-counter"></strong>				
+			</span>
+			<span style="display:none" id="submit_loading">
+				<script type="text/javascript">
+//<![CDATA[
+document.write('<img alt="Updating" src="http://assets3.twitter.com/images/updating.gif?1180506828" title="Updating" />')
+//]]>
+</script>
+			</span>
+		</div>
+		<div class="info">
+		<textarea cols="15" id="status" name="status" onkeypress="return (event.which == 8) || (this.value.length &lt; 140);" onkeyup="updateStatusTextCharCounter(this.value)" rows="3"></textarea>
+		</div>
+		<div class="submit">
+			<input id="submit" name="commit" type="submit" value="Update" />
+		</div>
+	</fieldset>
+</form><script type="text/javascript">
+//<![CDATA[
+$('status').focus()
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+
+	function updateStatusTextCharCounter(value) {
+	  if (140 - value.length >= 0) {
+		  $('status-field-char-counter').innerHTML = 140 - value.length;
+		} else {
+		  $('status-field-char-counter').innerHTML = 0;
+		}
+	};
+
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+$('status-field-char-counter').innerHTML = 140 - $('status').value.length;
+//]]>
+</script>
+
+<!-- <div style="border: 5px solid #87BC44; background: white; font-weight: bold; padding: 10px; margin:10px; font-size:1.1em">
+We are still working to bring IM back up. Thanks for bearing with us.
+</div> -->
+
+<ul class="tabMenu">
+	<li><a href="/account/archive">Archive</a></li>
+	<li><a href="/replies">Replies</a></li>
+	<li class="active"><a href="/home">Recent</a></li>
+</ul>
+
+<div class="tab">
+	<h2>What You And Your <a href="/friends">Friends</a> Are Doing</h2>
+	<table class="doing" id="timeline" cellspacing="0">    
+		<tr class="odd hentry" id="status_83828882">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/lachlanhardy" class="url"><img alt="Lachlan Hardy" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/10706/normal/avatar.jpg?1174191691" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/lachlanhardy" title="Lachlan Hardy">lachlanhardy</a></strong>
+		
+					<span class="entry-title entry-content">
+			  likes the Replies tells him stuff he missed, but wonders how to reply back at this late stage? Surely DM is over-kill?
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/lachlanhardy/statuses/83828882" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T10:33:22+00:00">19 minutes</abbr> ago</a>
+						from web
+            
+      
+			  <span id="status_actions_83828882">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83828882', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83828882').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83828882" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83818412">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/lachlanhardy" class="url"><img alt="Lachlan Hardy" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/10706/normal/avatar.jpg?1174191691" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/lachlanhardy" title="Lachlan Hardy">lachlanhardy</a></strong>
+		
+					<span class="entry-title entry-content">
+			  is smashing his head against JS that isn't interested in implementing client requirements. Obviously, it's the fault of JavaScript itself...
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/lachlanhardy/statuses/83818412" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T10:19:56+00:00">33 minutes</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83818412">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83818412', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83818412').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83818412" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="odd hentry" id="status_83739362">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/lachlanhardy" class="url"><img alt="Lachlan Hardy" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/10706/normal/avatar.jpg?1174191691" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/lachlanhardy" title="Lachlan Hardy">lachlanhardy</a></strong>
+		
+					<span class="entry-title entry-content">
+			  Just made another hire! Only 2 more to go and my team will be complete! MUAHAHAHAHAAA
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/lachlanhardy/statuses/83739362" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T08:44:24+00:00">about 2 hours</abbr> ago</a>
+						from txt
+            
+      
+			  <span id="status_actions_83739362">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83739362', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83739362').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83739362" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83735102">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/nzkoz" class="url"><img alt="Michael Koziarski" class="photo fn" src="http://assets2.twitter.com/system/user/profile_image/11294/normal/Photo_44.jpg?1171953610" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/nzkoz" title="Michael Koziarski">nzkoz</a></strong>
+		
+					<span class="entry-title entry-content">
+			  Intending to sleep early so he can go for a run before breakfast.
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/nzkoz/statuses/83735102" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T08:39:28+00:00">about 2 hours</abbr> ago</a>
+						from web
+            
+      
+			  <span id="status_actions_83735102">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83735102', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83735102').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83735102" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="odd hentry" id="status_83716302">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/nzkoz" class="url"><img alt="Michael Koziarski" class="photo fn" src="http://assets2.twitter.com/system/user/profile_image/11294/normal/Photo_44.jpg?1171953610" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/nzkoz" title="Michael Koziarski">nzkoz</a></strong>
+		
+					<span class="entry-title entry-content">
+			  Doesn't know what a friend request is,  but got rid of them anyway...
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/nzkoz/statuses/83716302" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T08:18:15+00:00">about 3 hours</abbr> ago</a>
+						from web
+            
+      
+			  <span id="status_actions_83716302">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83716302', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83716302').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83716302" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83697412">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/nzkoz" class="url"><img alt="Michael Koziarski" class="photo fn" src="http://assets2.twitter.com/system/user/profile_image/11294/normal/Photo_44.jpg?1171953610" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/nzkoz" title="Michael Koziarski">nzkoz</a></strong>
+		
+					<span class="entry-title entry-content">
+			  this f8 platform thing still has a bunch of weird bugs.
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/nzkoz/statuses/83697412" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T07:57:43+00:00">about 3 hours</abbr> ago</a>
+						from <a href="http://apps.facebook.com/twitter/">Facebook</a>
+            
+      
+			  <span id="status_actions_83697412">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83697412', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83697412').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83697412" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="odd hentry" id="status_83691922">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/nzkoz" class="url"><img alt="Michael Koziarski" class="photo fn" src="http://assets2.twitter.com/system/user/profile_image/11294/normal/Photo_44.jpg?1171953610" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/nzkoz" title="Michael Koziarski">nzkoz</a></strong>
+		
+					<span class="entry-title entry-content">
+			  Shouldn't the MS Surface demo (<a href="http://www.microsoft.com/surface/" target="_blank">http://www.microsoft.com/su...</a>) be silverlight not flash?
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/nzkoz/statuses/83691922" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T07:50:30+00:00">about 3 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83691922">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83691922', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83691922').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83691922" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83588062">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/technoweenie" class="url"><img alt="rick" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/780561/normal/rick.jpg?1173047064" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/technoweenie" title="rick">technoweenie</a></strong>
+		
+					<span class="entry-title entry-content">
+			  going to bed, will deploy new feature in the morning
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/technoweenie/statuses/83588062" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T05:38:53+00:00">about 5 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83588062">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83588062', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83588062').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83588062" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="odd hentry" id="status_83558522">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/defunkt" class="url"><img alt="Chris Wanstrath" class="photo fn" src="http://assets0.twitter.com/system/user/profile_image/713263/normal/3d12d0e9ca30c97d15a1e826c4553a1d.jpg?1176056431" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/defunkt" title="Chris Wanstrath">defunkt</a></strong>
+		
+					<span class="entry-title entry-content">
+			  realizes he's been drunk with 3/5ths of the datamapper team.  probably a damn fine library.
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/defunkt/statuses/83558522" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T05:03:29+00:00">about 6 hours</abbr> ago</a>
+						from web
+            
+      
+			  <span id="status_actions_83558522">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83558522', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83558522').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83558522" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83531952">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/lachlanhardy" class="url"><img alt="Lachlan Hardy" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/10706/normal/avatar.jpg?1174191691" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/lachlanhardy" title="Lachlan Hardy">lachlanhardy</a></strong>
+		
+					<span class="entry-title entry-content">
+			  is being all high-powered and stuff... I hope it works!
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/lachlanhardy/statuses/83531952" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T04:33:07+00:00">about 6 hours</abbr> ago</a>
+						from web
+            
+      
+			  <span id="status_actions_83531952">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83531952', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83531952').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83531952" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="odd hentry" id="status_83510322">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/technoweenie" class="url"><img alt="rick" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/780561/normal/rick.jpg?1173047064" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/technoweenie" title="rick">technoweenie</a></strong>
+		
+					<span class="entry-title entry-content">
+			  deploying cool new lighthouse feature to staging... *suspense builds*
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/technoweenie/statuses/83510322" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T04:10:28+00:00">about 7 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83510322">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83510322', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83510322').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83510322" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83491462">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/technoweenie" class="url"><img alt="rick" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/780561/normal/rick.jpg?1173047064" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/technoweenie" title="rick">technoweenie</a></strong>
+		
+					<span class="entry-title entry-content">
+			  json feed updated, bot works.  script was tumbled on <a href="http://tinyurl.com/2b8pum" target="_blank">http://tinyurl.com/2b8pum</a>
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/technoweenie/statuses/83491462" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T03:52:48+00:00">about 7 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83491462">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83491462', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83491462').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83491462" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="odd hentry" id="status_83479922">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/defunkt" class="url"><img alt="Chris Wanstrath" class="photo fn" src="http://assets0.twitter.com/system/user/profile_image/713263/normal/3d12d0e9ca30c97d15a1e826c4553a1d.jpg?1176056431" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/defunkt" title="Chris Wanstrath">defunkt</a></strong>
+		
+					<span class="entry-title entry-content">
+			  major refactoring.  @<a href="/kastner">kastner</a>, can i get trac url and login again?
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/defunkt/statuses/83479922" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T03:42:06+00:00">about 7 hours</abbr> ago</a>
+						from web
+            
+      
+			  <span id="status_actions_83479922">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83479922', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83479922').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83479922" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83464662">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/lachie" class="url"><img alt="Lachie Cox" class="photo fn" src="http://assets2.twitter.com/system/user/profile_image/1945191/normal/Photo_2.jpg?1174601931" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/lachie" title="Lachie Cox">lachie</a></strong>
+		
+					<span class="entry-title entry-content">
+			  cliquery ftloss
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/lachie/statuses/83464662" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T03:28:14+00:00">about 7 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83464662">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83464662', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83464662').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83464662" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+			<a href="/status/destroy/83464662" onclick="if (confirm('Sure you want to delete this update? There is NO undo!')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;" title="Delete this update?"><img alt="Icon_trash" border="0" src="http://assets1.twitter.com/images/icon_trash.gif?1180506828" /></a>
+		</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="odd hentry" id="status_83447162">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/technoweenie" class="url"><img alt="rick" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/780561/normal/rick.jpg?1173047064" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/technoweenie" title="rick">technoweenie</a></strong>
+		
+					<span class="entry-title entry-content">
+			  should be working, but json feed isnt as current as the xml one.  damn.  <a href="http://pastie.caboo.se/65927" target="_blank">http://pastie.caboo.se/65927</a>
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/technoweenie/statuses/83447162" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T03:10:04+00:00">about 8 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83447162">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83447162', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83447162').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83447162" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83442432">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/technoweenie" class="url"><img alt="rick" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/780561/normal/rick.jpg?1173047064" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/technoweenie" title="rick">technoweenie</a></strong>
+		
+					<span class="entry-title entry-content">
+			  @<a href="/activereload">activereload</a> trying out bot
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/technoweenie/statuses/83442432" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T03:05:29+00:00">about 8 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83442432">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83442432', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83442432').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83442432" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="odd hentry" id="status_83430572">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/nzkoz" class="url"><img alt="Michael Koziarski" class="photo fn" src="http://assets2.twitter.com/system/user/profile_image/11294/normal/Photo_44.jpg?1171953610" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/nzkoz" title="Michael Koziarski">nzkoz</a></strong>
+		
+					<span class="entry-title entry-content">
+			  @<a href="/rick">rick</a> you have a lot of catching up to do.  5 tweets per minute should do it
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/nzkoz/statuses/83430572" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T02:54:49+00:00">about 8 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83430572">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83430572', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83430572').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83430572" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83402902">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/technoweenie" class="url"><img alt="rick" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/780561/normal/rick.jpg?1173047064" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/technoweenie" title="rick">technoweenie</a></strong>
+		
+					<span class="entry-title entry-content">
+			  @<a href="/josh">josh</a> thanks :)
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/technoweenie/statuses/83402902" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T02:25:46+00:00">about 8 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83402902">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83402902', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83402902').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83402902" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="odd hentry" id="status_83402782">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/technoweenie" class="url"><img alt="rick" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/780561/normal/rick.jpg?1173047064" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/technoweenie" title="rick">technoweenie</a></strong>
+		
+					<span class="entry-title entry-content">
+			  twitteriffic 2.0 is great, wishing i could easily swap between profiles though, for a special activereload acct
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/technoweenie/statuses/83402782" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T02:25:36+00:00">about 8 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83402782">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83402782', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83402782').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83402782" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+<tr class="even hentry" id="status_83399942">
+  
+	
+			<td class="thumb vcard author">
+			  <a href="http://twitter.com/technoweenie" class="url"><img alt="rick" class="photo fn" src="http://assets1.twitter.com/system/user/profile_image/780561/normal/rick.jpg?1173047064" /></a>
+		</td>
+		
+	<td>	
+					<strong><a href="http://twitter.com/technoweenie" title="rick">technoweenie</a></strong>
+		
+					<span class="entry-title entry-content">
+			  firing up twitteriffic for the first time in weeks
+			</span>
+			
+				
+		<span class="meta entry-meta">
+						  <a href="http://twitter.com/technoweenie/statuses/83399942" class="entry-date" rel="bookmark"><abbr class="published" title="2007-05-30T02:22:09+00:00">about 9 hours</abbr> ago</a>
+						from <a href="http://iconfactory.com/software/twitterrific">twitterrific</a>
+            
+      
+			  <span id="status_actions_83399942">
+
+			<a href="#" onclick="new Ajax.Request('/favourings/create/83399942', {asynchronous:true, evalScripts:true, onLoading:function(request){$('status_star_83399942').src='/images/icon_throbber.gif'}}); return false;"><img alt="Icon_star_empty" border="0" id="status_star_83399942" src="http://assets1.twitter.com/images/icon_star_empty.gif?1180506828" /></a>
+	
+	</span>
+
+			
+		</span>
+	</td>
+</tr>
+
+	</table>
+  
+	<div class="pagination">
+
+  <a href="/home?page=2">Older &#187;</a>
+
+</div>
+	
+	<span class="statuses_options">
+	  <a href="http://twitter.com/statuses/friends_timeline/1945191.rss">RSS</a>
+	</span>
+</div>
+
+
+
+  <script type="text/javascript">
+  //<![CDATA[
+  var lastMoved = new Date();
+  
+  Event.observe(window, 'mousemove', function() {
+    lastMoved = new Date();
+  });
+  
+  function timeDelta(myDate) {
+    now = new Date();
+    return parseInt((now.getTime() - lastMoved.getTime()) / 1000);
+  }
+  
+  new PeriodicalExecuter(function() {     
+    if (timeDelta(lastMoved) > 600) {
+      return false;
+    }
+    
+    new Ajax.Request('/account/refresh?last_check=' + $('timeline').getElementsByTagName('tr')[0].id.split("_")[1], 
+    {
+      asynchronous:true, 
+      evalScripts:true
+    })}, 360);
+  //]]>
+  </script>
+
+
+		</div></div><hr />
+
+	
+	<div id="side">
+		  <div class="msg">
+	Welcome back, <strong><a href="http://twitter.com/lachie">Lachie Cox</a></strong>
+</div>
+
+
+
+<div class="notify">Are you on Facebook?<div style="background: url(images/f.gif) no-repeat center left; margin:0 0 3px 10px; padding: 0 0 0 13px"><a href="http://apps.facebook.com/twitter/" style="padding-bottom:5px;">Try our Facebook app!</a></div></div>
+
+<ul>
+	<li>Currently: <em id="currently">cliquery ftloss</em></li>
+</ul>
+
+<ul>
+	<li id="message_count"><a href="/direct_messages">1 Direct Message</a></li>
+	<li id="favourite_count"><a href="/favorites">0 Favorites</a></li>
+	<li id="friend_count"><a href="/friends">19 Friends</a></li>
+	<li id="follower_count"><a href="/followers">20 Followers</a></li>
+	<li id="update_count">129 Updates</li>
+</ul>
+
+<ul>
+	<li>
+		<form action="/account/update_send_via" id="send_via_form" method="post" onsubmit="new Ajax.Request('/account/update_send_via', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;">			<fieldset>
+			<h4>Send Notifications To:</h4>
+						
+						
+			<input id="current_user_send_via_none" name="current_user[send_via]" onclick="$('send_via_form').onsubmit()" type="radio" value="none" />
+			<label for="current_user_sleeping_none">web-only</label>
+			</fieldset>
+		</form>	</li>
+		<li><em><a href="/devices">Activate Phone!</a></em></li>
+			<li><em><a href="/devices">Activate your IM!</a></em></li>
+	</ul>
+<!--
+<fieldset class="user_search">
+    
+    	
+    	
+    </fieldset>
+-->
+
+  <div id="friends">
+  	
+  <span class="vcard">
+    <a href="http://twitter.com/Adium" class="url" rel="contact" title="Adiumy"><img alt="Adiumy" class="photo fn" height="24" src="http://assets2.twitter.com/system/user/profile_image/782113/mini/logo.png?1171939616" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/andymce" class="url" rel="contact" title="Andrew"><img alt="Andrew" class="photo fn" height="24" src="http://assets0.twitter.com/system/user/profile_image/5485522/mini/kdice.jpg?1177470040" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/benj72" class="url" rel="contact" title="Ben Askins"><img alt="Ben Askins" class="photo fn" height="24" src="http://assets2.twitter.com/system/user/profile_image/782218/mini/Photo_42.jpg?1180052155" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/defunkt" class="url" rel="contact" title="Chris Wanstrath"><img alt="Chris Wanstrath" class="photo fn" height="24" src="http://assets0.twitter.com/system/user/profile_image/713263/mini/3d12d0e9ca30c97d15a1e826c4553a1d.jpg?1176056431" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/err" class="url" rel="contact" title="Err the Blog"><img alt="Err the Blog" class="photo fn" height="24" src="http://assets2.twitter.com/system/user/profile_image/781972/mini/err.png?1174978640" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/topfunky" class="url" rel="contact" title="Geoffrey Grosenbach"><img alt="Geoffrey Grosenbach" class="photo fn" height="24" src="http://assets2.twitter.com/system/user/profile_image/10718/mini/im.gif?1171953387" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/Loney" class="url" rel="contact" title="Ilona Cox"><img alt="Ilona Cox" class="photo fn" height="24" src="http://assets1.twitter.com/system/user/profile_image/1978981/mini/Photo_159.jpg?1174625228" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/jess_c_roberts" class="url" rel="contact" title="Jessica Roberts"><img alt="Jessica Roberts" class="photo fn" height="24" src="http://assets0.twitter.com/system/user/profile_image/1974261/mini/me.jpg?1174623981" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/julzlee" class="url" rel="contact" title="Julie Lee"><img alt="Julie Lee" class="photo fn" height="24" src="http://assets3.twitter.com/images/default_profile_image_mini.gif?1180506828" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/lachlanhardy" class="url" rel="contact" title="Lachlan Hardy"><img alt="Lachlan Hardy" class="photo fn" height="24" src="http://assets1.twitter.com/system/user/profile_image/10706/mini/avatar.jpg?1174191691" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/caled" class="url" rel="contact" title="Luke M"><img alt="Luke M" class="photo fn" height="24" src="http://assets0.twitter.com/system/user/profile_image/1945911/mini/1.jpg?1174602260" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/crafterm" class="url" rel="contact" title="Marcus Crafter"><img alt="Marcus Crafter" class="photo fn" height="24" src="http://assets2.twitter.com/system/user/profile_image/75413/mini/Photo_4.jpg?1179523323" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/martin_S" class="url" rel="contact" title="Martin Stannard"><img alt="Martin Stannard" class="photo fn" height="24" src="http://assets0.twitter.com/system/user/profile_image/1952911/mini/head.jpg?1174622500" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/maxm" class="url" rel="contact" title="Max Muermann"><img alt="Max Muermann" class="photo fn" height="24" src="http://assets1.twitter.com/system/user/profile_image/1410011/mini/portrait-black.jpg?1174216493" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/nzkoz" class="url" rel="contact" title="Michael Koziarski"><img alt="Michael Koziarski" class="photo fn" height="24" src="http://assets1.twitter.com/system/user/profile_image/11294/mini/Photo_44.jpg?1171953610" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/LittlePete" class="url" rel="contact" title="Peter Allison-Nichol"><img alt="Peter Allison-Nichol" class="photo fn" height="24" src="http://assets0.twitter.com/system/user/profile_image/5670242/mini/bebe.jpg?1177980508" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/railsconf" class="url" rel="contact" title="RailsConf"><img alt="RailsConf" class="photo fn" height="24" src="http://assets3.twitter.com/system/user/profile_image/5493662/mini/railsConf-logo.gif?1178112248" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/technoweenie" class="url" rel="contact" title="rick"><img alt="rick" class="photo fn" height="24" src="http://assets0.twitter.com/system/user/profile_image/780561/mini/rick.jpg?1173047064" width="24" /></a>
+  </span>
+
+
+  <span class="vcard">
+    <a href="http://twitter.com/toolmantim" class="url" rel="contact" title="Tim Lucas"><img alt="Tim Lucas" class="photo fn" height="24" src="http://assets3.twitter.com/system/user/profile_image/2514731/mini/DSC00003-buddy.jpg?1175011811" width="24" /></a>
+  </span>
+
+
+  </div>
+
+
+
+	</div><hr />
+			
+		
+		<div id="navigation">
+	<h3>Navigation</h3>
+	<ul>
+		<li class="first"><a href="http://twitter.com/home">Home</a></li>
+		<li><a href="http://twitter.com/lachie">Your profile</a></li>
+		<li><a href="/invitations/invite">Invite</a></li>
+		<li><a href="/public_timeline">Public timeline</a></li>
+		<li><a href="/account/badge">Badges</a></li>
+		<li><a href="/account/settings">Settings</a></li>
+		<li><a href="http://help.twitter.com" target="_blank">Help</a></li>
+    <li><a href="/logout?siv=680d9ed4907d0553ed56ed7b160d1c05">Sign out</a></li>
+			</ul>
+</div>
+<hr />
+		<div id="footer">
+	<h3>Footer</h3>
+	<ul>
+		<li class="first">&copy; 2007 Twitter</li>
+		<li><a href="/help/aboutus">About Us</a></li>
+		<li><a href="/help/contact">Contact</a></li>
+		<li><a href="http://twitter.com/blog">Blog</a></li>
+		<li><a href="/help/api">API</a></li>
+		<li><a href="http://help.twitter.com" target="_blank">Help</a></li>
+		<li><a href="/help/jobs">Jobs</a></li>
+		<li><a href="/tos">Terms of Service</a></li>
+		<li><a href="/help/privacy">Privacy</a></li>
+	</ul>
+</div>
+
+			</div>
+	
+  
+	<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	  _uacct = "UA-30775-6";
+	  urchinTracker();
+	</script>
+	
+<!-- served to you through a copper wire by pisia.twitter.com at 30 May 10:52 in 650 ms (d 21 / r 602). thank you, come again. -->
+</body></html>

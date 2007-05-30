@@ -34,7 +34,10 @@ class Facet < ActiveRecord::Base
     facet_kind.parameters.merge(read_attribute(:info) || {})
   end
   
-  def favicon
-    ""
+  def favicon_url
+    f = facet_kind.favicon_url
+    f.blank? ? nil : f
+  rescue
+    nil
   end
 end
