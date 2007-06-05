@@ -79,7 +79,7 @@ Object.extend(Bubble.prototype,{
     
 
     this.element.style['top']  = this.glass.scale_y(this.height-this.y)+'px';
-    this.element.style['left'] = (this.wiggle()+this.glass.scale_x(this.x,this.y))+'px';
+    this.element.style['left'] = (this.wiggle()+this.glass.scale_x(this.x,this.y)-24)+'px';
   },
   
   wiggle: function() {
@@ -96,7 +96,7 @@ Object.extend(Bubble.prototype,{
     this.x = x;
     
     this.element.style['top']  = this.glass.scale_y(this.height-y)+'px';
-    this.element.style['left'] = this.glass.scale_x(x)+'px';
+    this.element.style['left'] = (this.glass.scale_x(x)-24)+'px';
   },
   set_velocity: function(v) {
     this.velocity = v;
@@ -112,10 +112,10 @@ Glass = {
     
     var delta = Position.positionedOffset(Glass.container);
     
-    Glass.height = Glass.dimensions.height - delta[1] - 48
-    Glass.width  = Glass.dimensions.width  - 48
+    Glass.height = Glass.dimensions.height - delta[1] - 48;
+    Glass.width  = Glass.dimensions.width; //  - 48
     
-    Glass.mid_x = Math.round(Glass.height / 2);
+    Glass.mid_x = Math.round(Glass.width / 2);
     
     Glass.name_box = $('name-box');
 
