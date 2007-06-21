@@ -9,7 +9,7 @@ require 'deprec/recipes'
 # be used to single out a specific subset of boxes in a particular role, like
 # :primary => true.
 
-set :domain, "63.97.251.138"
+set :domain, "lachie.info"
 role :web, domain
 role :app, domain
 role :db,  domain, :primary => true

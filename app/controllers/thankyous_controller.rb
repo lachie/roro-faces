@@ -47,8 +47,8 @@ class ThankyousController < ApplicationController
     
     raise "n0 h4XX0rz" if hash != params[:hash]
     
-    from = User.find_by_irc_nick(params[:from]) or raise "unknown from user #{params[:from]}"
-    to   = User.find_by_irc_nick(params[:to]  ) or raise "unknown to user #{params[:to]}"
+    from = User.find_by_stripped_irc_nick(params[:from]) or raise "unknown from user #{params[:from]}"
+    to   = User.find_by_stripped_irc_nick(params[:to]  ) or raise "unknown to user #{params[:to]}"
     
     raise "no wanking" if from == to
     raise "gimme a reason" if params[:reason].blank?

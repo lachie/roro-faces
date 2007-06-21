@@ -149,6 +149,10 @@ class User < ActiveRecord::Base
     User.find(:all).each {|u| u.mugshot.regenerate_thumbnails if u.mugshot rescue nil }
   end
   
+  def self.find_by_stripped_irc_nick(nick)
+    find(:first,:conditions => ["lower(trim(both '_' from irc_nick)) = lower(?)",nick])
+  end
+  
   def feed_sort_date
     updated_at
   end

@@ -8,16 +8,25 @@ class UsersController < ApplicationController
   end
   
   def index
-        
-    respond_to do |wants|
-      wants.html do
-        @users = User.find(:all)
-        @users_for_glass = @users.map(&:for_glass)
-        render :action => 'index'
+    if nick = params[:nick]
+      search(nick)
+    else
+      respond_to do |wants|
+        wants.html do
+          @users = User.find(:all)
+          @users_for_glass = @users.map(&:for_glass)
+          render :action => 'index'
+        end
+        wants.rss { do_index_rss }
       end
-      wants.rss { do_index_rss }
     end
-    
+  end
+  
+  def search(nick)
+    user = User.find_by_stripped_irc_nick(nick)
+    render :xml => user.to_xml
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => 404
   end
   
   def pinboard
