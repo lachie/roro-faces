@@ -150,7 +150,7 @@ class User < ActiveRecord::Base
   end
   
   def self.find_by_stripped_irc_nick(nick)
-    find(:first,:conditions => ["lower(trim(both '_' from irc_nick)) = lower(?)",nick])
+    find(:first,:conditions => ["lower(trim(both '_' from irc_nick)) = trim(both '_' from lower(?))",nick])
   end
   
   def feed_sort_date
