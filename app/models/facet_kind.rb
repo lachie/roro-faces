@@ -38,6 +38,8 @@ class FacetKind < ActiveRecord::Base
     string.gsub(/\$\{(\w+)\}/) { params[$1] }
   end
   
+  
+  
   protected
   PARAM_RE = /
     \$\{

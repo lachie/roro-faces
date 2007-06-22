@@ -1,5 +1,7 @@
 module UsersHelper
   def affiliation_to_sentence(a)
+    return once_off_affiliation_sentence(a) if a.group.once_off?
+    
     out = []
     
     out << (a.regular? ? "is a regular at" : "has visited")
@@ -11,6 +13,11 @@ module UsersHelper
     else
       "#{out.to_sentence} #{link_to_group(a.group)}"
     end
+  end
+  
+  def once_off_affiliation_sentence(a)
+    presented = a.presenter? ? "and presented at " : ''
+    "attended #{presented}#{link_to_group(a.group)}"
   end
   
   def link_to_group(group)
