@@ -17,6 +17,9 @@
 <body class="<%= controller.controller_name.downcase.dasherize %> <%= controller.controller_name.downcase.dasherize %>-<%= controller.action_name.downcase.dasherize %>">
   
   <div class="header">
+	<div class="logo">
+		<%= image_tag 'roro.png' %>
+	</div>
     <div class="login">
       <%= render :partial => 'shared/menu' %>
     </div>

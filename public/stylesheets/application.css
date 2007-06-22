@@ -51,6 +51,11 @@ a img {
   font-size: 80%;
   text-align: right;
 }
+.header .logo {
+	float: left;
+	padding-left: 20px;
+	height: 96px;
+}
 
 
 
