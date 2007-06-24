@@ -53,8 +53,9 @@ a img {
 }
 .header .logo {
 	float: left;
-	padding-left: 20px;
+	padding-left: 16px;
 	height: 96px;
+	border: none;
 }
 
 

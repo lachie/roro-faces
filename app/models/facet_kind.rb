@@ -1,5 +1,8 @@
-#require 'open-uri'
+require 'open-uri'
 #require 'hpricot'
+require 'feed-normalizer'
+require 'yaml'
+require 'fileutils'
 
 class FacetKind < ActiveRecord::Base
   has_many :facets
@@ -11,6 +14,22 @@ class FacetKind < ActiveRecord::Base
     
   def self.find_for_select
     find(:all,:order => 'name').collect {|f| [f.name,f.id]}
+  end
+  
+  def feeds
+    return [] if feed.blank?
+    facets.collect(&:feed)
+  end
+  
+  def aggregated_feed
+    
+  end
+  
+  def aggregated_entries
+    feeds.collect do |feed|
+      f = FeedNormalizer::FeedNormalizer.parse(open(feed))
+      f.entries
+    end.flatten
   end
   
   def parameters
