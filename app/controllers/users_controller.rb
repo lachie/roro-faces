@@ -11,13 +11,19 @@ class UsersController < ApplicationController
     if nick = params[:nick]
       search(nick)
     else
+      @users = User.find(:all)
       respond_to do |wants|
         wants.html do
-          @users = User.find(:all)
           @users_for_glass = @users.map(&:for_glass)
           render :action => 'index'
         end
         wants.rss { do_index_rss }
+        wants.xml do
+          render :text => @users.to_xml
+        end
+        wants.js do
+          render :text => @users.to_json
+        end
       end
     end
   end
@@ -99,7 +105,7 @@ class UsersController < ApplicationController
   end
   
   def do_index_rss
-    things = (User.find(:all,:order => 'updated_at desc') + Thankyou.find(:all,:order => 'created_at desc')).sort_by {|ut| ut.feed_sort_date}
+    things = (@users + Thankyou.find(:all)).sort_by {|ut| ut.feed_sort_date}
     options = {
       :feed => {
         :title => "roro facebook",

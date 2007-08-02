@@ -157,6 +157,14 @@ class User < ActiveRecord::Base
     updated_at
   end
 
+  def to_xml(*options)
+    public_attributes.to_xml(*options)
+  end
+  
+  def to_json(*options)
+    public_attributes.to_json
+  end
+
   protected
     # before filter 
     def encrypt_password
@@ -167,5 +175,9 @@ class User < ActiveRecord::Base
     
     def password_required?
       crypted_password.blank? || !password.blank?
+    end
+    
+    def public_attributes
+      {:id => self.id, :name => self.name, :site_url => self.site_url, :site_name => self.site_name, :irc_nick => self.irc_nick, :location => self.location}
     end
 end
