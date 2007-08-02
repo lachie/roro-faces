@@ -66,7 +66,13 @@ class UsersController < ApplicationController
       @facet_kinds << ['edit facets...',-2] if current_user.admin?
     end
     
-    render :action => (authorized? and !params[:preview] ? 'show_auth' : 'show')
+    respond_to do |wants|
+      wants.html do
+        render :action => (authorized? and !params[:preview] ? 'show_auth' : 'show')
+      end
+      wants.xml { render :text => @user.to_xml  }
+      wants.js  { render :text => @user.to_json }
+    end
   end
   
   def update
