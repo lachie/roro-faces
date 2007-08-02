@@ -178,6 +178,19 @@ class User < ActiveRecord::Base
     end
     
     def public_attributes
-      {:id => self.id, :name => self.name, :site_url => self.site_url, :site_name => self.site_name, :irc_nick => self.irc_nick, :location => self.location}
+      {
+        :id => self.id,
+        :name => self.name,
+        :site_url => self.site_url,
+        :site_name => self.site_name,
+        :irc_nick => self.irc_nick,
+        :location => self.location,
+        :created_at => self.created_at,
+        :updated_at => self.updated_at,
+        :mugshot_filename => self.mugshot && {
+          :full => self.mugshot.filename,
+          :thumb => self.mugshot.thumbnail_name_for(:thumb)
+        }
+      }
     end
 end
