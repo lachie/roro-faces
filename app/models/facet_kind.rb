@@ -1,9 +1,3 @@
-require 'open-uri'
-#require 'hpricot'
-require 'feed-normalizer'
-require 'yaml'
-require 'fileutils'
-
 class FacetKind < ActiveRecord::Base
   has_many :facets
   has_many :users, :through => :facets

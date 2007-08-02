@@ -58,6 +58,16 @@ end
 Mime::Type.register "text/javascript", :json
 Mime::Type.register "text/javascript", :js # Need to redefine otherwise break RJS
 
+# Ruby libs
+require 'open-uri'
+require 'yaml'
+require 'fileutils'
+
+# RubyGems
+require 'feed-normalizer'
+require 'RMagick'
+
+
 # Include your application configuration below
 require 'smtp_tls'
 require RAILS_ROOT+'/config/gmail.rb'
