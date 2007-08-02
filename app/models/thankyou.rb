@@ -15,4 +15,21 @@ class Thankyou < ActiveRecord::Base
   def feed_sort_date
     created_at
   end
+  
+  def to_xml(*options)
+    public_attributes.to_xml(*options)
+  end
+  
+  def to_json(*options)
+    public_attributes.to_json
+  end
+  
+  protected
+    def public_attributes
+      {
+        :id => self.id,
+        :from_id => self.from_id,
+        :to_id => self.to_id
+      }
+    end
 end

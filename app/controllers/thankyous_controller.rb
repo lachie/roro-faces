@@ -71,6 +71,11 @@ class ThankyousController < ApplicationController
     else
       @thankyous = Thankyou.find(:all,:order => 'updated_at desc')
     end
+    respond_to do |wants|
+      wants.html
+      wants.xml  { render :text => @thankyous.to_xml }
+      wants.json { render :text => @thankyous.to_json }
+    end
   end
   
   def show

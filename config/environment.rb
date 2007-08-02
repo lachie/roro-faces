@@ -55,9 +55,8 @@ end
 #   inflect.uncountable %w( fish sheep )
 # end
 
-# Add new mime types for use in respond_to blocks:
-# Mime::Type.register "text/richtext", :rtf
-# Mime::Type.register "application/x-mobile", :mobile
+Mime::Type.register "text/javascript", :json
+Mime::Type.register "text/javascript", :js # Need to redefine otherwise break RJS
 
 # Include your application configuration below
 require 'smtp_tls'
