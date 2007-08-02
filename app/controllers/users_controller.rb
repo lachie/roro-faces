@@ -18,12 +18,8 @@ class UsersController < ApplicationController
           render :action => 'index'
         end
         wants.rss { do_index_rss }
-        wants.xml do
-          render :text => @users.to_xml
-        end
-        wants.js do
-          render :text => @users.to_json
-        end
+        wants.xml { render :text => @users.to_xml }
+        wants.js  { render :text => @users.to_json }
       end
     end
   end
@@ -36,7 +32,6 @@ class UsersController < ApplicationController
   end
   
   def pinboard
-    
     respond_to do |wants|
       wants.html do
         @users = User.find(:all).sort_by {rand}
@@ -44,7 +39,6 @@ class UsersController < ApplicationController
       end
       wants.rss { do_index_rss }
     end
-    
   end
   
   def thankyous
@@ -70,7 +64,7 @@ class UsersController < ApplicationController
       wants.html do
         render :action => (authorized? and !params[:preview] ? 'show_auth' : 'show')
       end
-      wants.xml { render :text => @user.to_xml  }
+      wants.xml { render :text => @user.to_xml }
       wants.js  { render :text => @user.to_json }
     end
   end
