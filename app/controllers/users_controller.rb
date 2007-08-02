@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         end
         wants.rss  { do_index_rss }
         wants.xml  { render :text => @users.to_xml }
-        wants.json { render :text => @users.to_json }
+        wants.json { render_json @users.to_json }
       end
     end
   end
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
         render :action => (authorized? and !params[:preview] ? 'show_auth' : 'show')
       end
       wants.xml  { render :text => @user.to_xml }
-      wants.json { render :text => @user.to_json }
+      wants.json { render_json @user.to_json }
     end
   end
   

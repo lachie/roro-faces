@@ -74,7 +74,7 @@ class ThankyousController < ApplicationController
     respond_to do |wants|
       wants.html
       wants.xml  { render :text => @thankyous.to_xml }
-      wants.json { render :text => @thankyous.to_json }
+      wants.json { render_json @thankyous.to_json }
     end
   end
   
