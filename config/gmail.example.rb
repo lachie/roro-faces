@@ -1,2 +1,2 @@
-GMAIL_USER=foo@gmail.com
-GMAIL_PASS=foopass
+GMAIL_USER="foo@gmail.com"
+GMAIL_PASS="foopass"
