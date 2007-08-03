@@ -190,6 +190,10 @@ class User < ActiveRecord::Base
         :mugshot_filename => self.mugshot && {
           :full => self.mugshot.filename,
           :thumb => self.mugshot.thumbnail_name_for(:thumb)
+        },
+        :thankyous_count => {
+         :by => self.thankyous_by.count,
+         :to => self.thankyous_to.count
         }
       }
     end
