@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if nick = params[:nick]
       search(nick)
     else
-      @users = User.find(:all)
+      @users = User.find(:all, :include => {:mugshot => :thumbnails})
       respond_to do |wants|
         wants.html do
           @users_for_glass = @users.map(&:for_glass)

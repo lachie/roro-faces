@@ -2,23 +2,23 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 17) do
+ActiveRecord::Schema.define(:version => 18) do
 
   create_table "affiliations", :force => true do |t|
     t.column "user_id",   :integer
     t.column "group_id",  :integer
-    t.column "regular",   :boolean
     t.column "visitor",   :boolean
     t.column "presenter", :boolean
+    t.column "regular",   :boolean
   end
 
   create_table "facet_kinds", :force => true do |t|
     t.column "name",         :string,  :default => "", :null => false
-    t.column "service_url",  :string
-    t.column "title",        :string
     t.column "site",         :string
     t.column "feed",         :string
     t.column "aggregatable", :boolean
+    t.column "title",        :string
+    t.column "service_url",  :string
     t.column "favicon_url",  :string
   end
 
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 17) do
   end
 
   create_table "groups", :force => true do |t|
-    t.column "name",     :string,  :default => "", :null => false
+    t.column "name",     :string
     t.column "url",      :string
     t.column "once_off", :boolean
   end
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(:version => 17) do
     t.column "parent_id",    :integer
   end
 
+  add_index "mugshots", ["parent_id"], :name => "index_mugshots_on_parent_id"
+
   create_table "presentations", :force => true do |t|
     t.column "user_id",    :integer
     t.column "meeting_id", :integer
@@ -68,12 +70,14 @@ ActiveRecord::Schema.define(:version => 17) do
 
   create_table "thankyous", :force => true do |t|
     t.column "reason",     :string
-    t.column "source",     :string,   :limit => 8
     t.column "from_id",    :integer
     t.column "to_id",      :integer
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
+
+  add_index "thankyous", ["from_id"], :name => "index_thankyous_on_from_id"
+  add_index "thankyous", ["to_id"], :name => "index_thankyous_on_to_id"
 
   create_table "users", :force => true do |t|
     t.column "email",                     :string
@@ -84,6 +88,8 @@ ActiveRecord::Schema.define(:version => 17) do
     t.column "remember_token",            :string
     t.column "remember_token_expires_at", :datetime
     t.column "mugshot_id",                :integer
+    t.column "flickr_uid",                :string
+    t.column "delicious_uid",             :string
     t.column "irc_nick",                  :string
     t.column "blurb",                     :string
     t.column "aliases",                   :string
@@ -91,10 +97,10 @@ ActiveRecord::Schema.define(:version => 17) do
     t.column "name",                      :string
     t.column "site_url",                  :string
     t.column "site_name",                 :string
-    t.column "admin",                     :boolean,                :default => false
+    t.column "admin",                     :integer,  :limit => 4,  :default => 0, :null => false
     t.column "working_at",                :string
-    t.column "working_at_url",            :string
     t.column "working_on",                :string
+    t.column "working_at_url",            :string
   end
 
 end
