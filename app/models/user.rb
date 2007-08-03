@@ -187,9 +187,10 @@ class User < ActiveRecord::Base
         :location => self.location,
         :created_at => self.created_at,
         :updated_at => self.updated_at,
-        :mugshot_filename => self.mugshot && {
-          :full => self.mugshot.filename,
-          :thumb => self.mugshot.thumbnail_name_for(:thumb)
+        :mugshot => self.mugshot && {
+          :id => self.mugshot.id,
+          :full_filename => self.mugshot.filename,
+          :thumbnail_filename => self.mugshot.thumbnail_name_for(:thumb)
         },
         :thankyous_count => {
          :by => self.thankyous_by.count,
