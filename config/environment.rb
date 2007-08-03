@@ -55,8 +55,7 @@ end
 #   inflect.uncountable %w( fish sheep )
 # end
 
-Mime::Type.register "text/javascript", :json
-Mime::Type.register "text/javascript", :js # Need to redefine otherwise break RJS
+#Mime::Type.register "text/csv", :csv
 
 # Ruby libs
 require 'open-uri'
