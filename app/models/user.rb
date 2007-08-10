@@ -157,10 +157,6 @@ class User < ActiveRecord::Base
     updated_at
   end
 
-  def to_xml(*options)
-    public_attributes.to_xml(*options)
-  end
-  
   def to_json(*options)
     public_attributes.to_json
   end
