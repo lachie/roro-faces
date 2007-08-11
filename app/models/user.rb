@@ -160,6 +160,11 @@ class User < ActiveRecord::Base
   def to_json(*options)
     public_attributes.to_json
   end
+  
+  def to_xml(options={})
+    options[:root] ||= :user
+    public_attributes.to_xml(options)
+  end
 
   protected
     # before filter 
