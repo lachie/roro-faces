@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def pinboard
     respond_to do |wants|
       wants.html do
-        @users = User.find(:all,:order => 'email')
+        @users = User.find(:all,:order => 'email,')
         render :action => 'index_simple'
       end
       wants.rss { do_index_rss }
