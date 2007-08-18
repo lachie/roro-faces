@@ -165,6 +165,10 @@ class User < ActiveRecord::Base
     options[:root] ||= :user
     public_attributes.to_xml(options)
   end
+  
+  def self.find_for_pinboard
+    find(:all,:order => 'mugshot_id DESC,email')
+  end
 
   protected
     # before filter 

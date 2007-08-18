@@ -1,7 +1,7 @@
 class Mugshot < ActiveRecord::Base
   has_one :user
   attr_accessor :user_id
-    
+
   has_attachment :content_type => :image,
     :storage => :file_system,
     :resize_to => '150x150>',

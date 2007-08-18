@@ -1,4 +1,5 @@
-require 'deprec/recipes'
+# require 'deprec/recipes'
+require 'mongrel_cluster/recipes'
 
 # =============================================================================
 # ROLES
@@ -82,10 +83,13 @@ set :mongrel_address, "0.0.0.0"
 
 
 desc "Link up database.yml."
-task :after_update, :roles => [:app, :web] do
+after 'deploy:symlink' do
   # run "rm -rf #{current_path}/public/mugshots"
-  symlink_public
+  # symlink_public
  run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
  run "ln -nfs #{shared_path}/config/gmail.rb #{current_path}/config/gmail.rb"
  run "ln -nfs #{shared_path}/config/shared_secret.rb #{current_path}/config/shared_secret.rb"
+end
+
+task :deployme, :role => :app do
 end
