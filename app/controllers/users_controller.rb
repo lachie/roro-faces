@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
   
   def search(nick)
-    user = User.find_by_stripped_irc_nick(nick)
+    user = User.find_by_stripped_irc_nick(nick) or raise ActiveRecord::RecordNotFound
     render :xml => user.to_xml
   rescue ActiveRecord::RecordNotFound
     render :nothing => true, :status => 404
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def pinboard
     respond_to do |wants|
       wants.html do
-        @users = User.find(:all).sort_by {rand}
+        @users = User.find(:all,:order => 'email')
         render :action => 'index_simple'
       end
       wants.rss { do_index_rss }
