@@ -89,7 +89,15 @@ after 'deploy:symlink' do
  run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
  run "ln -nfs #{shared_path}/config/gmail.rb #{current_path}/config/gmail.rb"
  run "ln -nfs #{shared_path}/config/shared_secret.rb #{current_path}/config/shared_secret.rb"
+ 
+ run "ln -nfs #{shared_path}/public/mugshots #{current_path}/public/mugshots"
 end
 
-task :deployme, :role => :app do
+namespace :deploy do  
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    sudo <<-EOR
+      mongrel_rails cluster::stop -C /etc/mongrel_cluster/facebook.yml &&
+      mongrel_rails cluster::start -C /etc/mongrel_cluster/facebook.yml
+    EOR
+  end
 end

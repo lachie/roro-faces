@@ -279,6 +279,11 @@ p.minor {
   margin-bottom: 1.2em;
 }
 
+#grid .pinuser img {
+  width:48px;
+  height:48px;
+}
+
 #form-container {
   float: left;
 }
