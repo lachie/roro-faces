@@ -1,11 +1,13 @@
-<% content_for :feed_tags do %>
+<% content_for :header do %>
 <%= auto_discovery_link_tag(:rss, formatted_users_path(:rss) ) %>
+<%= javascript_include_tag 'schooner' %>
 <% end %>
 
 <% @page_title = "roro ppl" %>
 
-<%= javascript_tag "Glass.users = #{@users_for_glass.to_json}"%>
-
+<% cache('schooner') do %>
+  <%= javascript_tag "Glass.users = #{@users_for_glass.to_json}"%>
+<% end %>
 
 <div id="floaters">
   <img src="/images/beertop.png" class="beerhead" />

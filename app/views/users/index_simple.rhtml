@@ -1,36 +1,17 @@
-<% content_for :feed_tags do %>
+<% content_for :header do %>
 <%= auto_discovery_link_tag(:rss, formatted_users_path(:rss) ) %>
+<%= javascript_include_tag 'pinboard' %>
 <% end %>
-<script>
-var Rules = {
-  'div.pinuser:mouseover': function(e) {
-    e = Element.up(e,'div.pinuser');
-    var uname = $('nick_'+e.id)
-    if(!uname.style.position || uname.style.position=='absolute') {
-      uname.style.position = 'absolute';
-      Position.clone(e, uname, {
-        setHeight: false,
-        setWidth: false,
-        offsetTop: (e.offsetHeight-8),
-        offsetLeft: 7
-      });
-    }
-    Element.show(uname);
-  },
-  'div.pinuser:mouseout': function(e) {
-    e = Element.up(e,'div.pinuser');
-    Element.hide('nick_'+e.id);
-  }
-};
-</script>
+
 <% @page_title = "roro ppl" %>
 
-<div id="grid">
-<% @users.each do |user| %>
-  <div class="pinuser" id="<%= dom_id(user) %>">
-    <%= link_to(image_tag(user.thumbnail_public_path), user_path(user)) %>
+<% cache('pinboard') do %>
+  <div id="grid">
+  <% @users.each do |user| %>
+    <div class="pinuser" id="<%= dom_id(user) %>">
+      <%= link_to(image_tag(user.thumbnail_public_path), user_path(user)) %>
+    </div>
+    <div id="nick_<%= dom_id(user) %>" style='display:none'><%= user.nick %></div>
+  <% end %>
   </div>
-  <div id="nick_<%= dom_id(user) %>" style='display:none'><%= user.nick %></div>
 <% end %>
-</div>
-

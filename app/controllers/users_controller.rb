@@ -3,23 +3,34 @@ class UsersController < ApplicationController
   append_before_filter :load_user, :only => [:edit,:update, :show, :link_affiliation]
   append_before_filter :login_required, :only => [ :edit, :update ]
   
+  cache_sweeper :user_sweeper
+  
   def authorized?
     current_user == @user or admin?
+  end
+  
+  def load_users
+    @users = User.find(:all, :include => {:mugshot => :thumbnails})
   end
   
   def index
     if nick = params[:nick]
       search(nick)
     else
-      @users = User.find(:all, :include => {:mugshot => :thumbnails})
+
       respond_to do |wants|
+        
         wants.html do
-          @users_for_glass = @users.map(&:for_glass)
+          unless read_fragment('schooner')
+            load_users
+            @users_for_glass = @users.map(&:for_glass)
+          end            
           render :action => 'index'
         end
-        wants.rss  { do_index_rss }
-        wants.xml  { render :text => @users.to_xml }
-        wants.json { render_json @users.to_json }
+        
+        wants.rss  { load_users; do_index_rss }
+        wants.xml  { load_users; render :text => @users.to_xml }
+        wants.json { load_users; render_json @users.to_json }
       end
     end
   end
@@ -34,7 +45,9 @@ class UsersController < ApplicationController
   def pinboard
     respond_to do |wants|
       wants.html do
-        @users = User.find_for_pinboard
+        unless read_fragment('pinboard')
+          @users = User.find_for_pinboard
+        end
         render :action => 'index_simple'
       end
       wants.rss { do_index_rss }
