@@ -28,7 +28,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :case_sensitive => false
   before_save :encrypt_password
   
-  
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
@@ -149,8 +148,12 @@ class User < ActiveRecord::Base
     User.find(:all).each {|u| u.mugshot.regenerate_thumbnails if u.mugshot rescue nil }
   end
   
-  def self.find_by_stripped_irc_nick(nick)
-    find(:first,:conditions => ["lower(trim(both '_' from irc_nick)) = trim(both '_' from lower(?))",nick])
+  def self.find_by_stripped_irc_nick(nick)    
+    common_suffixes = [/_away/, /_working/, /_lunch/]
+    common_suffixes.each {|suffix| nick.gsub!(suffix, "")}
+    user = find(:first,:conditions => ["lower(rtrim(ltrim(irc_nick,'_'),'_')) = rtrim(ltrim(lower(?),'_'),'_')",nick])
+    user ||= find(:first,:conditions => ["lower(rtrim(ltrim(alternate_irc_nick,'_'),'_')) = rtrim(ltrim(lower(?),'_'),'_')",nick])
+    user
   end
   
   def feed_sort_date
@@ -189,6 +192,7 @@ class User < ActiveRecord::Base
         :site_url => self.site_url,
         :site_name => self.site_name,
         :irc_nick => self.irc_nick,
+        :alternate_irc_nick => self.alternate_irc_nick,
         :location => self.location,
         :created_at => self.created_at,
         :updated_at => self.updated_at,

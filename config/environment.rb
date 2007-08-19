@@ -63,7 +63,7 @@ require 'yaml'
 require 'fileutils'
 
 # RubyGems
-require 'feed-normalizer'
+#require 'feed-normalizer'
 require 'RMagick'
 
 

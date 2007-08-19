@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe User, "bob" do
+describe User do
   include HornsbySpecHelper
   
   before(:each) do
@@ -8,10 +8,49 @@ describe User, "bob" do
   end
   
   it "should be user" do
-    @bob.should be_instance_of User
+    @bob.should be_instance_of(User)
   end
   
   it "should return users in pinboard order" do
-    User.find_for_pinboard.map(&:email).should == ['carl@carl.com','bob@bob.com']
+    User.find_for_pinboard.map(&:email).should == ['carl@carl.com','bob@bob.com','dave@dave.com','eddie@eddie.com','fred@fred.com']
   end
+  
+  it "should find a user by their irc nick" do
+    User.find_by_stripped_irc_nick("dave").should == @dave
+  end
+
+  it "should strip off underscores when searching for a user by irc nick" do
+    User.find_by_stripped_irc_nick("_dave_").should == @dave
+  end
+
+  it "should strip off underscores from the stored nick when searching for a user by irc nick" do
+    User.find_by_stripped_irc_nick("eddie").should == @eddie
+  end
+
+  it "should find a user by their alternate irc nick" do
+    User.find_by_stripped_irc_nick("[NRE]fred").should == @fred
+  end
+
+  it "should strip off underscores when searching for a user by alternate irc nick" do
+    User.find_by_stripped_irc_nick("_[NRE]fred").should == @fred
+  end
+  
+  it "should find a user that is _away" do
+    User.find_by_stripped_irc_nick("eddie_away").should == @eddie    
+  end
+
+  it "should find a user that is _away_" do
+    User.find_by_stripped_irc_nick("_eddie_away_").should == @eddie    
+  end
+
+  it "should find a user that is at lunch" do
+    User.find_by_stripped_irc_nick("eddie_lunch").should == @eddie    
+  end
+
+  it "should find a user that is working" do
+    User.find_by_stripped_irc_nick("eddie_working").should == @eddie    
+  end
+
+
+
 end

@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 17) do
+ActiveRecord::Schema.define(:version => 20) do
 
   create_table "affiliations", :force => true do |t|
     t.column "user_id",   :integer
@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(:version => 17) do
   end
 
   create_table "facet_kinds", :force => true do |t|
-    t.column "name",         :string,  :default => "", :null => false
+    t.column "name",         :string,  :null => false
     t.column "service_url",  :string
     t.column "title",        :string
     t.column "site",         :string
@@ -24,20 +24,20 @@ ActiveRecord::Schema.define(:version => 17) do
 
   create_table "facets", :force => true do |t|
     t.column "name",          :string
-    t.column "info",          :string,  :default => "", :null => false
-    t.column "user_id",       :integer,                 :null => false
-    t.column "facet_kind_id", :integer,                 :null => false
+    t.column "info",          :string,  :null => false
+    t.column "user_id",       :integer, :null => false
+    t.column "facet_kind_id", :integer, :null => false
   end
 
   create_table "groups", :force => true do |t|
-    t.column "name",     :string,  :default => "", :null => false
+    t.column "name",     :string,  :null => false
     t.column "url",      :string
     t.column "once_off", :boolean
   end
 
   create_table "meetings", :force => true do |t|
-    t.column "when",     :datetime,                 :null => false
-    t.column "where",    :string,   :default => "", :null => false
+    t.column "when",     :datetime, :null => false
+    t.column "where",    :string,   :null => false
     t.column "group_id", :integer
   end
 
@@ -51,10 +51,12 @@ ActiveRecord::Schema.define(:version => 17) do
     t.column "parent_id",    :integer
   end
 
+  add_index "mugshots", ["parent_id"], :name => "index_mugshots_on_parent_id"
+
   create_table "presentations", :force => true do |t|
     t.column "user_id",    :integer
     t.column "meeting_id", :integer
-    t.column "title",      :string,  :default => "", :null => false
+    t.column "title",      :string,  :null => false
   end
 
   create_table "sessions", :force => true do |t|
@@ -63,8 +65,8 @@ ActiveRecord::Schema.define(:version => 17) do
     t.column "updated_at", :datetime
   end
 
-  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
 
   create_table "thankyous", :force => true do |t|
     t.column "reason",     :string
@@ -74,6 +76,9 @@ ActiveRecord::Schema.define(:version => 17) do
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
+
+  add_index "thankyous", ["to_id"], :name => "index_thankyous_on_to_id"
+  add_index "thankyous", ["from_id"], :name => "index_thankyous_on_from_id"
 
   create_table "users", :force => true do |t|
     t.column "email",                     :string
@@ -95,6 +100,7 @@ ActiveRecord::Schema.define(:version => 17) do
     t.column "working_at",                :string
     t.column "working_at_url",            :string
     t.column "working_on",                :string
+    t.column "alternate_irc_nick",        :string
   end
 
 end
