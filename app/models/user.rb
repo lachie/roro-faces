@@ -151,9 +151,7 @@ class User < ActiveRecord::Base
   def self.find_by_stripped_irc_nick(nick)    
     common_suffixes = [/_away/, /_working/, /_lunch/]
     common_suffixes.each {|suffix| nick.gsub!(suffix, "")}
-    user = find(:first,:conditions => ["lower(rtrim(ltrim(irc_nick,'_'),'_')) = rtrim(ltrim(lower(?),'_'),'_')",nick])
-    user ||= find(:first,:conditions => ["lower(rtrim(ltrim(alternate_irc_nick,'_'),'_')) = rtrim(ltrim(lower(?),'_'),'_')",nick])
-    user
+    find(:first,:conditions => ["lower(trim(both '_' from irc_nick)) = lower(trim(both '_' from ?)) or lower(trim(both '_' from alternate_irc_nick)) = lower(trim(both '_' from ?))", nick, nick])
   end
   
   def feed_sort_date
