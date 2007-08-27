@@ -3,7 +3,7 @@
 <%= javascript_include_tag 'pinboard' %>
 <% end %>
 
-<% @page_title = "roro ppl" %>
+<% @page_title = "#{User.count} roro ppl" %>
 
 <% cache('pinboard') do %>
   <div id="grid">

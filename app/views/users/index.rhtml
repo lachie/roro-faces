@@ -3,7 +3,7 @@
 <%= javascript_include_tag 'schooner' %>
 <% end %>
 
-<% @page_title = "roro ppl" %>
+<% @page_title = "#{User.count} roro ppl" %>
 
 <% cache('schooner') do %>
   <%= javascript_tag "Glass.users = #{@users_for_glass.to_json}"%>
