@@ -3,7 +3,7 @@
 	<li>Relative beer rating out of 5 over the last 14 days. <%= link_to "All Beers", thankyous_users_path%></li>
 <% @users.each do | user | %>
 	<% u = user[0] %>
-  <li><%= link_to u.nick, user_path(u) %><br/>
+  <li><%= link_to u.nick, user_path(u) %> (<%= user[1] %>)<br/>
   <% user[1].to_i.times do |t| %>
     <%= image_tag('lilbeer.gif', :id => "u_#{u.id}_#{t.id}", :class => 'beer') %>
   <% end %>
