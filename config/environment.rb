@@ -10,6 +10,8 @@
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+# Dependencies.log_activity = true
+
 require 'shared_secret'
 
 Rails::Initializer.run do |config|
@@ -65,6 +67,8 @@ require 'fileutils'
 # RubyGems
 #require 'feed-normalizer'
 require 'RMagick'
+
+
 
 
 # Include your application configuration below

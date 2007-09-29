@@ -29,18 +29,21 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   
 
-
-  conditions = ['thankyous.created_at > ?', (Date.today - 2.weeks)]
-   us = User.find(:all,:include => [:thankyous_to], :conditions => conditions)
-   @users = us.reject {|u| u.thankyous_to.empty?}.map{|u| [u, u.thankyous_to.size] }.sort_by{|i| i[1]}.reverse
-   top_score = @users.first[1].to_f
-   @users.each {|i| i[1] = 5 * (i[1] / top_score) }
-
   def self.beeratings
-    conditions = ['thankyous.created_at > ?', (Date.today - 2.weeks)]
-    users = find(:all,:include => [:thankyous_to], :conditions => conditions).map{|u| [u, u.thankyous_to.size] }.sort_by{|i| i[1]}.reverse
-    top_score = users.first[1].to_f
-    users.reject {|i| i[1] }.map {|i| [i[0], 5 * (i[1] / top_score)]}
+    rows = connection.select_all(%{SELECT from_id,count(*) as score
+      FROM thankyous t
+      where datediff(now(),created_at) < 14
+      group by from_id
+      having count(*) > 0
+      order by 2 desc})
+      
+    return [] if rows.blank?
+
+    top_score = rows.first['score'].to_f
+
+    rows.collect do |row|
+      [User.find(row['from_id']), (row['score'].to_i / top_score) * 5.0]
+    end
   end
   
   def beerating
@@ -91,6 +94,10 @@ class User < ActiveRecord::Base
   
   def nick
     @nick ||= [irc_nick, name, email.sub('@','(a)')].reject {|s| s.blank?}.first || "no username!"
+  end
+  
+  def to_param
+    irc_nick.blank? ? self.id.to_s : "#{id}-#{irc_nick}"
   end
   
   SCHEME_RE = /^\w+:\/\//

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   #skip_before_filter :login_from_cookie, :except => [:edit]
+  append_before_filter :strip_permalink
   append_before_filter :load_user, :only => [:edit,:update, :show, :link_affiliation]
   append_before_filter :login_required, :only => [ :edit, :update ]
   
@@ -7,6 +8,10 @@ class UsersController < ApplicationController
   
   def authorized?
     current_user == @user or admin?
+  end
+  
+  def strip_permalink
+    params[:id].split('-').first unless params[:id].blank?
   end
   
   def load_users
@@ -61,12 +66,7 @@ class UsersController < ApplicationController
   end
   
   def beerating
-    conditions = ['thankyous.created_at > ?', (Date.today - 2.weeks)]
-    us = User.find(:all,:include => [:thankyous_to], :conditions => conditions)
-    @users = us.reject {|u| u.thankyous_to.empty?}.map{|u| [u, u.thankyous_to.size] }.sort_by{|i| i[1]}.reverse
-    top_score = @users.first[1].to_f
-    @users.each {|i| i[1] = 5 * (i[1] / top_score) }
-    
+    @ratings = User.beeratings
   end
     
   def edit 
