@@ -29,6 +29,24 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   
 
+
+  conditions = ['thankyous.created_at > ?', (Date.today - 2.weeks)]
+   us = User.find(:all,:include => [:thankyous_to], :conditions => conditions)
+   @users = us.reject {|u| u.thankyous_to.empty?}.map{|u| [u, u.thankyous_to.size] }.sort_by{|i| i[1]}.reverse
+   top_score = @users.first[1].to_f
+   @users.each {|i| i[1] = 5 * (i[1] / top_score) }
+
+  def self.beeratings
+    conditions = ['thankyous.created_at > ?', (Date.today - 2.weeks)]
+    users = find(:all,:include => [:thankyous_to], :conditions => conditions).map{|u| [u, u.thankyous_to.size] }.sort_by{|i| i[1]}.reverse
+    top_score = users.first[1].to_f
+    users.reject {|i| i[1] }.map {|i| [i[0], 5 * (i[1] / top_score)]}
+  end
+  
+  def beerating
+    beeratings.detect {|r| r[0].id == self.id}
+  end
+
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
     u = find_by_email(email) # need to get the salt

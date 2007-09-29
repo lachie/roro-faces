@@ -1,0 +1,15 @@
+<% @page_title = "hey, beers" %>
+<ul class="bare-list">
+	<li>Relative beer rating out of 5 over the last 14 days. <%= link_to "All Beers", thankyous_users_path%></li>
+<% @users.each do | user | %>
+	<% u = user[0] %>
+  <li><%= link_to u.nick, user_path(u) %><br/>
+  <% user[1].to_i.times do |t| %>
+    <%= image_tag('lilbeer.gif', :id => "u_#{u.id}_#{t.id}", :class => 'beer') %>
+  <% end %>
+  <% if(user[1]>user[1].to_i) %>
+		<%= image_tag('lilbeer_half.png', :class => 'beer') %>
+   <% end %>
+	</li>
+<% end %>
+</ul>

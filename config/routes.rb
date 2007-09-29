@@ -9,7 +9,8 @@ ActionController::Routing::Routes.draw do |map|
     },
     :collection => {
       :pinboard => :get,
-      :thankyous => :get
+      :thankyous => :get,
+      :beerating => :get
     }
   
   map.resources :mugshots, 

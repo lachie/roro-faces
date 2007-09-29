@@ -60,6 +60,15 @@ class UsersController < ApplicationController
     @users = us.reject {|u| u.thankyous_to.empty?}.sort_by {|u| u.thankyous_to.length}.reverse
   end
   
+  def beerating
+    conditions = ['thankyous.created_at > ?', (Date.today - 2.weeks)]
+    us = User.find(:all,:include => [:thankyous_to], :conditions => conditions)
+    @users = us.reject {|u| u.thankyous_to.empty?}.map{|u| [u, u.thankyous_to.size] }.sort_by{|i| i[1]}.reverse
+    top_score = @users.first[1].to_f
+    @users.each {|i| i[1] = 5 * (i[1] / top_score) }
+    
+  end
+    
   def edit 
   end
   
