@@ -30,10 +30,10 @@ class User < ActiveRecord::Base
   
 
   def self.beeratings
-    rows = connection.select_all(%{SELECT from_id,count(*) as score
+    rows = connection.select_all(%{SELECT to_id,count(*) as score
       FROM thankyous t
       where datediff(now(),created_at) < 14
-      group by from_id
+      group by to_id
       having count(*) > 0
       order by 2 desc})
       
@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
     top_score = rows.first['score'].to_f
 
     rows.collect do |row|
-      [User.find(row['from_id']), (row['score'].to_i / top_score) * 5.0]
+      [User.find(row['to_id']), (row['score'].to_i / top_score) * 5.0]
     end
   end
   
