@@ -10,12 +10,11 @@ var reasons = <%= @users.map {|u| u.thankyous_to}.flatten.inject({}) do |rs,t|
 <% end %>
 
 <% @page_title = "hey, beers" %>
+
 <p class="minor">
-  <%= "since #{params[:since]} &middot; " if params[:since] %>
-  <%= link_to 'always', thankyous_users_path %>
-  &middot;
-  <%= link_to 'last month', thankyous_users_path(:since => 1.month.ago.to_date.to_s(:db)) %>
+  <%= link_to 'ratings', beerating_users_path %>
 </p>
+
 <ul class="bare-list">
   <%= render :partial => 'thankyou', :collection => @users %>
 </ul>

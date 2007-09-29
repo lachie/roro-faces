@@ -1,16 +1,25 @@
 <% @page_title = "hey, beers" %>
-<ul class="bare-list">
-	<li>Relative beer rating out of 5 over the last 14 days. <%= link_to "All Beers", thankyous_users_path%></li>
-<% @ratings.each do |(user,score)| 
-  rscore = "%.2f" % score %>
-  <li><%= link_to user.nick, user_path(user) %><br/>
-  <% score.to_i.times do |t| %>
-    <%= image_tag('lilbeer.gif', :class => 'beer', :title => rscore) %>
-  <% end %>
-  
-  <% if(score > score.to_i) %>
-		<%= image_tag('lilbeer_half.png', :class => 'beer', :title => rscore) %>
-  <% end %>
-	</li>
+
+<p>Relative beer rating out of 5 over the last 14 days.</p>
+
+<p class="minor">
+  <%= link_to 'all beers', thankyous_users_path %>
+</p>
+
+<ul class="bare-list beer-list">
+  <li>&nbsp;</li>
+  <li><b>Appreciated</b></li>
+  <li>&nbsp;</li>
+<% @ratings.each do |(user,score)| %>
+  <%= beerating(user,score) %>
+<% end %>
+</ul>
+
+<ul class="bare-list beer-list">
+  <li>&nbsp;</li>
+  <li><b>Appreciative</b></li>
+  <li>&nbsp;</li>
+<% @thankers.each do |(user,score)| %>
+  <%= beerating(user,score)%>
 <% end %>
 </ul>

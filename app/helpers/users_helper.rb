@@ -24,5 +24,20 @@ module UsersHelper
     link_to group.name, group_path(group)
   end
   
+  def beerating(user,score)
+    rscore = "%.2f" % score
 
+    out = '<li>' +
+    link_to(user.nick, user_path(user)) +
+    '<br/>'
+    
+    score.to_i.times do |t|
+      out << image_tag('lilbeer.gif', :class => 'beer', :title => rscore)
+    end
+
+    out << image_tag('lilbeer_half.png', :class => 'beer', :title => rscore) if score > score.to_i
+    out << '</li>'
+    
+    out
+  end
 end

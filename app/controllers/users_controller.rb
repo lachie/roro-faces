@@ -60,13 +60,21 @@ class UsersController < ApplicationController
   end
   
   def thankyous
-    conditions = ['thankyous.created_at > ?', params[:since]] if params[:since]
-    us = User.find(:all,:include => [:thankyous_to], :conditions => conditions)
+    # conditions = ['thankyous.created_at > ?', params[:since]] if params[:since]
+    # 
+    us = User.find(:all,:include => [:thankyous_to])
+    # 
+    # if since = params[:since]
+    #   since = Time.parse(since)
+    #   
+    # end
+    
     @users = us.reject {|u| u.thankyous_to.empty?}.sort_by {|u| u.thankyous_to.length}.reverse
   end
   
   def beerating
-    @ratings = User.beeratings
+    @ratings = User.beeratings(:to)
+    @thankers = User.beeratings(:from)
   end
     
   def edit 

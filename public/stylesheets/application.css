@@ -316,3 +316,12 @@ ul.bare-list {
   padding: 0;
   margin: 1em;
 }
+
+ul.beer-list {
+  float: left;
+  width: 40%;
+}
+
+ul.beer-list img {
+  margin-right: 3px;
+}

@@ -29,11 +29,14 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   
 
-  def self.beeratings
-    rows = connection.select_all(%{SELECT to_id,count(*) as score
+  def self.beeratings(to=:to)
+    
+    user_id = to == :to ? 'to_id' : 'from_id'
+    
+    rows = connection.select_all(%{SELECT #{user_id},count(*) as score
       FROM thankyous t
-      where datediff(now(),created_at) < 14
-      group by to_id
+      where datediff(now(),created_at) <= 14
+      group by #{user_id}
       having count(*) > 0
       order by 2 desc})
       
@@ -42,7 +45,7 @@ class User < ActiveRecord::Base
     top_score = rows.first['score'].to_f
 
     rows.collect do |row|
-      [User.find(row['to_id']), (row['score'].to_i / top_score) * 5.0]
+      [User.find(row[user_id]), (row['score'].to_i / top_score) * 5.0]
     end
   end
   
