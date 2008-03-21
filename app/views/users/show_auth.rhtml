@@ -32,7 +32,11 @@ If you hang out on #ror_au<br/>
 <div id="affiliations" class="list">
 <h2>affiliations</h2>
   <ul>
-    <%= render :partial => 'affiliation', :collection => @user.all_affiliations %>
+    <% @user.all_affiliations.each do |affiliation| %>
+      <li id='<%=dom_id(affiliation.group)%>'>
+        <%= render :partial => 'affiliation', :object => affiliation %>
+      </li>
+    <% end %>    
   </ul>
 </div>
 

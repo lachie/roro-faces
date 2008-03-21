@@ -2,5 +2,5 @@
   <%= image_tag(facet.favicon_url) if facet.favicon_url %>
   <%= link_to facet.link_text, clean_link(facet.link) %>
   <%= link_to 'feed', clean_link(facet.feed) unless facet.feed.blank? %>
-  [<%= link_to_remote 'x', :url => facet_path(facet), :method => 'delete' %>]
+  [<%= link_to 'x', :url => facet_path(facet), :class => 'delete_facet' %>]
 </li>

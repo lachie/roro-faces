@@ -127,6 +127,8 @@ class UsersController < ApplicationController
       :regular   => params[:regular  ]
     }
     @affiliation = @user.ensure_affiliation(affiliation)
+    
+    render :partial => 'affiliation', :object => @affiliation
   end
   
   protected

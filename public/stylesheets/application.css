@@ -284,6 +284,10 @@ p.minor {
   height:48px;
 }
 
+#grid .pinname {
+  position: absolute;
+}
+
 #form-container {
   float: left;
 }
@@ -324,4 +328,28 @@ ul.beer-list {
 
 ul.beer-list img {
   margin-right: 3px;
+}
+
+.facets h2 {
+  float:left;
+  clear: none;
+}
+.facets .count {
+  float: left;
+  clear: none;
+  padding-left: 1em;
+}
+.facets .favicon {
+  float: left;
+  clear: right;
+  padding-left: 1em;
+}
+.facets .ppl {
+  float: left;
+  width: 100%;
+  margin-bottom: 1em;
+}
+.facets .person {
+  float: left;
+
 }

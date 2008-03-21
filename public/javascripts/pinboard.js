@@ -1,20 +1,13 @@
-Event.addBehavior({
-  'div.pinuser:mouseover': function() {
-    var uname = $('nick_'+this.id);
+$(function() {
+  $('.pinuser').mouseover(function() {
+    var offset = $(this).offset();
+
+    $('#nick_'+this.id).css({
+      'top': offset.top+$(this).height()-8,
+      'left': offset.left+7
+    }).show()
     
-    if(!uname.style.position || uname.style.position=='absolute') {
-      uname.style.position = 'absolute';
-      Position.clone(this, uname, {
-        setHeight: false,
-        setWidth: false,
-        offsetTop: (this.offsetHeight-8),
-        offsetLeft: 7
-      });
-    }
-    
-    uname.show();
-  },
-  'div.pinuser:mouseout': function() {
-    $('nick_'+this.id).hide();
-  }
-});
+  }).mouseout(function() {
+    $('#nick_'+this.id).hide()
+  })
+})

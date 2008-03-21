@@ -146,12 +146,6 @@ class User < ActiveRecord::Base
     affiliation = affiliations.find_by_group_id(params[:group_id])
     linked = params.delete(:linked)
     linked = !(linked == 'false' || linked.blank?)
-    
-    visitor = params.delete(:visitor)
-    
-    unless params[:regular].blank? and visitor.blank?
-      params[:regular] = visitor.blank?
-    end
 
     if affiliation
       
