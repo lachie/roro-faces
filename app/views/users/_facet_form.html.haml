@@ -1,0 +1,8 @@
+-remote_form_for :facet, :url => facets_path, :method => :post do |f|
+  = hidden_field_tag :user_id, @user.id
+  %p
+    kind
+  %p
+    name
+    = f.text_field :name
+  %p= submit_tag '+'

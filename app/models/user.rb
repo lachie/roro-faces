@@ -190,7 +190,7 @@ class User < ActiveRecord::Base
   end
   
   def self.find_for_pinboard
-    find(:all,:order => 'mugshot_id DESC,email', :include => :mugshot)
+    find(:all,:order => 'mugshots.id DESC,users.id DESC', :include => :mugshot)
   end
 
   protected

@@ -1,15 +1,18 @@
 -id = dom_id(affiliation.group)
-=check_box_tag "#{id}_linked", '1', affiliation.user
-=affiliation.group.name
+%td
+  =check_box_tag "#{id}_linked", '1', affiliation.user
+  =affiliation.group.name
 
 -if affiliation.group.once_off?
+  %td/
   =hidden_field_tag "#{id}_kind_regular", false
   =hidden_field_tag "#{id}_kind_visitor", false
 -else
-  =radio_button_tag "#{id}_kind", 'regular', (!affiliation.new_record? && affiliation.regular?)
-  regular
-  =radio_button_tag "#{id}_kind", 'visitor', (!affiliation.new_record? && !affiliation.regular?)
-  visitor
-
-=check_box_tag "#{id}_presenter", '1', affiliation.presenter?
-presenter
+  %td
+    =radio_button_tag "#{id}_kind", 'regular', (!affiliation.new_record? && affiliation.regular?)
+    regular
+    =radio_button_tag "#{id}_kind", 'visitor', (!affiliation.new_record? && !affiliation.regular?)
+    visitor
+%td
+  =check_box_tag "#{id}_presenter", '1', affiliation.presenter?
+  presenter

@@ -1,0 +1,43 @@
+-content_for :header do
+  =javascript_tag "var user_id = #{@user.id};"
+  =javascript_include_tag 'user'
+
+-@page_title = @user.nick
+
+#info-container
+
+  %p.minor
+    = link_to "Preview #{@user.nick}", user_path(:id => @user, :preview => true)
+    &middot;
+    = link_to "Edit #{@user.nick}", edit_user_path(@user)
+
+  %p#mugshot.mugshot
+    = render :partial => 'mugshot'
+
+  -if @user.irc_nick.blank?
+    %p
+      If you hang out on #ror_au
+      %br/
+      = image_tag 'comments.png'
+      = link_to 'you can set your IRC nick', edit_user_path(@user)
+      \.
+
+
+  =render :partial => 'show_common'
+
+  #affiliations.list
+    %h2 affiliations
+    %table
+      -@user.all_affiliations.each do |affiliation|
+        %tr[affiliation.group]
+          =render :partial => 'affiliation', :object => affiliation
+
+
+
+  .list
+    %h2 facets
+    of your web presence.
+    %table#facet-list
+      =render :partial => 'facet', :collection => @user.facets
+    =select_tag( :facet_kind, options_for_select(@facet_kinds) )
+    #facet_kind_form

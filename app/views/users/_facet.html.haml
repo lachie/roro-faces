@@ -1,0 +1,12 @@
+%tr[facet]
+  %td
+    = image_tag(facet.favicon_url) if facet.favicon_url
+    = link_to facet.link_text, clean_link(facet.link)
+    
+  %td
+    = link_to 'feed', clean_link(facet.feed) unless facet.feed.blank?
+
+  %td
+    [
+    = link_to 'x', facet_path(facet), :class => 'delete_facet'
+    ]

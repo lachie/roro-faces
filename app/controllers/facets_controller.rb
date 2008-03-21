@@ -22,6 +22,7 @@ class FacetsController < ApplicationController
   
   def destroy
     @facet.destroy
+    render :nothing => true
   end
   
   protected

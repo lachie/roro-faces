@@ -1,0 +1,29 @@
+-@page_title = @user.nick
+
+#info-container
+  %p.minor
+    -if authorised?
+      =link_to "Show #{@user.nick}", user_path(@user)
+      &middot;
+      =link_to "Edit #{@user.nick}", edit_user_path(@user)
+      &middot;
+
+  %p.mugshot
+    =image_tag @user.mugshot.public_filename if @user.mugshot
+
+  =render :partial => 'show_common'
+
+  -if @user.affiliations.size > 0
+    #affiliations.list
+      %h2 groups
+      %ul
+        = render :partial => 'affiliation_show', :collection => @user.affiliations
+
+  -if @user.facets.size > 0
+    #facets.list
+      %h2 facets
+      of
+      =@user.nick
+      's web presence.
+      %table.facet-list
+        = render :partial => 'facet_show', :collection => @user.facets

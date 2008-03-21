@@ -1,0 +1,7 @@
+%tr
+  %td
+    = image_tag(facet_show.favicon_url) if facet_show.favicon_url
+    = link_to facet_show.link_text, facet_show.link
+
+  %td
+    = link_to 'feed', facet_show.feed unless facet_show.feed.blank?

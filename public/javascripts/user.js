@@ -30,9 +30,21 @@ $(function() {
   $("#affiliations input[type!=radio]").change(change)
   $("#affiliations input[type=radio] " ).click(change)
   
-  function delete_facet() {
+  
+  $('.delete_facet').click(function() {
+    var div = $(this).parent('tr')
+    div.hide()
     
-  }
+    $.post(this.href,{_method:'delete'},function(data,status) {
+      if(status=='success') {
+        div.remove()
+      } else {
+        div.show()
+      }
+    })
+    
+    return false;
+  })
   
   $("#facet_kind").change(function() {
     var value = $(this).val();
