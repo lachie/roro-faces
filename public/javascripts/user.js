@@ -59,7 +59,6 @@ $(function() {
       var parameters = { user_id: user_id, facet_kind_id: value };
       
       $('#facet_kind_form').load('/facets/new',parameters,function() {
-        console.log("loaded",this)
         
         $('form',this).submit(function() {
           $.post(this.action, $(this).serialize(), function(data) {
