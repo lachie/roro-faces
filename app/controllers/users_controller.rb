@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   append_before_filter :load_user, :only => [:edit,:update, :show, :link_affiliation]
   append_before_filter :login_required, :only => [ :edit, :update ]
   
+
   cache_sweeper :user_sweeper
   
   def authorized?
@@ -79,8 +80,16 @@ class UsersController < ApplicationController
   
   def chatter
     @page_title = 'chatter'
-    @built_ago = User.draw_chatter
+
+    respond_to do |wants|
+      wants.svg
+      wants.html do
+        @built_ago = User.draw_chatter
+      end
+    end
   end
+  
+
     
   def edit 
   end

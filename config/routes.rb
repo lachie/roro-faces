@@ -11,7 +11,8 @@ ActionController::Routing::Routes.draw do |map|
       :pinboard  => :get,
       :thankyous => :get,
       :beerating => :get,
-      :chatter   => :get
+      :chatter   => :get,
+      :beergraph => :get
     }
   
   map.resources :mugshots, 

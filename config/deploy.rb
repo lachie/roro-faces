@@ -15,6 +15,10 @@ role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
 
+set :scm, 'git'
+set :repository_cache, "git_master"
+set :deploy_via, :remote_cache
+
 # =============================================================================
 # REQUIRED VARIABLES
 # =============================================================================
@@ -90,7 +94,7 @@ after 'deploy:symlink' do
  run "ln -nfs #{shared_path}/config/gmail.rb #{current_path}/config/gmail.rb"
  run "ln -nfs #{shared_path}/config/shared_secret.rb #{current_path}/config/shared_secret.rb"
  
- run "ln -nfs #{shared_path}/public/mugshots #{current_path}/public/mugshots"
+ run "ln -nfs #{shared_path}/public/mugshots #{current_path}/public"
 end
 
 namespace :deploy do  

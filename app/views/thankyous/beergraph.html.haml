@@ -1,16 +1,11 @@
 -if @not_built
   %em no beer graph :(
 -else
-  =image_tag('beergraph.png')
+  %embed{:width=>"500", :height=>"500", :type=>"image/svg+xml", :src=>"/thankyous/beergraph.svg"}/
   %p
-    A neato graph of who's owes beer to whom in 
+    A graph of who's owes beer to whom in 
     %a{:href=>'irc://freenode.org/roro'}#roro
   %p
     Bigger circle == more beers.
   %p
     Name (beers owed to name / beers promised from name)
-  %p
-    %em
-      Generated
-      =distance_of_time_in_words(@built_ago)
-      ago.

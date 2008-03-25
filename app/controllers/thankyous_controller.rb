@@ -1,5 +1,10 @@
 class ThankyousController < ApplicationController
   
+  perform_caching && after_filter do |c|
+    c.cache_page if c.action_name == 'beergraph' and c.params[:format] == 'svg'
+  end
+  cache_sweeper :thankyou_sweeper
+    
   def new
     @thankyou = Thankyou.new(:from_id => current_user.id, :to_id => params[:to_id])
     
@@ -85,12 +90,12 @@ class ThankyousController < ApplicationController
   
 
   def beergraph
-    @page_title = 'beer graph'
-    png = File.join(RAILS_ROOT,'public','images','beergraph.png')
-    if File.exist?(png)
-      @built_ago  = Time.now-File.ctime(png)
-    else
-      @not_built = true
+
+    respond_to do |wants|
+      wants.html
+      wants.svg do
+        @users,@thanks,@to,@from = Thankyou.find_thanks_for_graph(:all,:include => [:from,:to])
+      end
     end
   end
 end

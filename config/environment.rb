@@ -71,7 +71,7 @@ end
 #   inflect.uncountable %w( fish sheep )
 # end
 
-#Mime::Type.register "text/csv", :csv
+Mime::Type.register "image/svg+xml", :svg
 
 # Ruby libs
 require 'open-uri'

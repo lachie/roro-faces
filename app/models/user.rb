@@ -212,6 +212,8 @@ class User < ActiveRecord::Base
     end
     ago
   end
+  
+  
 
   protected
     # before filter 

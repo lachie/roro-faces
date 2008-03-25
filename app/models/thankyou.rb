@@ -86,6 +86,43 @@ class Thankyou < ActiveRecord::Base
     system "neato -o #{png} -Tpng #{dot} &"
   end
   
+  def self.find_thanks_for_graph(*args)
+    thanks_to   = Hash.auto {0}
+    thanks_from = Hash.auto {0}
+    thanks      = Hash.auto {Hash.auto {0}}
+    
+    find(*args).each do |thankyou|
+      from = thankyou.from.irc_nick or next
+      to   = thankyou.to.irc_nick or next
+    
+      if from.blank?
+        puts "from was blank #{thankyou.inspect}"
+        next
+      end
+      if to.blank?
+        puts "to was blank #{thankyou.inspect}"
+        next
+      end
+      
+      thanks_to[to]     += 1
+      thanks_from[from] += 1
+      thanks[to][from]  += 1
+    end
+    
+    names = (thanks_to.keys|thanks_from.keys).sort_by {|name| thanks_to[name] - thanks_from[name]}
+    
+    nn = []
+    names.each_with_index do |name,i|
+      if i % 2 == 0
+        nn.push name
+      else
+        nn.unshift name
+      end
+    end
+    
+    [nn,thanks,thanks_to,thanks_from]
+  end
+  
   protected
     def public_attributes
       {

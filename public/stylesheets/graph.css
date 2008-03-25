@@ -1,0 +1,21 @@
+.from {
+  fill: green;
+  stroke: green;
+  stroke-width: 0.5;
+  fill-opacity: 0.5;
+}
+
+.to {
+  fill: blue;
+  stroke: blue;
+  stroke-width: 0.5;
+  fill-opacity: 0.5;
+}
+
+.thanks {
+  stroke: #555;  
+}
+
+svg {
+  fill: white;
+}
