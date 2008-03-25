@@ -7,10 +7,10 @@ module Graphs
       splines=true;
       sep=.5;
       margin=".1,.1";
-      bgcolor="#d6bf94"
+      bgcolor=white;
 
-    	node [shape=circle, fixedsize=true, fontcolor=red, fontname=Helvetica, fontsize=14, color=blue];
-    	edge [arrowsize=0.5, color="#a6803a"];
+    	node [shape=circle, fixedsize=true, fontcolor="#86171d", fontname=Helvetica, fontsize=14, color=blue];
+    	edge [arrowsize=0.5, color=gray];
     }
     yield(output)
     output << "}"
