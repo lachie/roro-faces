@@ -15,7 +15,6 @@ require File.join(File.dirname(__FILE__), 'boot')
 require 'shared_secret'
 
 
-
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here
   
@@ -50,12 +49,15 @@ Rails::Initializer.run do |config|
   # See Rails::Configuration for more options
   
   config.action_controller.session = { :session_key => "_faces_session", :secret => "zaphod beeblebrox? He's just this guy, you know?" }
+  
+  module FacesConfig
+    mattr_accessor :numbr5_path
+    self.numbr5_path = File.join(ENV['HOME'],'dev/ruby/numbr5')
+  end
+  
 end
 
-module FacesConfig
-  mattr_accessor :numbr5_path
-  self.numbr5_path = File.join(ENV['HOME'],'dev/ruby/numbr5')
-end
+
 
 # Add new inflection rules using the following format 
 # (all these examples are active by default):
