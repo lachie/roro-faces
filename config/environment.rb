@@ -13,6 +13,12 @@ require File.join(File.dirname(__FILE__), 'boot')
 # Dependencies.log_activity = true
 
 require 'shared_secret'
+require 'active_support'
+
+module FacesConfig
+  mattr_accessor :numbr5_path
+  self.numbr5_path = File.join(ENV['HOME'],'dev/ruby/numbr5')
+end
 
 
 Rails::Initializer.run do |config|
@@ -50,10 +56,7 @@ Rails::Initializer.run do |config|
   
   config.action_controller.session = { :session_key => "_faces_session", :secret => "zaphod beeblebrox? He's just this guy, you know?" }
   
-  module FacesConfig
-    mattr_accessor :numbr5_path
-    self.numbr5_path = File.join(ENV['HOME'],'dev/ruby/numbr5')
-  end
+
   
 end
 
