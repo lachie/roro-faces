@@ -1,0 +1,12 @@
+=image_tag('chatter.png')
+%p
+  A neato graph of who's talking to whom in 
+  %a{:href=>'irc://freenode.org/roro'}#roro
+%p
+  Bigger circle == more talky.
+%p
+  %em
+    Built
+    =distance_of_time_in_words(@built_ago)
+    ago.
+    Regenerated on demand each hour.

@@ -8,15 +8,17 @@ ActionController::Routing::Routes.draw do |map|
       :link_affiliation => :post
     },
     :collection => {
-      :pinboard => :get,
+      :pinboard  => :get,
       :thankyous => :get,
-      :beerating => :get
+      :beerating => :get,
+      :chatter   => :get
     }
   
   map.resources :mugshots, 
     :collection => { :update_all_thumbnails => :get }
     
-  map.resources :thankyous
+  map.resources :thankyous,
+    :collection => { :beergraph => :get }
   
   map.resources :meetings
   

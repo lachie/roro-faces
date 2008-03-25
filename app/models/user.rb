@@ -192,6 +192,26 @@ class User < ActiveRecord::Base
   def self.find_for_pinboard
     find(:all,:order => 'mugshots.id DESC,users.id DESC', :include => :mugshot)
   end
+  
+  def self.draw_chatter
+    output = "/images/chatter.png"
+    output_path = File.join(RAILS_ROOT,'public',output)
+    
+    if File.exist?(output_path)
+      ago = Time.now - File.ctime(output_path)
+      draw = ago >= 3600
+    else
+      ago = 0
+      draw = true
+    end
+
+    if(draw)
+      Dir.chdir(FacesConfig.numbr5_path) do
+        `rake graph OUTPUT=#{output_path}`
+      end
+    end
+    ago
+  end
 
   protected
     # before filter 

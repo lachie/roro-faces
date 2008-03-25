@@ -82,4 +82,15 @@ class ThankyousController < ApplicationController
     @thankyou = Thankyou.find(params[:id])
     redirect_to thankyous_path(:to_id => @thankyou.to_id)
   end
+  
+
+  def beergraph
+    @page_title = 'beer graph'
+    png = File.join(RAILS_ROOT,'public','images','beergraph.png')
+    if File.exist?(png)
+      @built_ago  = Time.now-File.ctime(png)
+    else
+      @not_built = true
+    end
+  end
 end

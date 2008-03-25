@@ -76,6 +76,11 @@ class UsersController < ApplicationController
     @ratings = User.beeratings(:to)
     @thankers = User.beeratings(:from)
   end
+  
+  def chatter
+    @page_title = 'chatter'
+    @built_ago = User.draw_chatter
+  end
     
   def edit 
   end
@@ -140,13 +145,13 @@ class UsersController < ApplicationController
     things = (@users + Thankyou.find(:all)).sort_by {|ut| ut.feed_sort_date}
     options = {
       :feed => {
-        :title => "roro facebook",
+        :title       => "roro facebook",
         :description => "The real faces of Rails Oceania people!"
       },
       :item => {
-        :title => [:nick,:feed_title],
+        :title       => [:nick,:feed_title],
         :description => :feed_description,
-        :pub_date => :feed_sort_date
+        :pub_date    => :feed_sort_date
       }
     }
     render_rss_feed_for things, options

@@ -24,6 +24,68 @@ class Thankyou < ActiveRecord::Base
     public_attributes.to_json
   end
   
+  extend Graphs
+  
+  def self.to_dot(*args)
+    dottify "thankyous" do |output|
+    
+      thanks        = Hash.auto { Hash.auto { 0 } }
+      to_totals     = Hash.auto { 0 }
+      from_totals   = Hash.auto { 0 }
+    
+      self.find(*args).each do |thankyou|
+        from = thankyou.from.irc_nick or next
+        to   = thankyou.to.irc_nick or next
+      
+        if from.blank?
+          puts "from was blank #{thankyou.inspect}"
+          next
+        end
+        if to.blank?
+          puts "to was blank #{thankyou.inspect}"
+          next
+        end
+      
+        from.gsub!(/\W/,'')
+        to.gsub!(/\W/,'')
+      
+        thanks[from][to]  += 1
+        to_totals[to]     += 1
+        from_totals[from] += 1
+      end
+    
+      max_count = to_totals.values.max.to_f
+      max_size = 1.0
+      min_size = 0.25
+      delta_size = max_size - min_size
+    
+      (to_totals.keys | from_totals.keys).each do |name|
+        tos   = to_totals[name]   || 0
+        froms = from_totals[name] || 0
+        size  = (tos / max_count) * delta_size + min_size
+      
+        output << "\t#{name} [width=#{size},label=\"\\N (#{tos}/#{froms})\"];\n"
+      end
+    
+      thanks.each do |(from,tos)|
+        tos.each do |(to,count)|
+          output << "\t#{from} -> #{to} [weight=#{count}];\n"
+        end
+      end
+    end
+  end
+  
+  def self.draw_graph(*args)
+    dot = RAILS_ROOT+"/tmp/thankyous.dot"
+    png = File.join(RAILS_ROOT,'public','images','beergraph.png')
+    
+    open(dot,'w') do |f|
+      f << to_dot(*args)
+    end
+    
+    system "neato -o #{png} -Tpng #{dot} &"
+  end
+  
   protected
     def public_attributes
       {

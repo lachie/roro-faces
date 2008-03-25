@@ -14,6 +14,8 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 require 'shared_secret'
 
+
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here
   
@@ -50,6 +52,11 @@ Rails::Initializer.run do |config|
   config.action_controller.session = { :session_key => "_faces_session", :secret => "zaphod beeblebrox? He's just this guy, you know?" }
 end
 
+module FacesConfig
+  mattr_accessor :numbr5_path
+  self.numbr5_path = File.join(ENV['HOME'],'dev/ruby/numbr5')
+end
+
 # Add new inflection rules using the following format 
 # (all these examples are active by default):
 # Inflector.inflections do |inflect|
@@ -70,8 +77,7 @@ require 'fileutils'
 #require 'feed-normalizer'
 require 'RMagick'
 
-
-
+require 'hash_ext'
 
 # Include your application configuration below
 require 'smtp_tls'
