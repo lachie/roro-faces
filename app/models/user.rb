@@ -212,6 +212,48 @@ class User < ActiveRecord::Base
     end
     ago
   end
+
+  CHANNEL = '#roro'
+  def self.each_chatter_line
+    IO.foreach(File.join(FacesConfig.numbr5_path,'data','messages.tab')) do |line|
+      chan,user,message = line.chomp.split("\t")
+      next if chan != CHANNEL or user == 'server'
+      user = user.sub(/^[\W_]+/,'').sub(/[\W_]+$/,'')
+      yield user,message
+    end
+  end
+  
+  def self.chatter
+    users   = Hash.auto { 0 }
+    user_to = Hash.auto { Hash.auto { 0 } }
+    total   = 0
+    
+    each_chatter_line do |user,message|
+      users[user] += 1
+      total       += 1
+    end
+    
+    everyone_re = %r!(#{users.keys.join('|')})!
+
+    each_chatter_line do |user,message|
+      message.scan(everyone_re).each do |other|
+        user_to[user][other.first] += 1
+      end
+    end
+    
+    ss = []
+    sorted_users = users.keys.sort_by {|name| users[name]}
+    
+    sorted_users.each_with_index do |name,i|
+      if i % 2 == 0
+        ss.push name
+      else
+        ss.unshift name
+      end
+    end
+    
+    [ss,users,user_to,total]
+  end
   
   
 

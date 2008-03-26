@@ -1,12 +1,9 @@
-=image_tag('chatter.png')
+%embed{:width=>"900", :height=>"700", :type=>"image/svg+xml", :src=>"/users/chatter.svg"}/
 %p
-  A neato graph of who's talking to whom in 
+  A graph of who's talking to whom in 
   %a{:href=>'irc://freenode.org/roro'}#roro
 %p
   Bigger circle == more talky.
 %p
   %em
-    Built
-    =distance_of_time_in_words(@built_ago)
-    ago.
-    Regenerated on demand each hour.
+    Regenerated on demand, at most once an hour.

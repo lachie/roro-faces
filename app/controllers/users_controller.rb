@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   append_before_filter :load_user, :only => [:edit,:update, :show, :link_affiliation]
   append_before_filter :login_required, :only => [ :edit, :update ]
   
-
+  perform_caching && after_filter do |c|
+    c.cache_page if c.action_name == 'chatter' and c.params[:format] == 'svg'
+  end
   cache_sweeper :user_sweeper
   
   def authorized?
@@ -82,10 +84,10 @@ class UsersController < ApplicationController
     @page_title = 'chatter'
 
     respond_to do |wants|
-      wants.svg
-      wants.html do
-        @built_ago = User.draw_chatter
+      wants.svg do
+        @users,@user_totals,@mentions,@total = User.chatter
       end
+      wants.html
     end
   end
   
@@ -143,6 +145,9 @@ class UsersController < ApplicationController
     @affiliation = @user.ensure_affiliation(affiliation)
     
     render :partial => 'affiliation', :object => @affiliation
+  end
+  
+  def self.chatter
   end
   
   protected

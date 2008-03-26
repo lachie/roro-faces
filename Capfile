@@ -18,9 +18,7 @@ role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
 
-# set :scm, 'git'
-# set :repository_cache, "git_master"
-# set :deploy_via, :remote_cache
+
 
 # =============================================================================
 # REQUIRED VARIABLES
@@ -35,7 +33,13 @@ set :deploy_to, "/var/www/apps/#{application}"
 
 # XXX we may not need this - it doesn't work on windows
 # XXX set :user, ENV['USER']
-set :repository, "http://rails-oceania.googlecode.com/svn/facebook"
+# set :repository, "http://rails-oceania.googlecode.com/svn/facebook"
+
+set :scm, 'git'
+set :repository, 'git://github.com/lachie/roro-faces.git'
+set :repository_cache, "git_master"
+set :deploy_via, :remote_cache
+
 set :rails_env, "production"
 
 # Automatically symlink these directories from current/public to shared/public.

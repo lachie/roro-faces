@@ -90,7 +90,7 @@ class ThankyousController < ApplicationController
   
 
   def beergraph
-
+    @page_title = 'beergraph'
     respond_to do |wants|
       wants.html
       wants.svg do

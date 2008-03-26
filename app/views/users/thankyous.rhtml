@@ -13,6 +13,8 @@ var reasons = <%= @users.map {|u| u.thankyous_to}.flatten.inject({}) do |rs,t|
 
 <p class="minor">
   <%= link_to 'ratings', beerating_users_path %>
+  &middot;
+  <%= link_to 'beergraph', beergraph_thankyous_path %>
 </p>
 
 <ul class="bare-list">

@@ -1,11 +1,13 @@
--if @not_built
-  %em no beer graph :(
--else
-  %embed{:width=>"500", :height=>"500", :type=>"image/svg+xml", :src=>"/thankyous/beergraph.svg"}/
-  %p
-    A graph of who's owes beer to whom in 
-    %a{:href=>'irc://freenode.org/roro'}#roro
-  %p
-    Bigger circle == more beers.
-  %p
-    Name (beers owed to name / beers promised from name)
+%p.minor
+  =link_to 'ratings', beerating_users_path
+  &middot;
+  =link_to 'all beers', thankyous_users_path
+
+%embed{:width=>"900", :height=>"700", :type=>"image/svg+xml", :src=>"/thankyous/beergraph.svg"}/
+%p
+  A graph of who's owed beer to whom in 
+  %a{:href=>'irc://freenode.org/roro'}#roro
+%p
+  Bigger circle == more beers.
+%p
+  Name (beers owed to name / beers promised from name)
