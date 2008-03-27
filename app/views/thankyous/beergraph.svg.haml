@@ -1,7 +1,10 @@
 !!! XML
 :plain
   <?xml-stylesheet href="/stylesheets/graph.css" type="text/css"?>
-%svg{:xmlns=>"http://www.w3.org/2000/svg", :width=>"100%", :height=>"100%", :viewBox=>"-150 -150 300 300"}
+%svg{:xmlns=>"http://www.w3.org/2000/svg", 'xmlns:xlink'=>"http://www.w3.org/1999/xlink", :width=>"100%", :height=>"100%", :viewBox=>"-150 -150 300 300"}
+  -#%script{:type => 'text/javascript', 'xlink:href' => '/javascripts/jquery-1.2.3.min.js'}
+  -#%script{:type => 'text/javascript', 'xlink:href' => '/javascripts/beergraph.js'}
+
 
   -count        = @users.size.to_f
   -radius       = 75
@@ -22,8 +25,13 @@
 
   %g{:style => "font-style:normal;font-family:Georgia;font-size:#{font_size}px"}
     -@users.each_with_index do |user,i|
-      %g{:transform => "rotate(#{i / count * 360}) translate(#{radius},0)"}
+      -angle = i / count * 360
+      %g{:transform => "rotate(#{angle}) translate(#{radius},0)"}
         %circle{:cx=>0, :cy=>0, :r=>(@from[user] / max_thanks * delta_radius + min_radius), :class => 'from'}
         %circle{:cx=>0, :cy=>0, :r=>(@to[user]   / max_thanks * delta_radius + min_radius), :class => 'to'}
-        %text{:x => max_radius, :y => 2}
-          ==#{user} (#{@to[user]}/#{@from[user]})
+        -if angle > 90 and angle < 270
+          %text{:x => -max_radius, :y => font_size/4, :transform => "rotate(180)", 'text-anchor' => 'end'}
+            ==(#{@to[user]}/#{@from[user]}) #{user}
+        -else
+          %text{:x => max_radius, :y => font_size/4}
+            ==#{user} (#{@to[user]}/#{@from[user]})

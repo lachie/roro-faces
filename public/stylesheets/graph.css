@@ -15,3 +15,7 @@
 .thanks {
   stroke: #555;  
 }
+
+.highlight {
+  stroke: red;
+}
