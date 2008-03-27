@@ -244,13 +244,17 @@ class User < ActiveRecord::Base
     ss = []
     sorted_users = users.keys.sort_by {|name| users[name]}
     
-    sorted_users.each_with_index do |name,i|
-      if i % 2 == 0
-        ss.push name
-      else
-        ss.unshift name
-      end
+    sorted_users.size.times do |i|
+      ss << ((i % 2 == 0) ? sorted_users.pop : sorted_users.shift)
     end
+    
+    # sorted_users.each_with_index do |name,i|
+    #   if i % 2 == 0
+    #     ss.push name
+    #   else
+    #     ss.unshift name
+    #   end
+    # end
     
     [ss,users,user_to,total]
   end
