@@ -217,7 +217,7 @@ class User < ActiveRecord::Base
   def self.each_chatter_line
     IO.foreach(File.join(FacesConfig.numbr5_path,'data','messages.tab')) do |line|
       chan,user,message = line.chomp.split("\t")
-      next if chan != CHANNEL or user == 'server'
+      next if chan != CHANNEL or user == 'server' or message.blank? or user.blank?
       user = user.sub(/^[\W_]+/,'').sub(/[\W_]+$/,'')
       yield user,message
     end
