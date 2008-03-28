@@ -216,7 +216,7 @@ class User < ActiveRecord::Base
   CHANNEL = '#roro'
   def self.each_chatter_line
     IO.foreach(File.join(FacesConfig.numbr5_path,'data','messages.tab')) do |line|
-      chan,user,message = line.chomp.split("\t")
+      timestamp,chan,user,message = line.chomp.split("\t")
       next if chan != CHANNEL or user == 'server' or message.blank? or user.blank?
       user = user.sub(/^[\W_]+/,'').sub(/[\W_]+$/,'')
       yield user,message
@@ -241,18 +241,19 @@ class User < ActiveRecord::Base
       end
     end
     
-    ss = []
+    ss  = []
+    sss = []
     sorted_users = users.keys.sort_by {|name| users[name]}
     
     sorted_users.size.times do |i|
       ss << ((i % 2 == 0) ? sorted_users.pop : sorted_users.shift)
     end
     
-    # sorted_users.each_with_index do |name,i|
+    # ss.size.times do |i|
     #   if i % 2 == 0
-    #     ss.push name
+    #     sss.push ss[i]
     #   else
-    #     ss.unshift name
+    #     sss.unshift ss[i]
     #   end
     # end
     
