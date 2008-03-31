@@ -113,3 +113,8 @@ namespace :deploy do
     EOR
   end
 end
+
+task :remove_graphs, :role => :app do
+  run "cd #{current_path}/public && rm users/chatter.svg"
+  run "cd #{current_path}/public && rm thankyous/beergraph.svg"
+end

@@ -254,6 +254,8 @@ class User < ActiveRecord::Base
       # yield timestamp,user,message
 
     end
+    
+    yield(buffers.last + buffer) unless buffers.empty? and buffer.empty?
   end
   
   def self.chatter
