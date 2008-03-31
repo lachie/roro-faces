@@ -225,6 +225,9 @@ class User < ActiveRecord::Base
 
     first,last = nil,nil
     
+    lines = Hash.auto { 0 }
+    total_lines = 0
+    
     IO.foreach(File.join(FacesConfig.numbr5_path,'data','messages.tab')) do |line|
       timestamp,chan,user,message = line.chomp.split("\t")
       
@@ -233,6 +236,9 @@ class User < ActiveRecord::Base
       
       user = user.sub(/^[\W_]+/,'').sub(/[\W_]+$/,'')
       timestamp = timestamp.to_i
+      
+      lines[user] += 1
+      total_lines += 1
 
       if setup
         first  = timestamp + i * half
@@ -256,26 +262,21 @@ class User < ActiveRecord::Base
     end
     
     yield(buffers.last + buffer) unless buffers.empty? and buffer.empty?
+    
+    [lines,total_lines]
   end
   
   def self.chatter
     presence = Hash.auto { Hash.auto { 0 } }
-    lines = Hash.auto { 0 }
-    total = 0
     
     # FIXME, its really expensive
-    chatter_lens(15*60) do |buffer|
+    lines,total = chatter_lens(5*60) do |buffer|
       users = buffer.uniq
       users.each do |user|
         users.each do |other_user|
           next if user == other_user
           presence[user][other_user] += 1
         end
-      end
-
-      buffer.each do |user|
-        lines[user] += 1
-        total       += 1
       end
     end
 
