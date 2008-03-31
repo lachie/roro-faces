@@ -213,53 +213,83 @@ class User < ActiveRecord::Base
     ago
   end
 
+  
   CHANNEL = '#roro'
-  def self.each_chatter_line
+  def self.chatter_lens(window,&block)
+    buffers = []
+    buffer = []
+    
+    i      = 0
+    half   = window / 2
+    setup  = true
+
+    first,last = nil,nil
+    
     IO.foreach(File.join(FacesConfig.numbr5_path,'data','messages.tab')) do |line|
       timestamp,chan,user,message = line.chomp.split("\t")
-      next if chan != CHANNEL or user == 'server' or message.blank? or user.blank?
+      
+      next if chan != CHANNEL or user == 'server' or user.blank?
+      next if timestamp == '0'
+      
       user = user.sub(/^[\W_]+/,'').sub(/[\W_]+$/,'')
-      yield user,message
+      timestamp = timestamp.to_i
+
+      if setup
+        first  = timestamp + i * half
+        last   = first     + half
+        i     += 1
+        setup  = false
+      end
+      
+      if timestamp > last
+        setup = true
+        yield(buffers.last + buffer) unless buffers.empty?
+        buffers << buffer
+        buffer = [user]
+      else
+        buffer << user
+      end
+            
+
+      # yield timestamp,user,message
+
     end
   end
   
   def self.chatter
-    users   = Hash.auto { 0 }
-    user_to = Hash.auto { Hash.auto { 0 } }
-    total   = 0
+    presence = Hash.auto { Hash.auto { 0 } }
+    lines = Hash.auto { 0 }
+    total = 0
     
-    each_chatter_line do |user,message|
-      users[user] += 1
-      total       += 1
-    end
-    
-    everyone_re = %r!(#{users.keys.join('|')})!
+    # FIXME, its really expensive
+    chatter_lens(15*60) do |buffer|
+      users = buffer.uniq
+      users.each do |user|
+        users.each do |other_user|
+          next if user == other_user
+          presence[user][other_user] += 1
+        end
+      end
 
-    each_chatter_line do |user,message|
-      message.scan(everyone_re).each do |other|
-        user_to[user][other.first] += 1
+      buffer.each do |user|
+        lines[user] += 1
+        total       += 1
+      end
+    end
+
+    ss = []
+    keys = lines.keys.sort_by {|key| lines[key]}
+    
+    keys.size.times do |i|
+      if i % 2 == 0
+        ss.push keys[i]
+      else
+        ss.unshift keys[i]
       end
     end
     
-    ss  = []
-    sss = []
-    sorted_users = users.keys.sort_by {|name| users[name]}
-    
-    sorted_users.size.times do |i|
-      ss << ((i % 2 == 0) ? sorted_users.pop : sorted_users.shift)
-    end
-    
-    # ss.size.times do |i|
-    #   if i % 2 == 0
-    #     sss.push ss[i]
-    #   else
-    #     sss.unshift ss[i]
-    #   end
-    # end
-    
-    [ss,users,user_to,total]
+    [ss,lines,presence,total]
   end
-  
   
 
   protected

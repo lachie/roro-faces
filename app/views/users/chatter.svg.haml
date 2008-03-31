@@ -11,16 +11,18 @@
   -max_radius   = circ / count / 2.0
   -min_radius   = max_radius * 0.2
   -delta_radius = max_radius-min_radius
-  -font_size    = max_radius.to_i * 2 + 1
+  -font_size    = [(max_radius.to_i * 2 + 1), 14].min
   -max_lines    = @user_totals.values.max.to_f
-  -max_single_thanks = @mentions.collect {|(to,froms)| froms.values}.flatten.max.to_f
+  -max_single_thanks = @mentions.collect {|(to,froms)| froms.values}.flatten.max.to_f - 1.0
   
   -@mentions.each do |(to,froms)|
     -to_angle   = @users.index(to) / count * Math::PI * 2
 
     -froms.each do |(from,total)|
       -from_angle = @users.index(from) / count * Math::PI * 2
-      -line_width = total / max_single_thanks * 0.75 + 0.05
+      ==<!-- #{total} / #{max_single_thanks} == #{(total / max_single_thanks)} -->
+      -line_width = ((total - 1.0) / max_single_thanks) * 1.2 + 0.2
+      ==<!-- #{line_width} -->
       
       %line{:x1=>Math.cos(from_angle)*radius,:y1=>Math.sin(from_angle)*radius,:x2=>Math.cos(to_angle)*radius,:y2=>Math.sin(to_angle)*radius,'stroke-width'=>line_width, :stroke=>'#555'}/
 
@@ -29,7 +31,6 @@
     -@users.each_with_index do |user,i|
       -angle = i / count * 360
       %g{:transform => "rotate(#{angle}) translate(#{radius},0)"}
-        ==<!-- #{@user_totals[user]} ... #{max_lines} -->
         %circle{:cx=>0, :cy=>0, :r=>(@user_totals[user] / max_lines * delta_radius + min_radius), :class => 'to'}
         -if angle > 90 and angle < 270
           %text{:x => -max_radius, :y => font_size/4, :transform => "rotate(180)", 'text-anchor' => 'end'}
