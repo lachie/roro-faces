@@ -281,11 +281,7 @@ class User < ActiveRecord::Base
     keys = lines.keys.sort_by {|key| lines[key]}
     
     keys.size.times do |i|
-      if i % 2 == 0
-        ss.push keys[i]
-      else
-        ss.unshift keys[i]
-      end
+      (i % 2 == 0) ? ss.unshift(keys[i]) : ss.push(keys[i])
     end
     
     [ss,lines,presence,total]
