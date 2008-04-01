@@ -24,9 +24,9 @@
 
     -froms.each do |(from,total)|
       -from_angle = @users.index(from) / count * Math::PI * 2
-      -line_width = ((total - 1.0) / max_single_thanks) * 1.2 + 0.2
+      -line_width = ((total - 1.0) / max_single_thanks) * 1.2 + 0.1
       
-      %line{:x1=>Math.cos(from_angle)*radius,:y1=>Math.sin(from_angle)*radius,:x2=>Math.cos(to_angle)*radius,:y2=>Math.sin(to_angle)*radius,'stroke-width'=>line_width, :stroke=>'#555'}/
+      %line{:x1=>Math.cos(from_angle)*radius,:y1=>Math.sin(from_angle)*radius,:x2=>Math.cos(to_angle)*radius,:y2=>Math.sin(to_angle)*radius,'stroke-width'=>line_width, :stroke=>'#aaa'}/
 
   
   %g{:style => "font-style:normal;font-family:Georgia;font-size:#{font_size}px"}

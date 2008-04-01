@@ -224,6 +224,7 @@ class User < ActiveRecord::Base
     setup  = true
 
     first,last = nil,nil
+    first_timestamp = nil
     
     lines = Hash.auto { 0 }
     total_lines = 0
@@ -241,9 +242,11 @@ class User < ActiveRecord::Base
       total_lines += 1
 
       if setup
-        first  = timestamp + i * half
-        last   = first     + half
+        first_timestamp ||= timestamp
+
         i     += 1
+        last   = first_timestamp     + i * half
+
         setup  = false
       end
       
@@ -265,16 +268,17 @@ class User < ActiveRecord::Base
     
     [lines,total_lines]
   end
-  
+  require 'pp'
   def self.chatter
     presence = Hash.auto { Hash.auto { 0 } }
     
     # FIXME, its really expensive
-    lines,total = chatter_lens(5*60) do |buffer|
+    lines,total = chatter_lens(15*60) do |buffer|
       users = buffer.uniq
       users.each do |user|
         users.each do |other_user|
           next if user == other_user
+          
           presence[user][other_user] += 1
         end
       end
