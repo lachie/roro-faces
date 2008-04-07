@@ -215,7 +215,14 @@ class User < ActiveRecord::Base
 
   
   CHANNEL = '#roro'
-  def self.chatter_lens(window,&block)
+  ALIASES = {
+    'kasual_keith' => 'keithpitty',
+    'brother_rspec' => 'lachie',
+    'brother_cache' => 'matta',
+    'brother_sphinx' => 'freelancing_god',
+    'Richo' => 'Richo99'
+  }
+  def self.chatter_lens(window,start=0,&block)
     buffers = []
     buffer = []
     
@@ -228,15 +235,20 @@ class User < ActiveRecord::Base
     
     lines = Hash.auto { 0 }
     total_lines = 0
+
     
     IO.foreach(File.join(FacesConfig.numbr5_path,'data','messages.tab')) do |line|
       timestamp,chan,user,message = line.chomp.split("\t")
       
       next if chan != CHANNEL or user == 'server' or user.blank?
       next if timestamp == '0'
-      
-      user = user.sub(/^[\W_]+/,'').sub(/[\W_]+$/,'')
       timestamp = timestamp.to_i
+      next if timestamp < start
+      
+            
+      user = user.sub(/^[\W_]+/,'').sub(/[\W_]+$/,'')
+      user = ALIASES[user] || user
+
       
       lines[user] += 1
       total_lines += 1
@@ -269,28 +281,51 @@ class User < ActiveRecord::Base
     [lines,total_lines]
   end
   require 'pp'
-  def self.chatter
+  def self.chatter(start=0)
     presence = Hash.auto { Hash.auto { 0 } }
     
     # FIXME, its really expensive
-    lines,total = chatter_lens(15*60) do |buffer|
+    lines,total = chatter_lens(15*60,start) do |buffer|
       users = buffer.uniq
+      other_users = users.dup
+      
       users.each do |user|
-        users.each do |other_user|
+        other_users.each do |other_user|
           next if user == other_user
           
           presence[user][other_user] += 1
         end
       end
     end
+    
+    max_lines = lines.values.max
+    
+    presence_threshhold = presence.values.map {|p| p.values}.flatten.max * 0.05
 
     ss = []
-    keys = lines.keys.sort_by {|key| lines[key]}
+    users = lines.keys.sort_by {|key| -lines[key]}
     
-    keys.size.times do |i|
-      (i % 2 == 0) ? ss.unshift(keys[i]) : ss.push(keys[i])
+    until users.empty?
+      user = users.shift
+      # next if lines[user] < presence_threshhold
+      group = [user]
+      i = 0
+      presence[user].keys.sort_by {|u| -presence[user][u]}.each do |other_user|
+        next if presence[user][other_user] < presence_threshhold
+        u = users.delete(other_user)
+        (i % 2 == 0) ? group.unshift(u) : group.push(u)
+        i+=1
+      end
+      
+      ss += group
     end
     
+    ss.compact!
+    # sss = []
+    #     ss.size.times do |i|
+    #       (i % 2 == 0) ? sss.unshift(ss[i]) : sss.push(ss[i])
+    #     end
+
     [ss,lines,presence,total]
   end
   

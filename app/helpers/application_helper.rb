@@ -55,4 +55,33 @@ module ApplicationHelper
     return if_blank if link.blank?
     link[SCHEME_RE] ? link : "http://#{link}"
   end
+  
+  def hsv2rgb(*hsv)
+    h,s,v = *hsv
+    m,n,f =nil,nil,nil
+    
+    h = h / 60.0
+
+    i = h.floor
+    f = h - i
+
+    f = 1 - f if i.even?
+
+    m = v * (1 - s)
+    n = v * (1 - s * f)
+    
+
+    case i
+      when 0,6 then [v,n,m]
+      when 1 then [n, v, m]
+      when 2 then [m, v, n]
+      when 3 then [m, n, v]
+      when 4 then [n, m, v]
+      when 5 then [v, m, n]
+    end
+  end
+
+  def rgb2hex(*rgb)
+    "#%02x%02x%02x" % rgb.map {|e| (e * 255).to_i}
+  end
 end
