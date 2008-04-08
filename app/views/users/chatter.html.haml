@@ -1,4 +1,12 @@
-%embed{:width=>"900", :height=>"700", :type=>"image/svg+xml", :src=>"/users/chatter.svg"}/
+%p.minor
+  = link_to_unless_current 'all', all_chatter_users_path
+  &middot;
+  = link_to_unless_current 'recent', chatter_users_path
+  chatter
+
+%embed{:width=>"900", :height=>"700", :type=>"image/svg+xml", :src=>"/users/#{@graph}.svg"}/
+
+
 %p
   A graph of who's talking to whom in 
   %a{:href=>'irc://freenode.org/roro'}#roro

@@ -235,6 +235,8 @@ class User < ActiveRecord::Base
     
     lines = Hash.auto { 0 }
     total_lines = 0
+    
+    earliest = nil
 
     
     IO.foreach(File.join(FacesConfig.numbr5_path,'data','messages.tab')) do |line|
@@ -243,8 +245,9 @@ class User < ActiveRecord::Base
       next if chan != CHANNEL or user == 'server' or user.blank?
       next if timestamp == '0'
       timestamp = timestamp.to_i
+
       next if timestamp < start
-      
+      earliest ||= timestamp      
             
       user = user.sub(/^[\W_]+/,'').sub(/[\W_]+$/,'')
       user = ALIASES[user] || user
@@ -278,14 +281,14 @@ class User < ActiveRecord::Base
     
     yield(buffers.last + buffer) unless buffers.empty? and buffer.empty?
     
-    [lines,total_lines]
+    [lines,total_lines,earliest]
   end
   require 'pp'
   def self.chatter(start=0)
     presence = Hash.auto { Hash.auto { 0 } }
     
     # FIXME, its really expensive
-    lines,total = chatter_lens(15*60,start) do |buffer|
+    lines,total,earliest = chatter_lens(15*60,start) do |buffer|
       users = buffer.uniq
       other_users = users.dup
       
@@ -317,16 +320,16 @@ class User < ActiveRecord::Base
         i+=1
       end
       
-      ss += group
+      ss << group.compact
     end
     
-    ss.compact!
+    # ss.compact!
     # sss = []
-    #     ss.size.times do |i|
-    #       (i % 2 == 0) ? sss.unshift(ss[i]) : sss.push(ss[i])
-    #     end
+    # ss.size.times do |i|
+    #   (i % 2 == 0) ? sss.unshift(ss[i]) : sss.push(ss[i])
+    # end
 
-    [ss,lines,presence,total]
+    [ss.flatten.compact,lines,presence,total,earliest]
   end
   
 

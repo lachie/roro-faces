@@ -100,7 +100,7 @@ body.users-index #content {
   float: none;
 }
 
-body.users-chatter #content,body.thankyous-beergraph #content {
+body.users-chatter #content,body.thankyous-beergraph #content,body.users-all-chatter #content {
 	/*max-width: 100%;
 	min-width: 80%;*/
 	width:inherit;

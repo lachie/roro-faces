@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
       :thankyous => :get,
       :beerating => :get,
       :chatter   => :get,
+      :all_chatter => :get,
       :beergraph => :get
     }
   

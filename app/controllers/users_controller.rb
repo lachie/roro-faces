@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   append_before_filter :login_required, :only => [ :edit, :update ]
   
   perform_caching && after_filter do |c|
-    c.cache_page if c.action_name == 'chatter' and c.params[:format] == 'svg'
+    c.cache_page if (c.action_name == 'chatter' or c.action_name == 'all_chatter') and c.params[:format] == 'svg'
   end
   cache_sweeper :user_sweeper
   
@@ -82,12 +82,28 @@ class UsersController < ApplicationController
   
   def chatter
     @page_title = 'chatter'
+    @graph = 'chatter'
+    @start = Time.now.to_i - 24*3600*3
 
+    do_chatter
+  end
+  
+  def all_chatter
+    @page_title = 'all chatter'
+    @graph = 'all_chatter'
+    @start = 0
+    
+    do_chatter
+  end
+    
+  def do_chatter
     respond_to do |wants|
       wants.svg do
-        @users,@user_totals,@mentions,@total = User.chatter
+        @users,@user_totals,@mentions,@total,@earliest = User.chatter(@start)
+        @earliest = Time.at(@earliest)
+        render :action => 'chatter'
       end
-      wants.html
+      wants.html { render :action => 'chatter' }
     end
   end
   
