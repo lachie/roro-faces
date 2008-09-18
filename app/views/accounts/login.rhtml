@@ -10,6 +10,6 @@
 <%= check_box_tag 'remember_me' %></p>
 
 <p><%= submit_tag 'Log in' %> &middot; <%= link_to_function 'I forgot my password...' do |p|
-  p << "document.location = '#{reset_password_path}?email=' + $F('email')"
+  p << "document.location = '#{reset_password_path}?email=' + $('#email').val()"
 end %></p>
 <% end -%>
