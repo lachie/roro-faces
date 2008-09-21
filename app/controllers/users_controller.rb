@@ -9,6 +9,8 @@ class UsersController < ApplicationController
   end
   cache_sweeper :user_sweeper
   
+  
+  
   def authorized?
     current_user == @user or admin?
   end
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
   end
   
   def load_users
-    @users = User.find(:all, :include => {:mugshot => :thumbnails})
+    @users = User.find(:all)
   end
   
   def index

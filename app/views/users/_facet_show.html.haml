@@ -1,6 +1,6 @@
 %tr
   %td
-    = image_tag(facet_show.favicon_url) if facet_show.favicon_url
+    %img.favicon{:src=>facet_show.favicon_url, :width=>16, :height=>16}
     = link_to facet_show.link_text, facet_show.link
 
   %td

@@ -1,0 +1,8 @@
+=image_tag @user.mugshot.url
+
+-unless @user.mugshot.file?
+  hey, upload a mugshot
+
+  / maybe delete mugshot
+
+=f.file_field :mugshot, :size => 8

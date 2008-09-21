@@ -1,0 +1,15 @@
+-content_for :header do
+  = auto_discovery_link_tag(:rss, formatted_users_path(:rss) )
+  = javascript_include_tag 'schooner'
+
+-@page_title = "#{User.count} roro ppl"
+
+-cache('schooner') do
+  = javascript_tag "Glass.users = #{@users_for_glass.to_json}"
+
+  #floaters
+    %img.beerhead{:src=>"/images/beertop.png"}
+    %img.beerbase{:src=>"/images/beerbase.png"}
+    %img.bg{:src=>"/images/croppedbeer.png"}
+
+#name-box{:style=>"display:none"}

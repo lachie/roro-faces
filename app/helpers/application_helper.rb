@@ -3,12 +3,14 @@ module ApplicationHelper
 
   
   class FacebookFormBuilder < ActionView::Helpers::FormBuilder
-    def wrap(name,content,options={})
+    def wrap(title,content,options={})
       mand = options.delete(:mandatory) ? '<strong class="mand">*</strong>' : ''
       extras = options.delete(:extras)
       byline = options[:byline].blank? ? '' : "<br/><span class='byline'>#{options.delete(:byline)}</span>"
       
-      @template.content_tag('p',"#{name.to_s.humanize}#{mand} #{extras}<br/>#{content}#{byline}")
+      title = options[:title] || title.to_s.titleize
+      
+      @template.content_tag('div',"<label>#{title} #{mand}</label> #{extras}<br/>#{content}#{byline}")
     end
     
     # dry!
@@ -29,7 +31,7 @@ module ApplicationHelper
     end
     
     def submit(oncreate='create',onupdate='update')
-      @template.content_tag('p', @template.submit_tag(@object.new_record? ? oncreate : onupdate))
+      @template.content_tag('div', @template.submit_tag(@object.new_record? ? oncreate : onupdate))
     end
   end
 

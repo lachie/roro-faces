@@ -80,7 +80,7 @@ require 'fileutils'
 
 # RubyGems
 #require 'feed-normalizer'
-require 'RMagick'
+# require 'RMagick'
 
 require 'hash_ext'
 

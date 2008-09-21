@@ -1,0 +1,13 @@
+-content_for :header do
+  = auto_discovery_link_tag(:rss, formatted_users_path(:rss) )
+  = javascript_include_tag 'pinboard'
+
+-@page_title = "#{User.count} roro ppl"
+
+-cache('pinboard') do
+  #grid
+    -@users.each do |user|
+      .pinuser[user]
+        = link_to(image_tag(user.mugshot.url(:thumb)), user_path(user))
+
+      .pinname{:id => "nick_#{dom_id(user)}", :style=>'display:none'}=user.nick

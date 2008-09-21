@@ -1,8 +1,10 @@
 load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 
+load 'config/secure_cap.rb'
+
 
 # require 'deprec/recipes'
-require 'mongrel_cluster/recipes'
+# require 'mongrel_cluster/recipes'
 
 # =============================================================================
 # ROLES
@@ -13,7 +15,7 @@ require 'mongrel_cluster/recipes'
 # be used to single out a specific subset of boxes in a particular role, like
 # :primary => true.
 
-set :domain, "lachie.info"
+set :domain, "smartbomb.com.au"
 role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
@@ -106,6 +108,17 @@ after 'deploy:symlink' do
 end
 
 namespace :deploy do  
+  task :stop, :roles => :app, :except => { :no_release => true } do
+    run %{
+      mongrel_rails cluster::stop -C /etc/mongrel_cluster/facebook.yml
+    }
+  end
+  task :start, :roles => :app, :except => { :no_release => true } do
+    run %{
+      mongrel_rails cluster::start -C /etc/mongrel_cluster/facebook.yml
+    }
+  end
+  
   task :restart, :roles => :app, :except => { :no_release => true } do
     run <<-EOR
       mongrel_rails cluster::stop -C /etc/mongrel_cluster/facebook.yml &&
@@ -118,3 +131,4 @@ task :remove_graphs, :role => :app do
   run "cd #{current_path}/public && rm users/chatter.svg"
   run "cd #{current_path}/public && rm thankyous/beergraph.svg"
 end
+

@@ -7,7 +7,7 @@ module ThankyouExt
 end
 
 class User < ActiveRecord::Base
-	belongs_to :mugshot
+  # belongs_to :mugshot
 	has_many :facets
   
   has_many :affiliations
@@ -27,6 +27,17 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false
   before_save :encrypt_password
+  
+  
+  
+  has_attached_file :mugshot,
+      :default_style => :small,
+      :styles => {
+        :thumb  => ["48x48#", :png],
+        :small  => "150x150>" },
+        
+      :default_url => "/images/no-mugshot.png"
+      # :convert_options => {:thumb => "xc:none -fill white -draw \"roundRectangle 0,0 48,48 15,15\" -compose SrcIn -composite"}
   
 
   def self.beeratings(to=:to)
@@ -52,6 +63,8 @@ class User < ActiveRecord::Base
   def beerating
     beeratings.detect {|r| r[0].id == self.id}
   end
+
+  # Auf stuffz
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
@@ -123,7 +136,7 @@ class User < ActiveRecord::Base
   end
   
   def for_glass
-    [id,nick,thumbnail_public_path]
+    [id,nick,mugshot.url(:thumb)]
   end
   
   
@@ -190,7 +203,7 @@ class User < ActiveRecord::Base
   end
   
   def self.find_for_pinboard
-    find(:all,:order => 'mugshots.id DESC,users.id DESC', :include => :mugshot)
+    find(:all,:order => 'users.id DESC')
   end
   
   def self.draw_chatter

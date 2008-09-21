@@ -1,0 +1,39 @@
+-facebook_form_for @user, {:html => {:multipart => true}} do |f|
+  .editing
+    %h2 names
+    .explain
+      IRC nick &gt; name &gt; email
+      %br
+      The facebook displays the first one you've filled in.
+
+    = f.text_field :irc_nick, :byline => 'if you hang out on #roro, fill this in so that people can owe you beers via numbr5'
+
+    = f.text_field :alternate_irc_nick, :byline => 'sometimes, you need an alter ego on the irc channel. This is it.'
+
+    = f.text_field :name
+  
+    = f.text_field :email, :mandatory => true, :byline => 'your email address is your login, so change with care'
+  
+    = f.text_field :aliases
+
+    %h2 about u
+
+    = f.text_field :site_url
+    = f.text_field :site_name, :byline => 'your "homepage"'
+  
+    = f.text_area :blurb, :rows => 7, :extras => "(use textile: #{link_to('quick ref', 'http://hobix.com/textile/quick.html')})"
+  
+    = f.text_field :location
+  
+    = f.text_field :working_at
+    = f.text_field :working_at_url
+    = f.text_area :working_on, :rows => 7, :extras => "(use textile: #{link_to('quick ref', 'http://hobix.com/textile/quick.html')})"
+  
+    = f.password_field :password
+    = f.password_field :password_confirmation, :byline => '(leave blank to keep current password)'
+  
+    %p
+      = submit_tag 'save'
+      
+  .mugshot.left
+    =render :partial => 'mugshot', :locals => {:f => f}

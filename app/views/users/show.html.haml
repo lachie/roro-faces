@@ -1,17 +1,17 @@
 -@page_title = @user.nick
 
 #info-container
-  %p.minor
+  .edit
     -if authorised?
-      =link_to "Show #{@user.nick}", user_path(@user)
-      &middot;
-      =link_to "Edit #{@user.nick}", edit_user_path(@user)
-      &middot;
-
-  %p.mugshot
-    =image_tag @user.mugshot.public_filename if @user.mugshot
+      =link_to "Edit #{@user.nick}", user_path(@user)
 
   =render :partial => 'show_common'
+  
+  .mugshot.left
+    =image_tag @user.mugshot.url
+
+  #thankyous.thankyous{:class => logged_in_but_other_user? ? 'highlighted' : ''}
+    = render :partial => 'thankyous'
 
   -if @user.affiliations.size > 0
     #affiliations.list
