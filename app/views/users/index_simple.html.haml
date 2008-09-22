@@ -5,7 +5,7 @@
 -@page_title = "#{User.count} roro ppl"
 
 -cache('pinboard') do
-  #grid
+  .grid
     -@users.each do |user|
       .pinuser[user]
         = link_to(image_tag(user.mugshot.url(:thumb)), user_path(user))

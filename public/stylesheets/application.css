@@ -1,0 +1,100 @@
+.header-row {
+  height: 97px;
+}
+.header img {
+  vertical-align: bottom;
+}
+
+.navigation {
+  min-height: 97px;
+  height: 100%;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+.navigation ul {
+  position: relative;
+  bottom: -40px;
+  list-style-type: none;
+}
+
+.content {
+  border-top: 1.1em solid #a0a0a0;
+  padding-top: .4em;
+  background: #f3f3f3;
+}
+
+.content .blurb {
+  font-style: italic;
+/*  font-size: 1.2em;*/
+}
+
+.content hr.space {
+  background: #f3f3f3;
+  color: #f3f3f3;
+}
+
+ul.groups {
+  list-style-image: url(/images/smiley_bullet.png);
+}
+
+.mugshot {
+  text-align: center;
+}
+
+.facets h2 {
+  padding-left: 34px;
+  background: url(/images/facets.png) no-repeat;
+}
+
+.facets td.favicon {
+  width: 16px;
+}
+
+.facets .person {
+  width: 120px;
+  float: left;
+  text-align: center;
+  background: #e0e0e0;
+  padding: 4px 0;
+  margin: 0 4px 4px 0;
+}
+
+h2 span {
+  font-size: .5em;
+  color: #222222;
+}
+
+h2 {
+  color: #d64949;
+  font-family: "Futura", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.sidebar {
+  border-top: 1.1em solid #f0f0f0;
+  padding-top: .4em;
+}
+
+.pinuser {
+  width: 48px;
+  margin: 0 .1em 1.2em .1em;
+  float: left;
+}
+
+.pinname {
+  position: absolute;
+}
+
+.grid {
+  float: left;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  background: #FaFaFa;
+  
+  padding: 1.5em 0;
+}

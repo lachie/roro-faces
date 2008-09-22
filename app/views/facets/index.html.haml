@@ -1,12 +1,13 @@
 -@page_title = "the many facets of roro"
 
 -@facet_kinds.each do |facet_kind|
-  %h2=facet_kind.name
-  .count=facet_kind.facets.size
-  %img.favicon{:src=>facet_kind.favicon_url, :width=>16, :height=>16}
+  %h2
+    =facet_kind.name
+    %span
+      =facet_kind.facets.size
+      %img.favicon{:src=>facet_kind.favicon_url, :width=>16, :height=>16}
   .ppl
     -facet_kind.facets.reverse.each do |facet|
       .person
         = link_to(facet.user.nick,facet.link)
-        &middot
-        &nbsp;
+  %hr.space

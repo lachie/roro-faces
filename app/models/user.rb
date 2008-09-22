@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
       :default_style => :small,
       :styles => {
         :thumb  => ["48x48#", :png],
-        :small  => "150x150>" },
+        :small  => "162x162>" },
         
       :default_url => "/images/no-mugshot.png"
       # :convert_options => {:thumb => "xc:none -fill white -draw \"roundRectangle 0,0 48,48 15,15\" -compose SrcIn -composite"}
@@ -109,7 +109,15 @@ class User < ActiveRecord::Base
   # facebook stuff
   
   def nick
-    @nick ||= [irc_nick, name, email.sub('@','(a)')].reject {|s| s.blank?}.first || "no username!"
+    @nick ||= [irc_nick, name, obscured_email].reject {|s| s.blank?}.first || "no username!"
+  end
+  
+  def name_with_fallback
+    [name, obscured_email].reject {|s| s.blank?}.first || "no username!"
+  end
+  
+  def obscured_email
+    email.sub('@','(a)')
   end
   
   def to_param

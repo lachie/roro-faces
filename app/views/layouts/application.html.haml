@@ -20,19 +20,49 @@
   = yield :feed_tags
 
 %body{:class=>"#{controller.controller_name.downcase.dasherize} #{controller.controller_name.downcase.dasherize}-#{controller.action_name.downcase.dasherize}"}
-  
-  .header
-    .logo
-      = link_to(image_tag('roro.png'),pinboard_users_url)
-    .login
-      = render :partial => 'shared/menu'
+  .container.header-row
+    .column.span-16.prepend-1.append-1.header
+      %a{:href => '/'}
+        %img{:src => '/images/logo.jpg'}
+    .column.span-6.last.navigation
+      %ul
+        -if logged_in?
+          %li
+            %strong.large
+              Hi 
+              = link_to current_user.nick, user_path(current_user)
+            (
+            = link_to 'log out', logout_path
+            )
+          
+        -else
+          %li
+            To edit your profile, please
+            = link_to 'log in', login_path
+          %li
+            or
+            = link_to 'sign up', signup_path
 
-    .header-inner
-      %h1= @page_title || '&nbsp;'
+        %li
+          = link_to_unless_current 'pinboard', pinboard_users_path
+          &middot;
+          = link_to_unless_current 'hey,beers', beerating_users_path
+          &middot;
+          = link_to_unless_current 'facets', facets_path
+          &middot;
+          = link_to_unless_current 'chatter', chatter_users_path
+
+  .container.content-row
+    .column.span-16.prepend-1.append-1.content
+      %hr.space
+      = yield
+    .column.span-6.last.sidebar
+      sidebar
   
-  #content
-    = yield
-    .clear &nbsp
+  .container.footer-row
+    .column.span-18.last.footer.quiet
+      All content and design &copy; roro, or the individual authors.  
+  
   
   %script{:src=>"http://www.google-analytics.com/urchin.js", :type=>"text/javascript"}
   :javascript

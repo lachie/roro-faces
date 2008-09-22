@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     if nick = params[:nick]
       search(nick)
     else
+      return pinboard
 
       respond_to do |wants|
         

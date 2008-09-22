@@ -1,29 +1,67 @@
 -@page_title = @user.nick
 
-#info-container
-  .edit
-    -if authorised?
-      =link_to "Edit #{@user.nick}", user_path(@user)
 
-  =render :partial => 'show_common'
+-if authorised?
+  .column.span-16.last.edit
+    =link_to "Edit #{@user.nick}", user_path(@user)
+
+%hr.space
+
+
+.column.span-6.mugshot
+  =image_tag @user.mugshot.url
   
-  .mugshot.left
-    =image_tag @user.mugshot.url
-
-  #thankyous.thankyous{:class => logged_in_but_other_user? ? 'highlighted' : ''}
+  %hr.space
+  
+  .box.thankyous{:class => logged_in_but_other_user? ? 'highlighted' : ''}
     = render :partial => 'thankyous'
 
-  -if @user.affiliations.size > 0
-    #affiliations.list
-      %h2 groups
-      %ul
-        = render :partial => 'affiliation_show', :collection => @user.affiliations
+.column.span-10.last
+  .name-location
+    %h2=@user.name_with_fallback
+    
+    -unless @user.aliases.blank?
+      .aliases
+        %em a.k.a
+        =@user.aliases
+      
+    -unless @user.location.blank?
+      .location
+        %em in
+        =@user.location
 
-  -if @user.facets.size > 0
-    #facets.list
-      %h2 facets
-      of
-      =@user.nick
-      's web presence.
-      %table.facet-list
-        = render :partial => 'facet_show', :collection => @user.facets
+  -unless @user.blurb.blank?
+    .blurb.large
+      =textilize_without_paragraph @user.blurb
+
+  -unless @user.site_url.blank?
+    .site
+      =link_to @user.site_name, @user.site_url
+
+  -unless @user.working_at.blank?
+    .working-at
+      %em working at
+      =@user.working_at_url.blank? ? @user.working_at : link_to(@user.working_at, clean_link(@user.working_at_url))
+
+  -unless @user.working_on.blank?
+    .working-on
+      %em working on
+      =textilize_without_paragraph @user.working_on
+      
+  -if @user.affiliations.size > 0
+    %hr.space
+    
+    %ul.groups
+      = render :partial => 'affiliation_show', :collection => @user.affiliations
+
+
+
+%hr
+
+-if @user.facets.size > 0
+  .column.span-16.last.facets
+    %h2 
+      facets
+      %span==of #{@user.nick}'s web presence.
+    %table.facet-list
+      = render :partial => 'facet_show', :collection => @user.facets
