@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+%html
+%head
+  %title roro facebook
+  
+  = stylesheet_link_tag 'blueprint/screen', :media => 'screen, projection'
+  = stylesheet_link_tag 'blueprint/print', :media => 'print'
+  
+  /[if IE]
+    = stylesheet_link_tag 'blueprint/ie', :media => 'screen, projection'
+  /[endif]
+  </pre>
+  
+  = stylesheet_link_tag 'application'
+  
+  
+  = javascript_include_tag 'jquery-1.2.3.min.js'
+  = yield :header
+  = yield :feed_tags
+
+%body{:class=>"#{controller.controller_name.downcase.dasherize} #{controller.controller_name.downcase.dasherize}-#{controller.action_name.downcase.dasherize}"}
+  
+  .header
+    .logo
+      = link_to(image_tag('roro.png'),pinboard_users_url)
+    .login
+      = render :partial => 'shared/menu'
+
+    .header-inner
+      %h1= @page_title || '&nbsp;'
+  
+  #content
+    = yield
+    .clear &nbsp
+  
+  %script{:src=>"http://www.google-analytics.com/urchin.js", :type=>"text/javascript"}
+  :javascript
+    _uacct = "UA-1843540-1";
+    urchinTracker();
