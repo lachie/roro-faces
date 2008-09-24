@@ -24,7 +24,6 @@ class MigrateMugshotData < ActiveRecord::Migration
       user.save!
     end
     
-    raise "undo..."
   end
 
   def self.down

@@ -40,7 +40,7 @@ module ApplicationHelper
   end
   
   def authorised?
-    @controller.authorized?
+    @controller.send :authorized?
   end
   
   def logged_in_but_other_user?

@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     admin? or (@user and logged_in? and current_user != @user)
   end
   
+  def authorized?
+    current_user == @user or admin?
+  end
+  
   protected
     def redirect_from_lachie_dot_info
       if request.host == "faces.lachie.info"

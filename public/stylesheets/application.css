@@ -51,7 +51,7 @@ ul.groups {
   width: 16px;
 }
 
-.facets .person {
+.facets .person,.groups .person {
   width: 120px;
   float: left;
   text-align: center;
@@ -59,6 +59,7 @@ ul.groups {
   padding: 4px 0;
   margin: 0 4px 4px 0;
 }
+
 
 h2 span {
   font-size: .5em;
@@ -97,4 +98,12 @@ h2 {
   background: #FaFaFa;
   
   padding: 1.5em 0;
+}
+
+label {
+  display: block;
+}
+
+label span {
+  font-weight: normal;
 }

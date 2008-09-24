@@ -16,17 +16,18 @@ ActionController::Routing::Routes.draw do |map|
       :beergraph => :get
     }
   
-  map.resources :mugshots, 
-    :collection => { :update_all_thumbnails => :get }
+  map.resources(:mugshots, :collection => { :update_all_thumbnails => :get })
     
   map.resources :thankyous,
     :collection => { :beergraph => :get }
-  
-  map.resources :meetings
-  
+
   map.resources :presentations
   
-  map.resources :groups
+  map.resources :groups do |group|
+    group.resources(:meetings) do |meeting|
+      meeting.resources(:presos)
+    end
+  end
   
   map.logout 'accounts/logout', :controller => 'accounts', :action => 'logout'
   map.login  'accounts/login', :controller => 'accounts', :action => 'login'

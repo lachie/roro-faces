@@ -1,0 +1,21 @@
+-@page_title = @group.name
+
+-content_for(:sidebar) do
+  %h2 meetings
+  %ul
+    -@group.meetings.each do |meeting|
+      %li
+        %a.large{:href=>group_meeting_path(@group,meeting)}=meeting.date.to_s(:long_ordinal)
+
+%h2.column.span-16.last=@group.name
+
+.column.span-4.last
+  =link_to "Our homepage", @group.url
+
+.column.span-16.last.ppl
+  %h2 members
+  -@group.users.each_with_index do |user,i|
+    .person
+      %img{:src => user.mugshot.url(:thumb)}
+      %br
+      = link_to user.nick, user_path(user)

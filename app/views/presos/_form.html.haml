@@ -1,0 +1,9 @@
+-form_for @preso, :url => group_meeting_preso_path(@group,@meeting,@preso) do |f|
+  %fieldset
+    =f.label :title
+    =f.text_field :title, :class => 'title'
+    
+    =f.label :description, "Description <span>(use textile)</span>"
+    =f.text_area :description
+    
+    =f.submit

@@ -1,0 +1,14 @@
+%h2
+  ==#{@meeting.group.name},
+  =@meeting.date.to_s(:long_ordinal)
+  
+%ul
+  -@meeting.presos.each do |preso|
+    %li
+      %a{:href => group_meeting_preso_path(@group,@meeting,preso)}
+        =preso.title
+        &mdash;
+        =preso.user.nick
+  
+-if authorised?
+  %a{:href => new_group_meeting_preso_path(@meeting.group,@meeting)} I gave a presentation...

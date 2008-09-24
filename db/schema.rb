@@ -9,11 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080919062536) do
+ActiveRecord::Schema.define(:version => 20080924114455) do
 
   create_table "affiliations", :force => true do |t|
-    t.integer "user_id",   :limit => 11
-    t.integer "group_id",  :limit => 11
+    t.integer "user_id"
+    t.integer "group_id"
     t.boolean "regular"
     t.boolean "visitor"
     t.boolean "presenter"
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(:version => 20080919062536) do
     t.text     "content"
     t.text     "description"
     t.string   "title"
-    t.integer  "user_id",        :limit => 11
+    t.integer  "user_id"
   end
 
   create_table "facet_kinds", :force => true do |t|
-    t.string  "name",         :default => "", :null => false
+    t.string  "name",         :null => false
     t.string  "service_url"
     t.string  "title"
     t.string  "site"
@@ -40,39 +40,51 @@ ActiveRecord::Schema.define(:version => 20080919062536) do
 
   create_table "facets", :force => true do |t|
     t.string  "name"
-    t.string  "info",                        :default => "", :null => false
-    t.integer "user_id",       :limit => 11,                 :null => false
-    t.integer "facet_kind_id", :limit => 11,                 :null => false
+    t.string  "info",          :null => false
+    t.integer "user_id",       :null => false
+    t.integer "facet_kind_id", :null => false
   end
 
   create_table "groups", :force => true do |t|
-    t.string  "name",     :default => "", :null => false
+    t.string  "name",       :null => false
     t.string  "url"
     t.boolean "once_off"
+    t.string  "short_name"
   end
 
   create_table "meetings", :force => true do |t|
-    t.datetime "when",                                   :null => false
-    t.string   "where",                  :default => "", :null => false
-    t.integer  "group_id", :limit => 11
+    t.string  "where",    :null => false
+    t.integer "group_id"
+    t.date    "date"
   end
 
   create_table "mugshots", :force => true do |t|
-    t.integer "size",         :limit => 11
+    t.integer "size"
     t.string  "filename"
     t.string  "content_type"
-    t.integer "height",       :limit => 11
-    t.integer "width",        :limit => 11
+    t.integer "height"
+    t.integer "width"
     t.string  "thumbnail"
-    t.integer "parent_id",    :limit => 11
+    t.integer "parent_id"
   end
 
   add_index "mugshots", ["parent_id"], :name => "index_mugshots_on_parent_id"
 
   create_table "presentations", :force => true do |t|
-    t.integer "user_id",    :limit => 11
-    t.integer "meeting_id", :limit => 11
-    t.string  "title",                    :default => "", :null => false
+    t.integer "user_id"
+    t.integer "meeting_id"
+    t.string  "title",      :null => false
+  end
+
+  create_table "presos", :force => true do |t|
+    t.text     "description"
+    t.text     "description_html"
+    t.boolean  "allow_feedback"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.integer  "meeting_id"
   end
 
   create_table "sessions", :force => true do |t|
@@ -87,8 +99,8 @@ ActiveRecord::Schema.define(:version => 20080919062536) do
   create_table "thankyous", :force => true do |t|
     t.string   "reason"
     t.string   "source",     :limit => 8
-    t.integer  "from_id",    :limit => 11
-    t.integer  "to_id",      :limit => 11
+    t.integer  "from_id"
+    t.integer  "to_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -104,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20080919062536) do
     t.datetime "updated_at"
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
-    t.integer  "mugshot_id",                :limit => 11
+    t.integer  "mugshot_id"
     t.string   "irc_nick"
     t.string   "blurb"
     t.string   "aliases"
@@ -123,7 +135,7 @@ ActiveRecord::Schema.define(:version => 20080919062536) do
     t.string   "alternate_irc_nick"
     t.string   "mugshot_file_name"
     t.string   "mugshot_content_type"
-    t.integer  "mugshot_file_size",         :limit => 11
+    t.integer  "mugshot_file_size"
     t.datetime "mugshot_updated_at"
   end
 

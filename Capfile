@@ -20,7 +20,7 @@ role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
 
-
+# set :use_sudo, false
 
 # =============================================================================
 # REQUIRED VARIABLES
@@ -31,7 +31,7 @@ role :db,  domain, :primary => true
 # form the root of the application path.
 
 set :application, "facebook"
-set :deploy_to, "/var/www/apps/#{application}"
+set :deploy_to, lambda { "/var/www/apps/#{application}" }
 
 # XXX we may not need this - it doesn't work on windows
 # XXX set :user, ENV['USER']
@@ -94,6 +94,10 @@ set :mongrel_address, "0.0.0.0"
 # ssh_options[:keys] = %w(/path/to/my/key /path/to/another/key)
 # ssh_options[:port] = 25
 
+task :beta, :roles => :app, :except => { :no_release => true } do
+  set :application, "faces-beater"
+end
+
 
 desc "Link up database.yml."
 after 'deploy:symlink' do
@@ -110,19 +114,19 @@ end
 namespace :deploy do  
   task :stop, :roles => :app, :except => { :no_release => true } do
     run %{
-      mongrel_rails cluster::stop -C /etc/mongrel_cluster/facebook.yml
+      mongrel_rails cluster::stop -C #{shared_path}/mongrel_cluster.yml
     }
   end
   task :start, :roles => :app, :except => { :no_release => true } do
     run %{
-      mongrel_rails cluster::start -C /etc/mongrel_cluster/facebook.yml
+      mongrel_rails cluster::start -C #{shared_path}/mongrel_cluster.yml
     }
   end
   
   task :restart, :roles => :app, :except => { :no_release => true } do
     run <<-EOR
-      mongrel_rails cluster::stop -C /etc/mongrel_cluster/facebook.yml &&
-      mongrel_rails cluster::start -C /etc/mongrel_cluster/facebook.yml
+      mongrel_rails cluster::stop -C #{shared_path}/mongrel_cluster.yml &&
+      mongrel_rails cluster::start -C #{shared_path}/mongrel_cluster.yml
     EOR
   end
 end

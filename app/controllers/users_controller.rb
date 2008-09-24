@@ -10,11 +10,6 @@ class UsersController < ApplicationController
   cache_sweeper :user_sweeper
   
   
-  
-  def authorized?
-    current_user == @user or admin?
-  end
-  
   def strip_permalink
     params[:id].split('-').first unless params[:id].blank?
   end

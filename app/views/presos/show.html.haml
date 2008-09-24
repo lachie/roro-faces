@@ -1,0 +1,8 @@
+%h2
+  =@preso.title
+  %span
+    by
+    =@preso.user.nick
+    
+-if authorised?
+  %a{:href => edit_group_meeting_preso_path(@group,@meeting,@preso)} edit

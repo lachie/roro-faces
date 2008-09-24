@@ -12,10 +12,10 @@
   /[endif]
   </pre>
   
-  = stylesheet_link_tag 'application'
+  = stylesheet_link_tag 'application', 'jquery-ui-themeroller'
   
   
-  = javascript_include_tag 'jquery-1.2.3.min.js'
+  = javascript_include_tag 'jquery-1.2.3.min.js', 'ui.core', 'ui.tabs'
   = yield :header
   = yield :feed_tags
 
@@ -57,7 +57,7 @@
       %hr.space
       = yield
     .column.span-6.last.sidebar
-      sidebar
+      = yield(:sidebar)
   
   .container.footer-row
     .column.span-18.last.footer.quiet
