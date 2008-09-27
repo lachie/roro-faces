@@ -1,3 +1,5 @@
+/* @override http://0.0.0.0:3000/stylesheets/application.css */
+
 .header-row {
   height: 97px;
 }
@@ -66,7 +68,7 @@ h2 span {
   color: #222222;
 }
 
-h2 {
+h2,h3,h4 {
   color: #d64949;
   font-family: "Futura", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -109,8 +111,40 @@ label span {
 }
 
 .highlighttable {
-  border: 1px solid black;
+  border: 1px solid #a0a0a0;
+}
+.highlighttable .linenos {
+  width: 20px;
+  background: #a0a0a0;
+  text-align: right;
+	color: #4d4d4d;
 }
 .highlighttable .highlight {
   background: inherit;
+}
+
+.highlighttable pre,.highlighttable code {
+  line-height: 1;
+  margin: 0;
+}
+
+.presos-show .talk h2 {
+  background: url(/images/talk.png) no-repeat 0 2px;
+  padding-left: 36px;
+}
+
+.comment {
+  border: 1px solid #d6d6d6;
+  background-color: #e7e7e7;
+  padding: .5em 1em;
+}
+
+.comment .m {
+	float: left;
+	margin: 0 1em 0 0;
+}
+
+.ui-tabs-nav li {
+	display: inline;
+	padding: 1em;
 }

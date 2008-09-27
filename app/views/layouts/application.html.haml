@@ -4,14 +4,13 @@
 %head
   %title roro facebook
   
-  =# stylesheet_link_tag 'blueprint/screen', :media => 'screen, projection'
-  =# stylesheet_link_tag 'blueprint/print', :media => 'print'
+  = stylesheet_link_tag 'blueprint/screen', :media => 'screen, projection'
+  = stylesheet_link_tag 'blueprint/print', :media => 'print'
   
   /[if IE]
-    =# stylesheet_link_tag 'blueprint/ie', :media => 'screen, projection'
+    = stylesheet_link_tag 'blueprint/ie', :media => 'screen, projection'
   /[endif]
 
-  = stylesheet_link_tag 'reset', 'text', '960'
   = stylesheet_link_tag 'application', 'jquery-ui-themeroller', 'code'
   
   

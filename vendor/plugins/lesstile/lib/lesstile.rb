@@ -15,7 +15,7 @@ class Lesstile
 
       text += "\n" unless ends_with?(text, "\n")
       text.gsub!(/\r\n/, "\n")
-      text = CGI::escapeHTML(text)
+      # text = CGI::escapeHTML(text)
 
       code_regex = /---\s*?(\w*?)\s*?\n(.*?)---\n/m
       output = ""

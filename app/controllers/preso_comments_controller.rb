@@ -1,8 +1,8 @@
-class PresosController < ApplicationController
-  before :load_parents
+class PresoCommentsController < ApplicationController
+  before_filter :load_parents
   
   def create
-    @preso.preso_comments.create!(params[:preso_comment])
+    @preso.preso_comments.create!(params[:preso_comment].update(:user_id => current_user.id))
     redirect_to group_meeting_preso_path(@group,@meeting,@preso)
   end
   

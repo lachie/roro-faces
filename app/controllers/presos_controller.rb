@@ -9,6 +9,10 @@ class PresosController < ApplicationController
   
   def show
     @preso = Preso.find(params[:id])
+    @meeting ||= @preso.meeting
+    @group   ||= @meeting.group
+    
+    @other_presos = @meeting.presos - [@preso]
   end
   
   def edit
@@ -20,7 +24,7 @@ class PresosController < ApplicationController
   end
   
   def create
-    @preso = @meeting.presos.create!(params[:preso])
+    @preso = @meeting.presos.create!(params[:preso].update(:user_id => current_user.id))
     redirect_to group_meeting_preso_path(@group,@meeting,@preso)
   end
   
