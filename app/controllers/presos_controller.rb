@@ -1,6 +1,8 @@
 class PresosController < ApplicationController
   before_filter :load_meeting
   
+  
+  
   def index
     @meeting.presos
   end
@@ -33,4 +35,5 @@ class PresosController < ApplicationController
     @group   = Group.find_by_short_name(params[:group_id])
     @meeting = @group.meetings.find_by_date(params[:meeting_id])
   end
+
 end

@@ -4,5 +4,15 @@
     by
     =@preso.user.nick
     
+=@preso.description_html
+    
 -if authorised?
   %a{:href => edit_group_meeting_preso_path(@group,@meeting,@preso)} edit
+-if logged_in?
+  -form_for PresoComment.new, :url => group_meeting_preso_preso_comment_path(@group,@meeting,@preso,PresoComment.new) do |f|
+    =f.text_area :comment
+    -if @preso.allow_feedback?
+      feedback pls
+    =f.submit 'comment'
+-else
+  log in to comment.

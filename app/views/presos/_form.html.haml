@@ -3,7 +3,10 @@
     =f.label :title
     =f.text_field :title, :class => 'title'
     
-    =f.label :description, "Description <span>(use textile)</span>"
+    =f.label :description, "Description <span>(use textile + lesstile)</span>"
     =f.text_area :description
+    
+    =f.label :allow_feedback, "I want feedback on my talk. <span>(people can leave comments either way)</span>"
+    =f.check_box :allow_feedback
     
     =f.submit

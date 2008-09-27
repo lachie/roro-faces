@@ -25,7 +25,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :groups do |group|
     group.resources(:meetings) do |meeting|
-      meeting.resources(:presos)
+      meeting.resources(:presos) do |preso|
+        preso.resources(:preso_comments)
+      end
     end
   end
   
