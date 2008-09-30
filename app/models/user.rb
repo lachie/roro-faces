@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
       :default_url => "/images/no-mugshot.png"
       # :convert_options => {:thumb => "xc:none -fill white -draw \"roundRectangle 0,0 48,48 15,15\" -compose SrcIn -composite"}
   
+  named_scope :front_page_random, :order => 'rand()', :limit => 1, :conditions => 'mugshot_file_name is not null'
 
   def self.beeratings(to=:to)
     

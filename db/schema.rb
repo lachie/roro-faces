@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080924114455) do
+ActiveRecord::Schema.define(:version => 20080927010759) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "user_id"
@@ -17,6 +17,16 @@ ActiveRecord::Schema.define(:version => 20080924114455) do
     t.boolean "regular"
     t.boolean "visitor"
     t.boolean "presenter"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.text     "comment"
+    t.text     "comment_html"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "entries", :force => true do |t|
@@ -46,10 +56,11 @@ ActiveRecord::Schema.define(:version => 20080924114455) do
   end
 
   create_table "groups", :force => true do |t|
-    t.string  "name",       :null => false
+    t.string  "name",            :null => false
     t.string  "url"
     t.boolean "once_off"
     t.string  "short_name"
+    t.string  "twitter_hashtag"
   end
 
   create_table "meetings", :force => true do |t|
@@ -74,6 +85,16 @@ ActiveRecord::Schema.define(:version => 20080924114455) do
     t.integer "user_id"
     t.integer "meeting_id"
     t.string  "title",      :null => false
+  end
+
+  create_table "preso_rating", :force => true do |t|
+    t.integer  "preso_id"
+    t.integer  "user_id"
+    t.integer  "rating_content"
+    t.integer  "rating_length"
+    t.integer  "rating_slides"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "presos", :force => true do |t|

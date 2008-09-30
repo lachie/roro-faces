@@ -73,6 +73,13 @@ h2,h3,h4 {
   font-family: "Futura", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+h2 a,h3 a {
+  color: #d64949;
+  text-decoration: none;
+  padding-bottom: -2px;
+  border-bottom: 1px solid #d68787;
+}
+
 .sidebar {
   border-top: 1.1em solid #f0f0f0;
   padding-top: .4em;
@@ -108,6 +115,13 @@ label {
 
 label span {
   font-weight: normal;
+}
+
+.ratings label {
+  float: left;
+  width: 75px;
+  text-align: right;
+  padding-right: 1em;
 }
 
 .highlighttable {
@@ -146,5 +160,5 @@ label span {
 
 .ui-tabs-nav li {
 	display: inline;
-	padding: 1em;
+	margin: 1em;
 }

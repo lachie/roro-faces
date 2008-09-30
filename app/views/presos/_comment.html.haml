@@ -4,6 +4,7 @@
 
   :plain
     #{comment.comment_html}
+
 .column.span-16.last.meta
   &rarr;
   =comment.user.nick
@@ -12,4 +13,4 @@
   ago
   -if current_user == comment.user
     &middot;
-    %a.edit{:href => group_meeting_preso_preso_comment_path(@group,@meeting,@preso,comment)} edit
+    %a.edit{:href => group_meeting_preso_comment_path(@group,@meeting,@preso,comment)} edit

@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
     
   include AuthenticatedSystem
   before_filter :login_from_cookie
+  
+  around_filter :add_current_user_to_thread
 
   def logged_in_but_other_user?
     admin? or (@user and logged_in? and current_user != @user)
@@ -43,5 +45,14 @@ class ApplicationController < ActionController::Base
         end
       end
       render({:content_type => 'text/javascript', :text => response}.merge(options))
+    end
+    
+    def add_current_user_to_thread
+      Thread.current[:user] = current_user
+      
+      yield
+      
+    ensure
+      Thread.current[:user] = nil
     end
 end

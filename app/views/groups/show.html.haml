@@ -6,6 +6,14 @@
     -@group.meetings.each do |meeting|
       %li
         %a.large{:href=>group_meeting_path(@group,meeting)}=meeting.date.to_s(:long_ordinal)
+        
+  %h2 in the ether
+  %ul
+    -@group.twitter_feed.feed_items.each do |tweet|
+      %li
+        =tweet.body
+        &mdash;
+        %a{:href => tweet.author_url}=tweet.author_name
 
 %h2.column.span-16.last=@group.name
 

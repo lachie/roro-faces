@@ -56,7 +56,11 @@ Rails::Initializer.run do |config|
   
   config.action_controller.session = { :session_key => "_faces_session", :secret => "zaphod beeblebrox? He's just this guy, you know?" }
   
-
+  config.gem 'rfeedparser', :version => '>=0.9.951', :library => 'rfeedparser'
+  
+  Dir.glob(File.join(RAILS_ROOT,'vendor','*','lib')).each do |dir|
+    config.load_paths += [dir]
+  end
   
 end
 

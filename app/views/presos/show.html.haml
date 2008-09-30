@@ -11,7 +11,10 @@
   %a{:href => edit_group_meeting_preso_path(@group,@meeting,@preso)} edit
 
 %h3
-  ==#{@group.name}, #{@meeting.date.to_s(:long_ordinal)}
+  %a{:href => group_path(@group)}=@group.name
+  ,
+  %a{:href => group_meeting_path(@group,@meeting)}=@meeting.date.to_s(:long_ordinal)
+
 .talk.span-16.last
   %h2
     =@preso.title
@@ -22,13 +25,13 @@
   :plain
     #{@preso.description_html}
 
--unless @preso.preso_comments.blank?
+-unless @preso.comments.blank?
   %h3 you reckon...
-  =render :partial => 'comment', :collection => @preso.preso_comments
+  =render :partial => 'comment', :collection => @preso.comments
   
 
 -if logged_in?
   %h3 comment
-  =render :partial => 'comment_form', :locals => {:comment => PresoComment.new, :preso => @preso}
+  =render :partial => 'comment_form', :locals => {:comment => Comment.new, :preso => @preso}
 -else
   log in to comment.
