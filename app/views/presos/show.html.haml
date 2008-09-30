@@ -25,13 +25,27 @@
   :plain
     #{@preso.description_html}
 
+-if @preso.allow_feedback?
+  .span-16.last
+    -if @preso.preso_ratings.blank?
+      %h3 be the first to rate this talk
+    -else
+      %h3 rating
+      =@preso.avg_rating.inspect
+    
+    -if logged_in? && !@preso.user_rated?(current_user)
+      .span-16.last
+        = render :partial => 'rating_form', :locals => {:preso_rating => PresoRating.new, :preso => @preso}
+    
+
 -unless @preso.comments.blank?
   %h3 you reckon...
   =render :partial => 'comment', :collection => @preso.comments
-  
+
 
 -if logged_in?
-  %h3 comment
-  =render :partial => 'comment_form', :locals => {:comment => Comment.new, :preso => @preso}
+  .span-16.last
+    %h3 comment
+    =render :partial => 'comment_form', :locals => {:comment => Comment.new, :preso => @preso}
 -else
-  log in to comment.
+  log in to comment & rate.

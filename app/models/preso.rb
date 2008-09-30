@@ -18,4 +18,12 @@ class Preso < ActiveRecord::Base
   def apply_filter
     self.description_html = FacesFormatter.format_as_xhtml(self.description)
   end
+  
+  def avg_rating
+    connection.select_one("select avg(content) as avg_content, avg(length) as avg_length, avg(slides) as avg_slides from preso_ratings where preso_ratings.preso_id=#{id}")
+  end
+  
+  def user_rated?(user)
+    preso_ratings.count(:conditions => ['user_id = ?',user.id]) > 0
+  end
 end

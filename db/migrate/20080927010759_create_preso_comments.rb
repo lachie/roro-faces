@@ -10,13 +10,13 @@ class CreatePresoComments < ActiveRecord::Migration
       t.timestamps
     end
     
-    create_table :preso_rating do |t|
+    create_table :preso_ratings do |t|
       t.belongs_to :preso
       t.belongs_to :user
       
-      t.integer :rating_content
-      t.integer :rating_length
-      t.integer :rating_slides
+      t.integer :content
+      t.integer :length
+      t.integer :slides
       
       t.timestamps
     end

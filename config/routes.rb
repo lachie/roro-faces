@@ -27,6 +27,7 @@ ActionController::Routing::Routes.draw do |map|
     group.resources(:meetings) do |meeting|
       meeting.resources(:presos) do |preso|
         preso.resources(:comments)
+        preso.resources(:preso_ratings)
       end
     end
   end
