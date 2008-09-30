@@ -1,0 +1,21 @@
+.column.span-8
+  %h2 roro groups
+
+  %ul
+    -Group.front_page_order.each do |group|
+      %li
+        %a{:href => group_path(group)}=group.name
+        
+        
+.column.span-8.last
+  %h2
+    %a{:href => user_path(@user)}
+      meet
+      =@user.nick
+      
+  %img{:src => @user.mugshot.url(:small)}
+  .name
+    =@user.name
+    -unless @user.location.blank?
+      from
+      =@user.location

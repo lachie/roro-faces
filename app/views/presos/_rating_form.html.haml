@@ -1,0 +1,20 @@
+-form_for comment, :url => group_meeting_preso_comment_path(@group,@meeting,preso,comment) do |f|
+  -if preso.allow_feedback?
+    %h3
+      rate the talk
+    .ratings
+      =f.label :rating_content, "the content"
+      -5.times do |rating|
+        =f.radio_button :rating_content, rating, :class => 'star'
+      
+      .clear
+
+      =f.label :rating_length, "the length"
+      -5.times do |rating|
+        =f.radio_button :rating_length, rating, :class => 'star'
+      
+      .clear
+
+      =f.label :rating_slides, "the slides or other props"
+      -5.times do |rating|
+        =f.radio_button :rating_slides, rating, :class => 'star'
