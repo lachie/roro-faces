@@ -1,5 +1,9 @@
 /* @override http://0.0.0.0:3000/stylesheets/application.css */
 
+ul {
+  list-style-image: url(/images/smiley_bullet.png);
+}
+
 .header-row {
   height: 97px;
 }
@@ -18,6 +22,7 @@
   position: relative;
   bottom: -40px;
   list-style-type: none;
+  list-style-image: none;
 }
 
 .content {
@@ -36,9 +41,7 @@
   color: #f3f3f3;
 }
 
-ul.groups {
-  list-style-image: url(/images/smiley_bullet.png);
-}
+
 
 .mugshot {
   text-align: center;
@@ -62,11 +65,17 @@ ul.groups {
   margin: 0 4px 4px 0;
 }
 
+a {
+  border: none;
+  text-decoration: none;
+}
 
-h2 span {
+
+h2 span,h3 span {
   font-size: .5em;
   color: #222222;
 }
+
 
 h2,h3,h4 {
   color: #d64949;
@@ -79,6 +88,19 @@ h2 a,h3 a {
   padding-bottom: -2px;
   border-bottom: 1px solid #d68787;
 }
+
+.rating .label {
+  float: left;
+  width: 50px;
+  text-align: right;
+  margin-right: 1em;
+}
+
+.rating .stars {
+  float: left;
+  margin-right: 1em;
+}
+
 
 .sidebar {
   border-top: 1.1em solid #f0f0f0;

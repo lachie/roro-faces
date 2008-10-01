@@ -87,12 +87,12 @@ ActiveRecord::Schema.define(:version => 20080927010759) do
     t.string  "title",      :null => false
   end
 
-  create_table "preso_rating", :force => true do |t|
+  create_table "preso_ratings", :force => true do |t|
     t.integer  "preso_id"
     t.integer  "user_id"
-    t.integer  "rating_content"
-    t.integer  "rating_length"
-    t.integer  "rating_slides"
+    t.integer  "content"
+    t.integer  "length"
+    t.integer  "slides"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -26,15 +26,21 @@
     #{@preso.description_html}
 
 -if @preso.allow_feedback?
-  .span-16.last
+  .span-16.last.rating
     -if @preso.preso_ratings.blank?
       %h3 be the first to rate this talk
     -else
-      %h3 rating
-      =@preso.avg_rating.inspect
+      -avg = @preso.avg_rating
+      %h3
+        rating
+        %span
+          ==(from #{pluralize(avg["count"], "rating")})
+      =render :partial => 'ratings', :locals => {:avg_rating => avg}
     
     -if logged_in? && !@preso.user_rated?(current_user)
+      %hr.space
       .span-16.last
+        %h3 add your rating
         = render :partial => 'rating_form', :locals => {:preso_rating => PresoRating.new, :preso => @preso}
     
 

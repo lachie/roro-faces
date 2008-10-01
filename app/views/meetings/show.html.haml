@@ -1,5 +1,6 @@
-%h2
-  ==#{@meeting.group.name},
+%h3
+  %a{:href => group_path(@group)}=@group.name
+  ,
   =@meeting.date.to_s(:long_ordinal)
   
 %ul

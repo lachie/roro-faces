@@ -9,21 +9,18 @@
         
   %h2 in the ether
   %ul
-    -@group.twitter_feed.feed_items.each do |tweet|
-      %li
-        =tweet.body
-        &mdash;
-        %a{:href => tweet.author_url}=tweet.author_name
+    =render :partial => 'shared/tweet', :collection => @group.twitter_feed.feed_items.all(:limit => 10)
 
 %h2.column.span-16.last=@group.name
 
-.column.span-4.last
-  =link_to "Our homepage", @group.url
+.column.span-8.last
+  =link_to "#{@group.name} homepage", @group.url
 
 .column.span-16.last.ppl
   %h2 members
   -@group.users.each_with_index do |user,i|
     .person
-      %img{:src => user.mugshot.url(:thumb)}
-      %br
-      = link_to user.nick, user_path(user)
+      %a{:href=>user_path(user)}
+        %img{:src => user.mugshot.url(:thumb)}
+        %br
+        =user.nick

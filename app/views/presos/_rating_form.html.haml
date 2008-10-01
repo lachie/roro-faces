@@ -1,21 +1,22 @@
 -form_for :preso_rating, :url => group_meeting_preso_preso_rating_path(@group,@meeting,preso,preso_rating) do |f|
   .ratings
-    =f.label :content, "the content"
+    =f.label :content, "content"
     -5.times do |rating|
       =f.radio_button :content, rating, :class => 'star'
     
     .clear
 
-    =f.label :length, "the length"
+    =f.label :length, "length"
     -5.times do |rating|
       =f.radio_button :length, rating, :class => 'star'
     
     .clear
 
-    =f.label :slides, "the slides or other props"
+    =f.label :slides, "slides or other props"
     -5.times do |rating|
       =f.radio_button :slides, rating, :class => 'star'
     
     .clear
-      
+    
+    %label &nbsp;
     =f.submit 'rate'

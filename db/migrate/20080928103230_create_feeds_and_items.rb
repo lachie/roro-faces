@@ -24,6 +24,8 @@ class CreateFeedsAndItems < ActiveRecord::Migration
       
       t.string :uuid
       
+      t.string :nominal_type
+      
       t.string :title
       t.text :body
       t.string :url

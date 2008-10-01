@@ -42,14 +42,14 @@ class Feed < ActiveRecord::Base
   private
   def _read_feed(feed)
     update_attributes!(
-      :uuid       => feed.id,
+      :uuid       => feed['id'],
       :title      => feed.title,
       :fetched_at => Time.now
     )
   end
   
   def _read_item(item)
-    iid = item.id
+    iid = item['id']
     feed_item = feed_items.find_by_uuid(iid) || feed_items.build(:uuid => iid)
     
     return unless !feed_item.updated_at || item.updated_time < feed_item.updated_at
@@ -58,8 +58,6 @@ class Feed < ActiveRecord::Base
     feed_item.body  = item.content[0]['value']
     feed_item.url   = item.url
     
-    puts
-    pp item
     feed_item.author_name  = item.author
     feed_item.author_url   = item.author_detail['href']
     feed_item.author_email = item.author_detail['email']

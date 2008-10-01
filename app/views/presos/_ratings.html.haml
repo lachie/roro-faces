@@ -1,0 +1,6 @@
+-%w{length content slides}.each do |f|
+  .label=f
+  .stars
+    =stars(avg_rating["avg_#{f}"])
+  ==(#{"%.2f" % avg_rating["avg_#{f}"]})
+  .clear

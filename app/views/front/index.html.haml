@@ -1,3 +1,8 @@
+-content_for(:sidebar) do
+  %h2 in the ether
+  %ul
+    =render :partial => 'shared/tweet', :collection => @tweets
+
 .column.span-8
   %h2 roro groups
 

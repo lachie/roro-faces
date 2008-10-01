@@ -86,4 +86,15 @@ module ApplicationHelper
   def rgb2hex(*rgb)
     "#%02x%02x%02x" % rgb.map {|e| (e * 255).to_i}
   end
+  
+  def stars(rating)
+    stars = Float(rating).round
+    no_stars = 5-stars
+    
+    text = ""
+    stars.times { text << "<div class='star star_on'><a></a></div>"}
+    no_stars.times { text << "<div class='star'><a></a></div>"}
+    
+    text
+  end
 end

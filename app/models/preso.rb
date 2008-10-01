@@ -20,7 +20,8 @@ class Preso < ActiveRecord::Base
   end
   
   def avg_rating
-    connection.select_one("select avg(content) as avg_content, avg(length) as avg_length, avg(slides) as avg_slides from preso_ratings where preso_ratings.preso_id=#{id}")
+    fields = %w{content slides length}.map {|f| "avg(#{f}) as avg_#{f}"} * ','
+    connection.select_one("select #{fields}, count(*) as count from preso_ratings where preso_ratings.preso_id=#{id}")
   end
   
   def user_rated?(user)
