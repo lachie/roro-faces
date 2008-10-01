@@ -11,6 +11,8 @@ class Group < ActiveRecord::Base
   
   def twitter_feed
     feeds.twitter.first
+  rescue
+    nil
   end
   
   def to_param

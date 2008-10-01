@@ -6,10 +6,11 @@
     -@group.meetings.each do |meeting|
       %li
         %a.large{:href=>group_meeting_path(@group,meeting)}=meeting.date.to_s(:long_ordinal)
-        
-  %h2 in the ether
-  %ul
-    =render :partial => 'shared/tweet', :collection => @group.twitter_feed.feed_items.all(:limit => 10)
+  
+  -if tf = @group.twitter_feed
+    %h2 in the ether
+    %ul
+      =render :partial => 'shared/tweet', :collection => tf.feed_items.all(:limit => 10)
 
 %h2.column.span-16.last=@group.name
 
