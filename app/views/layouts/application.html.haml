@@ -54,6 +54,8 @@
   .container.content-row
     .column.span-16.prepend-1.append-1.content
       %hr.space
+      -if flash[:shoo]
+        %h2=flash[:shoo]
       = yield
     .column.span-6.last.sidebar
       .column.span-6.last.user-search
