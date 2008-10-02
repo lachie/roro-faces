@@ -13,7 +13,7 @@
 
   = stylesheet_link_tag 'application', 'jquery-ui-themeroller', 'code', 'jquery.rating'
   
-  = javascript_include_tag 'jquery-1.2.3.min.js', 'ui.core', 'ui.tabs', 'jquery.rating'
+  = javascript_include_tag 'jquery-1.2.3.min.js', 'ui.core', 'ui.tabs', 'jquery.rating', 'application.js'
   
   = yield :header
   = yield :feed_tags
@@ -56,6 +56,9 @@
       %hr.space
       = yield
     .column.span-6.last.sidebar
+      .column.span-6.last.user-search
+        %form{:action => search_users_path, :method => 'get'}
+          %input{:name => 'q', :value => params[:q]}
       = yield(:sidebar)
   
   .container.footer-row

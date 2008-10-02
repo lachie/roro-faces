@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   
   def index
     if nick = params[:nick]
-      search(nick)
+      search_nick(nick)
     else
       return pinboard
 
@@ -41,7 +41,14 @@ class UsersController < ApplicationController
     end
   end
   
-  def search(nick)
+  def search
+    @users = User.search(params[:q])
+    respond_to do |wants|
+      wants.html
+    end
+  end
+  
+  def search_nick(nick)
     user = User.find_by_stripped_irc_nick(nick) or raise ActiveRecord::RecordNotFound
     render :xml => user.to_xml
   rescue ActiveRecord::RecordNotFound

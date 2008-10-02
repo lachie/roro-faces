@@ -41,6 +41,12 @@ ul {
   color: #f3f3f3;
 }
 
+.user-search {
+  text-align: center;
+}
+.user-search .blurred {
+  color: #aaa;
+}
 
 
 .mugshot {
@@ -56,7 +62,7 @@ ul {
   width: 16px;
 }
 
-.facets .person,.groups .person {
+.facets .person,.groups .person,.users .person {
   width: 120px;
   float: left;
   text-align: center;

@@ -8,12 +8,13 @@ ActionController::Routing::Routes.draw do |map|
       :link_affiliation => :post
     },
     :collection => {
-      :pinboard  => :get,
-      :thankyous => :get,
-      :beerating => :get,
-      :chatter   => :get,
+      :pinboard    => :get,
+      :thankyous   => :get,
+      :beerating   => :get,
+      :chatter     => :get,
       :all_chatter => :get,
-      :beergraph => :get
+      :beergraph   => :get,
+      :search      => :get
     }
   
   map.resources(:mugshots, :collection => { :update_all_thumbnails => :get })

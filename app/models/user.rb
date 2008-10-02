@@ -192,10 +192,26 @@ class User < ActiveRecord::Base
     User.find(:all).each {|u| u.mugshot.regenerate_thumbnails if u.mugshot rescue nil }
   end
   
+  protected
+  def self.strip_name(name)
+    common_suffixes = [/_away$/, /_working$/, /_lunch$/]
+    common_suffixes.each {|suffix| name.gsub!(suffix, "")}
+    name
+  end
+  
+  public
   def self.find_by_stripped_irc_nick(nick)    
-    common_suffixes = [/_away/, /_working/, /_lunch/]
-    common_suffixes.each {|suffix| nick.gsub!(suffix, "")}
+    nick = strip_name(nick)
+
     find(:first,:conditions => ["lower(trim(both '_' from irc_nick)) = lower(trim(both '_' from ?)) or lower(trim(both '_' from alternate_irc_nick)) = lower(trim(both '_' from ?))", nick, nick])
+  end
+  
+  def self.search(term)
+    term = strip_name(term)
+    
+    conditions = %w{irc_nick alternate_irc_nick name email}.map {|c| "(lower(trim(both '_' from #{c})) like :term)"} * ' or '
+    
+    find(:all,:conditions => [conditions,{:term => "%#{term}%"}])
   end
   
   def feed_sort_date
@@ -235,6 +251,7 @@ class User < ActiveRecord::Base
     ago
   end
 
+  # TODO extract this somewhere
   
   CHANNEL = '#roro'
   ALIASES = {

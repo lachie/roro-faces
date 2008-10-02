@@ -1,0 +1,9 @@
+.column.span-16.last.ppl
+  %h2
+    ==&#8216;#{params[:q]}&#8217;
+  -@users.each_with_index do |user,i|
+    .person
+      %a{:href=>user_path(user)}
+        %img{:src => user.mugshot.url(:thumb)}
+        %br
+        =user.nick
