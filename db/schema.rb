@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080927010759) do
+ActiveRecord::Schema.define(:version => 20080928103230) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "user_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20080927010759) do
   end
 
   create_table "facet_kinds", :force => true do |t|
-    t.string  "name",         :null => false
+    t.string  "name",         :default => "", :null => false
     t.string  "service_url"
     t.string  "title"
     t.string  "site"
@@ -50,13 +50,41 @@ ActiveRecord::Schema.define(:version => 20080927010759) do
 
   create_table "facets", :force => true do |t|
     t.string  "name"
-    t.string  "info",          :null => false
-    t.integer "user_id",       :null => false
-    t.integer "facet_kind_id", :null => false
+    t.string  "info",          :default => "", :null => false
+    t.integer "user_id",                       :null => false
+    t.integer "facet_kind_id",                 :null => false
+  end
+
+  create_table "feed_items", :force => true do |t|
+    t.integer  "feed_id"
+    t.string   "uuid"
+    t.string   "nominal_type"
+    t.string   "title"
+    t.text     "body"
+    t.string   "url"
+    t.string   "author_name"
+    t.string   "author_email"
+    t.string   "author_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feeds", :force => true do |t|
+    t.integer  "feedable_id"
+    t.string   "feedable_type"
+    t.string   "nominal_type"
+    t.string   "url"
+    t.string   "feed_url"
+    t.string   "uuid"
+    t.datetime "fetched_at"
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "groups", :force => true do |t|
-    t.string  "name",            :null => false
+    t.string  "name",            :default => "", :null => false
     t.string  "url"
     t.boolean "once_off"
     t.string  "short_name"
@@ -64,7 +92,7 @@ ActiveRecord::Schema.define(:version => 20080927010759) do
   end
 
   create_table "meetings", :force => true do |t|
-    t.string  "where",    :null => false
+    t.string  "where",    :default => "", :null => false
     t.integer "group_id"
     t.date    "date"
   end
@@ -84,7 +112,7 @@ ActiveRecord::Schema.define(:version => 20080927010759) do
   create_table "presentations", :force => true do |t|
     t.integer "user_id"
     t.integer "meeting_id"
-    t.string  "title",      :null => false
+    t.string  "title",      :default => "", :null => false
   end
 
   create_table "preso_ratings", :force => true do |t|
