@@ -11,9 +11,11 @@ describe User do
     @bob.should be_instance_of(User)
   end
   
-  it "should return users in pinboard order" do
-    User.find_for_pinboard.map(&:email).should == ['carl@carl.com','bob@bob.com','dave@dave.com','eddie@eddie.com','fred@fred.com']
+  it ".find_for_pinboard should return users" do
+    User.find_for_pinboard.map(&:email).sort.should == ['carl@carl.com','bob@bob.com','dave@dave.com','eddie@eddie.com','fred@fred.com'].sort
   end
+
+  it ".find_for_pinboard should have some sort of limit to avoid memory blow out with a large number of users"
   
   it "should find a user by their irc nick" do
     User.find_by_stripped_irc_nick("dave").should == @dave
