@@ -26,7 +26,9 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false
+  validates_uniqueness_of   :openid, :case_sensitive => false
   before_save :encrypt_password
+  before_validation :normalize_openid
   
   
   
@@ -89,6 +91,10 @@ class User < ActiveRecord::Base
 
   def remember_token?
     remember_token_expires_at && Time.now.utc < remember_token_expires_at 
+  end
+
+  def normalize_openid
+    self.openid = OpenIdAuthentication.normalize_url(self.openid)
   end
 
   # These create and unset the fields required for remembering users between browser closes
