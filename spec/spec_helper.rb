@@ -45,3 +45,5 @@ Spec::Runner.configure do |config|
   # 
   # For more information take a look at Spec::Example::Configuration and Spec::Runner
 end
+
+Hornsby.load
