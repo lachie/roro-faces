@@ -37,7 +37,7 @@ class PresosController < ApplicationController
   protected
   def load_meeting
     @group   = Group.find_by_short_name(params[:group_id])
-    @meeting = @group.meetings.find_by_date(params[:meeting_id])
+    @meeting = @group.meetings.by_date(params[:meeting_id]).first
   end
 
 end

@@ -2,7 +2,7 @@ class MeetingsController < ApplicationController
   before_filter :load_group
   
   def show
-    @meeting = @group.meetings.find_by_date(params[:id])
+    @meeting = @group.meetings.by_date(params[:id]).first
   end
   
   protected

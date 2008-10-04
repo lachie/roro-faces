@@ -4,15 +4,4 @@
   %a{:href => polymorphic_path([:admin,@group,meeting])}=meeting
   
 %h3 new meetup
--form_for(:meeting,:url => admin_group_meetings_path(@group)) do |f|
-  .set
-    =f.label :formatted_date, 'date of meetup'
-    =f.text_field :formatted_date
-  .set
-    =f.label :formatted_time, 'time'
-    =f.text_field :formatted_time
-  .set
-    =f.label :where, 'location'
-    =f.text_field :where
-    
-  =f.submit 'create'
+=render :partial => 'admin/meetings/form', :locals => {:meeting => @group.meetings.build}

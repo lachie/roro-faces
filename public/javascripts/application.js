@@ -18,4 +18,8 @@ jQuery(function($) {
     }
   }).blur();
   
+  
+  // var t = $('.toggler');
+  // console.log(t.classes);
+  
 })

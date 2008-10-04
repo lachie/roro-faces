@@ -2,6 +2,12 @@
   %a{:href => polymorphic_path([:admin,@meeting.group])}=@meeting.group.name
   \:
   =@meeting
+  
+%h3 edit
+=render :partial => 'form', :locals => {:meeting => @meeting}
+
 %h3 presos
 =list_of_children(@meeting,:presos) do |preso|
   %a{:href => polymorphic_path([:admin,@meeting.group,@meeting,preso])}=preso.title
+  
+=render :partial => 'admin/presos/form', :locals => {:preso => @meeting.presos.build}

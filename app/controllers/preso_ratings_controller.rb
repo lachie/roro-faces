@@ -9,7 +9,7 @@ class PresoRatingsController < ApplicationController
   protected
   def load_parents
     @group   = Group.find_by_short_name(params[:group_id])
-    @meeting = @group.meetings.find_by_date(params[:meeting_id])
+    @meeting = @group.meetings.by_date(params[:meeting_id]).first
     @preso = @meeting.presos.find(params[:preso_id])
   end
 end
