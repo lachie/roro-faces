@@ -6,9 +6,11 @@ development:
   host: localhost
 
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
-  timeout: 5000
+  adapter: mysql
+  database: facebook_test
+  username: root
+  password: 
+  host: localhost
 
 production:
   adapter: mysql

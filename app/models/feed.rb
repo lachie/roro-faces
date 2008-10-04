@@ -16,7 +16,6 @@ class Feed < ActiveRecord::Base
   
   def parse!
     self.class.transaction do
-      puts "Reading: #{feed_url}"
       feed = FeedParser.parse(open(feed_url))
       
       raise "failed to read the feed" unless feed
@@ -30,9 +29,7 @@ class Feed < ActiveRecord::Base
     
     true
   rescue
-    puts "ex: #{$!}"
     raise $!
-    false
   end
     
   def reparse?

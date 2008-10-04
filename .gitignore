@@ -5,3 +5,4 @@ doc/api
 doc/app
 public/mugshots
 config/gmail.rb
+db/*.sqlite3

@@ -12,15 +12,16 @@ class AccountsController < ApplicationController
   end
 
   def login
-    return unless request.post?
-    self.current_user = User.authenticate(params[:email], params[:password])
-    if logged_in?
-      if params[:remember_me] == "1"
-        self.current_user.remember_me
-        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
+    return unless request.post? || using_open_id?
+    if using_open_id?
+      open_id_authentication
+    else
+      self.current_user = User.authenticate(params[:email], params[:password])
+      if logged_in?
+        successful_login
+      else
+        failed_login("Invalid user name or password")
       end
-      redirect_back_or_default(user_path(self.current_user))
-      flash[:notice] = "Logged in successfully"
     end
   end
 
@@ -60,4 +61,34 @@ class AccountsController < ApplicationController
     logger.warn $!
     redirect_to login_path
   end
+  
+  protected
+    def open_id_authentication
+      authenticate_with_open_id do |result, identity_url|
+        if result.successful?
+          if self.current_user = User.find_by_openid(identity_url)
+            successful_login
+          else
+            failed_login "Sorry, no user by that identity URL exists (#{identity_url})"
+          end
+        else
+          failed_login result.message
+        end
+      end
+    end
+
+    def successful_login
+      if params[:remember_me] == "1"
+        self.current_user.remember_me
+        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
+      end
+      redirect_back_or_default(user_path(self.current_user))
+      flash[:notice] = "Logged in successfully"
+    end
+
+    def failed_login(message)
+      flash[:error] = message
+      redirect_back_or_default(login_url)
+    end
+
 end

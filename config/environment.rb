@@ -91,13 +91,17 @@ require 'hash_ext'
 
 # Include your application configuration below
 require 'smtp_tls'
-require RAILS_ROOT+'/config/gmail.rb'
+begin
+  require RAILS_ROOT+'/config/gmail.rb'
 
-ActionMailer::Base.smtp_settings = {
-  :address => "smtp.gmail.com",
-  :port => "587",
-  :domain => "localhost.localdomain",
-  :authentication => :plain,
-  :user_name => GMAIL_USER,
-  :password => GMAIL_PASS
-}
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => "587",
+    :domain => "localhost.localdomain",
+    :authentication => :plain,
+    :user_name => GMAIL_USER,
+    :password => GMAIL_PASS
+  }
+rescue LoadError
+  puts "WARNING: config/gmail.rb does not exists - using default ActionMailer settings (email may not work)"
+end
