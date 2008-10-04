@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.namespace(:admin) do |a|
+    a.connect '', :controller => 'application'
+    a.resources :groups
+  end
+  
+  
   map.resources :facet_kinds
   
   map.resources :facets
@@ -38,9 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.signup 'accounts/signup', :controller => 'accounts', :action => 'signup'
   map.reset_password 'accounts/reset_password', :controller => 'accounts', :action => 'reset_password'
   
-  map.namespace(:admin) do |a|
-    a.connect '', :controller => 'application'
-  end
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   

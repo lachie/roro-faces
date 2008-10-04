@@ -2,6 +2,8 @@ module Admin
   class ApplicationController < ::ApplicationController
     before_filter :require_admin
     
+    helper :admin
+    
     def index
     end
     
