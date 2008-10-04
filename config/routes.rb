@@ -1,7 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
   map.namespace(:admin) do |a|
     a.connect '', :controller => 'application'
-    a.resources :groups
+    a.resources(:groups) do |group|
+      group.resources(:meetings) do |meeting|
+        meeting.resources(:presos)
+      end
+    end
   end
   
   

@@ -1,0 +1,9 @@
+%h2
+  %a{:href => polymorphic_path([:admin,@preso.meeting.group])}=@preso.meeting.group
+  \:
+  %a{:href => polymorphic_path([:admin,@preso.meeting.group,@preso.meeting])}=@preso.meeting
+  \:
+  =@preso
+
+%h3 preso
+

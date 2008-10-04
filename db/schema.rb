@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081003005044) do
+ActiveRecord::Schema.define(:version => 20081004074609) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "user_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20081003005044) do
   end
 
   create_table "facet_kinds", :force => true do |t|
-    t.string  "name",         :default => "", :null => false
+    t.string  "name",         :null => false
     t.string  "service_url"
     t.string  "title"
     t.string  "site"
@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(:version => 20081003005044) do
 
   create_table "facets", :force => true do |t|
     t.string  "name"
-    t.string  "info",          :default => "", :null => false
-    t.integer "user_id",                       :null => false
-    t.integer "facet_kind_id",                 :null => false
+    t.string  "info",          :null => false
+    t.integer "user_id",       :null => false
+    t.integer "facet_kind_id", :null => false
   end
 
   create_table "feed_items", :force => true do |t|
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20081003005044) do
   end
 
   create_table "groups", :force => true do |t|
-    t.string  "name",            :default => "", :null => false
+    t.string  "name",            :null => false
     t.string  "url"
     t.boolean "once_off"
     t.string  "short_name"
@@ -92,9 +92,9 @@ ActiveRecord::Schema.define(:version => 20081003005044) do
   end
 
   create_table "meetings", :force => true do |t|
-    t.string  "where",    :default => "", :null => false
-    t.integer "group_id"
-    t.date    "date"
+    t.string   "where",    :null => false
+    t.integer  "group_id"
+    t.datetime "date"
   end
 
   create_table "mugshots", :force => true do |t|
@@ -119,15 +119,15 @@ ActiveRecord::Schema.define(:version => 20081003005044) do
   end
 
   create_table "open_id_authentication_nonces", :force => true do |t|
-    t.integer "timestamp",                  :null => false
+    t.integer "timestamp",  :null => false
     t.string  "server_url"
-    t.string  "salt",       :default => "", :null => false
+    t.string  "salt",       :null => false
   end
 
   create_table "presentations", :force => true do |t|
     t.integer "user_id"
     t.integer "meeting_id"
-    t.string  "title",      :default => "", :null => false
+    t.string  "title",      :null => false
   end
 
   create_table "preso_ratings", :force => true do |t|
@@ -201,7 +201,7 @@ ActiveRecord::Schema.define(:version => 20081003005044) do
     t.string   "mugshot_content_type"
     t.integer  "mugshot_file_size"
     t.datetime "mugshot_updated_at"
-    t.string   "openid",                                  :default => "",    :null => false
+    t.string   "openid",                                                     :null => false
   end
 
 end

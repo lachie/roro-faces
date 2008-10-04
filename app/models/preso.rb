@@ -15,6 +15,10 @@ class Preso < ActiveRecord::Base
   #     current_user && read_attribute(:allow_feedback) && !preso_comments.any? {|pc| current_user.id == pc.user_id && pc.rates? }
   #   end
   
+  def to_s
+    title
+  end
+  
   def apply_filter
     self.description_html = FacesFormatter.format_as_xhtml(self.description)
   end

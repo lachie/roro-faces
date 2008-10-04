@@ -97,4 +97,34 @@ module ApplicationHelper
     
     text
   end
+  
+  def javascripts(*sources)
+    options = sources.last.is_a?(Hash) ? sources.pop.stringify_keys : { }
+
+    # Start the list
+    javascripts = []
+
+    # Include extra javascripts
+    if options["include"]
+      options["include"].each do |javascript|
+        javascripts << javascript
+      end
+    end
+
+    # Controller/action javascripts
+    controller_name = controller.class.to_s.underscore.sub(/_controller$/,'')
+    javascripts << "#{controller_name}"
+    javascripts << "#{controller_name}-#{controller.action_name}"
+
+    # Link to all user javascripts
+    javascripts.collect! do |name|
+      name = "auto/#{name}"
+      if File.exist?("#{RAILS_ROOT}/public/javascripts/#{name}.js")
+        javascript_include_tag(name)
+      end
+    end
+
+    # Link to applicaton.js and defaults (if requested)
+    javascripts.compact.join("\n").to_s
+  end
 end

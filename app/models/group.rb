@@ -19,6 +19,10 @@ class Group < ActiveRecord::Base
     short_name
   end
   
+  def to_s
+    name
+  end
+  
   def create_feed
     return if twitter_hashtag.blank?
     

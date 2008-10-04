@@ -1,4 +1,4 @@
-class Admin::GroupsController < ApplicationController  
+class Admin::GroupsController < Admin::ApplicationController
   def index
     @groups = Group.front_page_order
   end
