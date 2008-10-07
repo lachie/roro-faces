@@ -11,5 +11,5 @@
         &mdash;
         =preso.user.nick
   
--if authorised?
+-if logged_in?
   %a{:href => new_group_meeting_preso_path(@meeting.group,@meeting)} I gave a presentation...
