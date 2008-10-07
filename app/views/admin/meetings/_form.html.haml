@@ -1,0 +1,15 @@
+
+-form_for(meeting,:url => polymorphic_path([:admin,@group,meeting])) do |f|
+  .set
+    =f.label :formatted_date, 'date of meetup'
+    =f.text_field :formatted_date
+    
+  .set
+    =f.label :formatted_time, 'time'
+    =f.text_field :formatted_time
+    %span e.g. 19:00 is 7pm; 24-hr, HH:MM format
+  .set
+    =f.label :where, 'location'
+    =f.text_field :where
+    
+  =f.submit 'save'
