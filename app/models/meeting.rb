@@ -26,4 +26,9 @@ class Meeting < ActiveRecord::Base
   def parse_formatted
     write_attribute(:date, DateTime.strptime("#{@formatted_date} #{@formatted_time}",'%d/%m/%Y %H:%M'))
   end
+  
+  def apply_filter
+    self.analogue_blog_html = FacesFormatter.format_as_xhtml(self.analogue_blog)
+    self.spiel_html = FacesFormatter.format_as_xhtml(self.spiel)
+  end
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081004074609) do
+ActiveRecord::Schema.define(:version => 20081009224351) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "user_id"
@@ -92,9 +92,13 @@ ActiveRecord::Schema.define(:version => 20081004074609) do
   end
 
   create_table "meetings", :force => true do |t|
-    t.string   "where",    :null => false
+    t.string   "where",              :null => false
     t.integer  "group_id"
     t.datetime "date"
+    t.text     "spiel"
+    t.text     "spiel_html"
+    t.text     "analogue_blog"
+    t.text     "analogue_blog_html"
   end
 
   create_table "mugshots", :force => true do |t|

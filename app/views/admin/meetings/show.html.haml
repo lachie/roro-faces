@@ -3,6 +3,8 @@
   \:
   =@meeting
   
+%a{:href => group_meeting_path(@group,@meeting)} preview
+  
 %h3 edit
 =render :partial => 'form', :locals => {:meeting => @meeting}
 

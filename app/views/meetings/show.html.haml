@@ -3,13 +3,30 @@
   ,
   =@meeting
   
-%ul
-  -@meeting.presos.each do |preso|
-    %li
-      %a{:href => group_meeting_preso_path(@group,@meeting,preso)}
-        =preso.title
-        &mdash;
-        =preso.user.nick
-  
--if logged_in?
-  %a{:href => new_group_meeting_preso_path(@meeting.group,@meeting)} I gave a presentation...
+.where
+  =@meeting.where
+
+%hr.space
+
+.spiel
+  :plain
+    #{@meeting.spiel_html}
+
+-unless @meeting.analogue_blog.blank?
+  %h4 analogue blog / meeting notes
+  :plain
+    #{@meeting.analogue_blog}
+
+%hr.space
+
+%h4 presentations
+-if @meeting.presos.blank?
+  hey, would you like to give a talk?
+-else
+  %ul
+    -@meeting.presos.each do |preso|
+      %li
+        %a{:href => group_meeting_preso_path(@group,@meeting,preso)}
+          =preso.title
+          &mdash;
+          =preso.user.nick

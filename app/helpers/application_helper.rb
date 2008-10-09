@@ -127,4 +127,8 @@ module ApplicationHelper
     # Link to applicaton.js and defaults (if requested)
     javascripts.compact.join("\n").to_s
   end
+  
+  def formatting_help
+    "(use textile + <a href='http://github.com/xaviershay/lesstile'>lesstile</a> with <a href='http://pygments.org/languages/'>pygments</a>)"
+  end
 end
