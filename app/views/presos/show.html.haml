@@ -15,15 +15,7 @@
   ,
   %a{:href => group_meeting_path(@group,@meeting)}=@meeting.date.to_s(:long_ordinal)
 
-.talk.span-16.last
-  %h2
-    =@preso.title
-    %span
-      by
-      =@preso.user.nick
-
-  :plain
-    #{@preso.description_html}
+=render :partial => 'preso', :object => @preso
 
 -if @preso.allow_feedback?
   .span-16.last.rating

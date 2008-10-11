@@ -5,11 +5,17 @@
   
 %a{:href => group_meeting_path(@group,@meeting)} preview
   
-%h3 edit
-=render :partial => 'form', :locals => {:meeting => @meeting}
+%h3
+  %a.toggler{:href => '#edit'} edit
+#edit
+  =render :partial => 'form', :locals => {:meeting => @meeting}
 
 %h3 presos
 =list_of_children(@meeting,:presos) do |preso|
   %a{:href => polymorphic_path([:admin,@meeting.group,@meeting,preso])}=preso.title
   
-=render :partial => 'admin/presos/form', :locals => {:preso => @meeting.presos.build}
+%h3
+  %a.toggler{:href => '#new'} new preso
+    
+#new
+  =render :partial => 'admin/presos/form', :locals => {:preso => @meeting.presos.build}

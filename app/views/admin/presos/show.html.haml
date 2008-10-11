@@ -7,4 +7,8 @@
 
 %h3 preso
 
-=render :partial => 'admin/presos/form', :locals => {:preso => @preso}
+=render :partial => 'presos/preso', :locals => {:preso => @preso}
+
+%h3 edit
+.span-16.last
+  =render :partial => 'admin/presos/form', :locals => {:preso => @preso}

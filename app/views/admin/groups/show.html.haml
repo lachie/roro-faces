@@ -3,5 +3,7 @@
 =list_of_children(@group,:meetings) do |meeting|
   %a{:href => polymorphic_path([:admin,@group,meeting])}=meeting
   
-%h3 new meetup
-=render :partial => 'admin/meetings/form', :locals => {:meeting => @group.meetings.build}
+%h3 
+  %a.toggler{:href => '#new'} new meetup
+#new
+  =render :partial => 'admin/meetings/form', :locals => {:meeting => @group.meetings.build}

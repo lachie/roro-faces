@@ -1,0 +1,9 @@
+.talk.span-16.last
+  %h2
+    =@preso.title
+    %span
+      by
+      =@preso.user.nick
+
+  :plain
+    #{@preso.description_html}

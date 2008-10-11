@@ -22,4 +22,16 @@ jQuery(function($) {
   // var t = $('.toggler');
   // console.log(t.classes);
   
+  
+  $('.toggler')
+    .each(function(i,t) {
+      $($(t).attr('href')).hide()
+    })
+    .click(function() {
+      var id = $(this).attr('href');
+    
+      $(id).toggle();
+      return false;
+    });
+
 })
