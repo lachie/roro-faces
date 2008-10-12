@@ -115,6 +115,11 @@ class UsersController < ApplicationController
 
     
   def edit 
+    if authorized?
+      @facet_kinds = FacetKind.find_for_select.unshift(['',-1]).push(["-----",-1],["new facet kind...",0])
+      @facet_kinds << ['edit facets...',-2] if current_user.admin?
+      render :action => 'show_auth'
+    end
   end
   
   def new
@@ -122,14 +127,9 @@ class UsersController < ApplicationController
   end
   
   def show
-    if authorized?
-      @facet_kinds = FacetKind.find_for_select.unshift(['',-1]).push(["-----",-1],["new facet kind...",0])
-      @facet_kinds << ['edit facets...',-2] if current_user.admin?
-    end
-    
     respond_to do |wants|
       wants.html do
-        render :action => (authorized? and !params[:preview] ? 'show_auth' : 'show')
+        render :action => 'show'
       end
       wants.xml  { render :text => @user.to_xml }
       wants.json { render_json @user.to_json }
@@ -141,8 +141,8 @@ class UsersController < ApplicationController
     @user.save!
     
     redirect_to user_url(@user)
-  rescue
-    render :action => 'edit'
+  # rescue
+    # render :action => 'edit'
   end
   
   def create

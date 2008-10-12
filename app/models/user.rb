@@ -94,7 +94,9 @@ class User < ActiveRecord::Base
   end
 
   def normalize_openid
-    self.openid = OpenIdAuthentication.normalize_url(self.openid)
+    unless self.openid.blank?
+      self.openid = OpenIdAuthentication.normalize_url(self.openid)
+    end
   end
 
   # These create and unset the fields required for remembering users between browser closes
@@ -261,11 +263,11 @@ class User < ActiveRecord::Base
   
   CHANNEL = '#roro'
   ALIASES = {
-    'kasual_keith' => 'keithpitty',
-    'brother_rspec' => 'lachie',
-    'brother_cache' => 'matta',
+    'kasual_keith'   => 'keithpitty',
+    'brother_rspec'  => 'lachie',
+    'brother_cache'  => 'matta',
     'brother_sphinx' => 'freelancing_god',
-    'Richo' => 'Richo99'
+    'Richo'          => 'Richo99'
   }
   def self.chatter_lens(window,start=0,&block)
     buffers = []

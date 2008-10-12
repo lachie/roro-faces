@@ -15,6 +15,10 @@
       %li
         %a{:href=>'#mugshot'}
           %span mugshot
+      -if superuser?
+        %li
+          %a{:href=>'#privs'}
+            %span privs
 
     #names
       %h2 names
@@ -57,6 +61,13 @@
     #mugshot
       %h2 mugshot
       =render :partial => 'mugshot', :locals => {:f => f}
+      
+    -if superuser?
+      #privs
+        %h2 privileges
+        = f.check_box :admin
+        %label{:for => 'user_admin'} admin
+        
   
     %p
       = submit_tag 'save'

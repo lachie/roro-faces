@@ -8,7 +8,7 @@ module AuthenticatedSystem
     
     # If there is a current_user, are they an admin?
     def admin?
-      logged_in? and current_user.admin?
+      logged_in? && current_user.admin?
     end
     
     # Accesses the current user from the session.

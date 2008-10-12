@@ -15,12 +15,17 @@ class ApplicationController < ActionController::Base
   around_filter :add_current_user_to_thread
 
   def logged_in_but_other_user?
-    admin? or (@user and logged_in? and current_user != @user)
+    admin? || superuser? || (@user && logged_in? && current_user != @user)
   end
   
   def authorized?
-    current_user == @user or admin?
+    current_user == @user || admin? || superuser?
   end
+  
+  def superuser?
+    logged_in? && current_user.superuser?
+  end
+  helper_method :superuser?
   
   protected
     def redirect_from_lachie_dot_info

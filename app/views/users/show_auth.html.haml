@@ -7,7 +7,7 @@
 #info-container
 
   .edit
-    = link_to "Preview #{@user.nick}", user_path(:id => @user, :preview => true)
+    = link_to "Preview #{@user.nick}", user_path(@user)
 
   =render :partial => 'show_edit'
 
