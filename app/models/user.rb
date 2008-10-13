@@ -26,7 +26,9 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false
-  validates_uniqueness_of   :openid, :case_sensitive => false
+  
+  validates_uniqueness_of   :openid, :case_sensitive => false, :allow_blank => true
+  
   before_save :encrypt_password
   before_validation :normalize_openid
   
@@ -96,6 +98,8 @@ class User < ActiveRecord::Base
   def normalize_openid
     unless self.openid.blank?
       self.openid = OpenIdAuthentication.normalize_url(self.openid)
+    else
+      self.openid = ''
     end
   end
 
