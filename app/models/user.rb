@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :thankyous_to, :class_name => 'Thankyou', :foreign_key => 'to_id'  , :order => 'created_at desc'
   
   # Virtual attribute for the unencrypted password
-  attr_accessor :password
+  attr_accessor :password, :openid_sreg_fields
 
   validates_presence_of     :email
   validates_presence_of     :password,                   :if => :password_required?
@@ -97,7 +97,9 @@ class User < ActiveRecord::Base
 
   def normalize_openid
     unless self.openid.blank?
+      puts "normalize_url"
       self.openid = OpenIdAuthentication.normalize_url(self.openid)
+      # TODO use openid_sreg_fields
     else
       self.openid = ''
     end

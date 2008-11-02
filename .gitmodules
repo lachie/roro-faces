@@ -1,0 +1,3 @@
+[submodule "vendor/rfeedparser"]
+	path = vendor/rfeedparser
+	url = git://github.com/jmhodges/rfeedparser.git

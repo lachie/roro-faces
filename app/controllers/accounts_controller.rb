@@ -26,12 +26,31 @@ class AccountsController < ApplicationController
   end
 
   def signup
-    @user = User.new(params[:user])
     return unless request.post?
-    @user.save!
-    self.current_user = @user
-    redirect_back_or_default(user_path(@user))
-    flash[:notice] = "Thanks for signing up!"
+    
+
+    if using_open_id?
+
+      authenticate_with_open_id do |result, identity_url, sreg_fields|
+        puts "woot, signing up #{result.successful?}, #{identity_url}, #{sreg_fields}"
+        
+        if result.successful?
+          self.current_user = @user = User.create!(:openid => identity_url, :openid_sreg_fields => sreg_fields)
+          
+          redirect_back_or_default(user_path(@user))
+        else
+          return failed_login(result.message)
+        end
+      end
+
+    else
+      self.current_user = @user = User.create!(params[:user])
+      
+      redirect_back_or_default(user_path(@user))
+      flash[:notice] = "Thanks for signing up!"
+    end
+    
+    
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
   end
