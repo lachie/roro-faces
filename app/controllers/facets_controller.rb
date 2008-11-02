@@ -8,7 +8,7 @@ class FacetsController < ApplicationController
   end
   
   def new
-    @facet = Facet.new :facet_kind_id => params[:facet_kind_id], :user_id => params[:user_id], :info => nil
+    @facet = Facet.new :facet_kind_id => params[:facet_kind_id], :user_id => params[:user_id]
     
     render :partial => 'form'
   end
