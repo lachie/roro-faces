@@ -1,4 +1,24 @@
-$(function() {  
+(function($) {
+  
+  
+function delete_facet() {
+  var a   = $(this),
+      div = a.parents('tr:first')
+             .hide();
+  
+  $.post(a.attr('href'),{_method:'delete'},function(data,status) {
+    if(status == 'success') {
+      div.remove()
+    } else {
+      div.show()
+    }
+  })
+  
+  return false;
+};
+
+
+$(function() {
   var change = function() {
     var value = this.id.match(/^group_(\d+)/)
     
@@ -31,20 +51,7 @@ $(function() {
   $("#affiliations input[type=radio] " ).click(change)
   
   
-  $('.delete_facet').click(function() {
-    var div = $(this).parent('tr')
-    div.hide()
-    
-    $.post(this.href,{_method:'delete'},function(data,status) {
-      if(status=='success') {
-        div.remove()
-      } else {
-        div.show()
-      }
-    })
-    
-    return false;
-  })
+  $('.delete_facet').click(delete_facet);
   
   $("#facet_kind").change(function() {
     var value = $(this).val();
@@ -62,13 +69,22 @@ $(function() {
         
         $('form',this).submit(function() {
           $.post(this.action, $(this).serialize(), function(data) {
-            $('#facet-list').append(data)
-            $('#facet_kind_form').html('<div id="facet_kind_form"></div>')
+            var row = $(data)
+            
+            $('.delete_facet',row).click(delete_facet);
+            
+            $('#facet-list').append(row);
+            $('#facet_kind_form').empty();
+            $("#facet_kind").val('-1');
           })
           return false;
         })
+        
       })
     }
     return false;
   })
+  
 });
+
+})(jQuery);
