@@ -4,9 +4,6 @@ class Facet < ActiveRecord::Base
   
   # validates_presence_of :name
   
-  
-  serialize :info, Hash
-  
   SCHEME_RE = /^\w+:\/\//
   
   def link
@@ -31,7 +28,30 @@ class Facet < ActiveRecord::Base
   #
   
   def info
-    facet_kind.parameters.merge(read_attribute(:info) || {})
+    unless @info
+      info = begin
+                i = YAML.load(read_attribute(:info))
+                raise unless Hash === i
+                i
+              rescue
+                logger.error "failed to load info ($!)"
+                {}
+              end
+
+      @info = facet_kind.parameters.merge(info || {})
+    end
+    
+    @info
+  end
+  
+  def info=(hash)
+    unless Hash === hash
+      write_attribute(:info, nil)
+      @info = {}
+    else
+      @info = hash
+      write_attribute(:info, hash.to_yaml)
+    end
   end
   
   def favicon_url
