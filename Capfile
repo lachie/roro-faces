@@ -28,6 +28,8 @@ set :repository, 'git://github.com/lachie/roro-faces.git'
 set :repository_cache, "git_master"
 set :deploy_via, :remote_cache
 
+set :git_enable_submodules, true
+
 # Automatically symlink these directories from current/public to shared/public.
 set :app_symlinks, %w{mugshots}
 
