@@ -1,14 +1,16 @@
 namespace :db do
   namespace :fixtures do  
+
+    SKIP_TABLES = %w[ schema_info schema_migrations sessions entries open_id_authentication_associations open_id_authentication_nonces feed_items]
+
     desc 'Create YAML test fixtures from data in an existing database. Defaults to development database. Set RAILS_ENV to override.'
     task :extract => :environment do
       fixture_path = "#{RAILS_ROOT}/tmp/fixtures"
       mkdir_p fixture_path
 
       sql = "SELECT * from %s"
-      skip_tables = ["schema_info","schema_migrations","sessions"]
       ActiveRecord::Base.establish_connection
-      (ActiveRecord::Base.connection.tables - skip_tables).each do |table_name|
+      (ActiveRecord::Base.connection.tables - SKIP_TABLES).each do |table_name|
         puts "flattening #{table_name}"
         i = "000"
 
@@ -29,13 +31,12 @@ namespace :db do
       require 'pp'
 
       puts "importing"
-      skip_tables = %w[ schema_info schema_migrations sessions entries open_id_authentication_associations open_id_authentication_nonces feed_items]
       # skip_tables += %w{
       # }
 
       ActiveRecord::Base.establish_connection
 
-      tables = (ActiveRecord::Base.connection.tables - skip_tables)
+      tables = (ActiveRecord::Base.connection.tables - SKIP_TABLES)
       # tables = %w{users}
 
       tables.each do |table_name|
