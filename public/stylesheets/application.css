@@ -83,7 +83,7 @@ h2 span,h3 span {
 }
 
 
-h2,h3,h4 {
+h2,h3,h4,.title {
   color: #d64949;
   font-family: "Futura", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

@@ -1,0 +1,17 @@
+.span-16
+  .span-2
+    %a{:href=> user_path(repo.user)}
+      %img{:src => repo.user.mugshot.url(:thumb)}
+  .span-13
+    .span-13
+      .span-9
+        %h3
+          %a{:href => repo.url}==#{repo.username}/#{repo.name}
+      .span-3
+        w
+        %span.title=repo.watchers
+        \/
+        f
+        %span.title=repo.forks
+    .span-13
+      %p=repo.description

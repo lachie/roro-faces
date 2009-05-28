@@ -9,6 +9,7 @@ end
 class User < ActiveRecord::Base
   # belongs_to :mugshot
 	has_many :facets
+	has_many :repos
   
   has_many :affiliations
   has_many :groups, :through => :affiliations

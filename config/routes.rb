@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :facet_kinds
   
   map.resources :facets
+  map.resources :repos
 
   map.resources :users,
     :member => {
