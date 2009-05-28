@@ -18,16 +18,22 @@
           =group.name
           (meetup tba)
       
--if @user        
+-if @repo
   .column.span-8.last
     %h2
-      %a{:href => user_path(@user)}
-        meet
-        =@user.nick
-        
-    %img{:src => @user.mugshot.url(:small)}
-    .name
-      =@user.name
-      -unless @user.location.blank?
-        from
-        =@user.location
+      %img{:src => @repo.user.mugshot.url(:thumb)}
+      %a{:href => @repo.url}
+        =@repo.full_name
+    .span-8
+      =@repo.description
+    .span-8
+      %em.name
+        by
+        =@repo.user.name
+        -unless @repo.user.location.blank?
+          from
+          =@repo.user.location
+    .span-8
+      ==#{pluralize(@repo.watchers-1, 'watcher')},
+      ==#{pluralize(@repo.forks     , 'forks' )}
+
