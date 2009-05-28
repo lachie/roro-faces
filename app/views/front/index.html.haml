@@ -4,14 +4,20 @@
     =render :partial => 'shared/tweet', :collection => @tweets
 
 .column.span-8
-  %h2 roro groups
-
+  %h2 meetups
   %ul
-    -Group.front_page_order.each do |group|
+    -@meetups.each do |meetup|
       %li
-        %a{:href => group_path(group)}=group.name
-        
-        
+        %a{:href => group_meeting_path(meetup.group,meetup)}
+          =meetup.group.name
+          =meetup.to_s
+
+    -@groups.each do |group|
+      %li
+        %a{:href => group_path(group)}
+          =group.name
+          (meetup tba)
+      
 -if @user        
   .column.span-8.last
     %h2

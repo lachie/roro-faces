@@ -8,7 +8,7 @@ class Admin::MeetingsController < Admin::ApplicationController
   
   def create
     @meeting = @group.meetings.create!(params[:meeting])
-    redirect_to admin_group_meetings_path(@group,@meeting)
+    redirect_to admin_group_meeting_path(@group,@meeting)
   end
   
   def update

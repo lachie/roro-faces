@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081009224351) do
+ActiveRecord::Schema.define(:version => 20081012004757) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "user_id"
@@ -206,6 +206,7 @@ ActiveRecord::Schema.define(:version => 20081009224351) do
     t.integer  "mugshot_file_size"
     t.datetime "mugshot_updated_at"
     t.string   "openid",                                                     :null => false
+    t.boolean  "superuser",                               :default => false
   end
 
 end

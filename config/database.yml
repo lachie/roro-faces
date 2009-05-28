@@ -1,8 +1,15 @@
-development:
+dev_old:
   adapter: mysql
-  database: facebook_development
+  database: faces_dev
   username: root
   password: 
+  host: localhost
+
+development:
+  adapter: postgresql
+  database: faces_dev
+  username: postgres
+  password:
   host: localhost
 
 test:

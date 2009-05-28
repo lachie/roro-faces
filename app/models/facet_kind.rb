@@ -67,5 +67,7 @@ class FacetKind < ActiveRecord::Base
   
   def get_favicon
     self.favicon_url = Favicon.from_url(service_url)
+  rescue
+    # TODO make this swallow only networky errors
   end
 end

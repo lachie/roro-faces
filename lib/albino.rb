@@ -44,7 +44,7 @@
 require 'open4'
 
 class Albino
-  @@bin = RAILS_ENV == 'development' ? 'pygmentize' : '/usr/bin/pygmentize'
+  @@bin = RAILS_ENV == 'production' ? '/usr/bin/pygmentize' : 'pygmentize'
 
   def self.bin=(path)
     @@bin = path

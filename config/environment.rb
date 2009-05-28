@@ -5,14 +5,14 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-#RAILS_GEM_VERSION = '1.2.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
 # Dependencies.log_activity = true
 
-require 'shared_secret'
+require File.dirname(__FILE__)+'/shared_secret'
 require 'active_support'
 
 module FacesConfig
@@ -23,6 +23,10 @@ end
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here
+  #
+
+
+  # config.gem 'ruby-openid', :version => '~> 2.1.2', :lib => false
   
   # Skip frameworks you're not going to use (only works if using vendor/rails)
   config.frameworks -= [ :action_web_service ]

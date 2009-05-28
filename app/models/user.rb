@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
       :default_url => "/images/no-mugshot.png"
       # :convert_options => {:thumb => "xc:none -fill white -draw \"roundRectangle 0,0 48,48 15,15\" -compose SrcIn -composite"}
   
-  named_scope :front_page_random, :order => 'rand()', :limit => 1, :conditions => 'mugshot_file_name is not null'
+  named_scope :front_page_random, :order => 'random()', :limit => 1, :conditions => 'mugshot_file_name is not null'
 
   def self.beeratings(to=:to)
     
@@ -136,7 +136,11 @@ class User < ActiveRecord::Base
   end
   
   def to_param
-    irc_nick.blank? ? self.id.to_s : "#{id}-#{irc_nick}"
+    if irc_nick.blank?
+      self.id.to_s
+    else
+      "#{id}-#{irc_nick.gsub(/\W/,'-')}"
+    end
   end
   
   SCHEME_RE = /^\w+:\/\//

@@ -12,6 +12,8 @@ else
   end
 end
 
+# require File.dirname(__FILE__)+'/lib/'
+
 config.to_prepare do
-  ActionController::Base.send :include, OpenIdAuthentication
+  ActionController::Base.send :include, ::OpenIdAuthentication
 end

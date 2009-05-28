@@ -1,5 +1,11 @@
-%h2 groups
+%h2 regional groups
 %ul
   -@groups.each do |group|
+    %li
+      %a{:href=>admin_group_path(group)}=group.name
+
+%h2 event groups
+%ul
+  -@once_offs.each do |group|
     %li
       %a{:href=>admin_group_path(group)}=group.name

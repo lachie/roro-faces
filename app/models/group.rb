@@ -8,6 +8,9 @@ class Group < ActiveRecord::Base
   after_create :create_feed
   
   named_scope :front_page_order, :order => 'once_off asc,name asc'
+  named_scope :regular, :conditions => 'once_off = False or once_off is null'
+  named_scope :once_off, :conditions => 'once_off = True'
+  named_scope :others, lambda {|ids| ids.blank? ? {} : {:conditions => ['id not in (?)',ids]}}
   
   def twitter_feed
     feeds.twitter.first

@@ -1,6 +1,7 @@
 class Admin::GroupsController < Admin::ApplicationController
   def index
-    @groups = Group.front_page_order
+    @groups    = Group.regular
+    @once_offs = Group.once_off
   end
   
   def show
