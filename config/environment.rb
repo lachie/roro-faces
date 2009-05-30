@@ -61,6 +61,8 @@ Rails::Initializer.run do |config|
   config.action_controller.session = { :session_key => "_faces_session", :secret => "zaphod beeblebrox? He's just this guy, you know?" }
   
   config.gem 'addressable', :lib => 'addressable/uri'
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate'
+  config.gem 'chriseppstein-compass', :lib => 'compass'
   
   Dir.glob(File.join(RAILS_ROOT,'vendor','*','lib')).each do |dir|
     config.load_paths += [dir]

@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
     
     rows = connection.select_all(%{SELECT #{user_id},count(*) as score
       FROM thankyous t
-      where datediff(now(),created_at) <= 14
+      where (current_date - created_at) <= interval '14 days'
       group by #{user_id}
       having count(*) > 0
       order by 2 desc})

@@ -4,14 +4,13 @@
 %head
   %title roro facebook
   
-  = stylesheet_link_tag 'blueprint/screen', :media => 'screen, projection'
-  = stylesheet_link_tag 'blueprint/print', :media => 'print'
+  = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
+  = stylesheet_link_tag 'compiled/print.css', :media => 'print'
   
   /[if IE]
-    = stylesheet_link_tag 'blueprint/ie', :media => 'screen, projection'
-  /[endif]
+    = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
 
-  = stylesheet_link_tag 'application', 'jquery-ui-themeroller', 'code', 'jquery.rating'
+  = stylesheet_link_tag 'jquery-ui-themeroller', 'code', 'jquery.rating'
   
   = javascript_include_tag 'jquery-1.2.6.min', 'jquery-ui-personalized-1.6rc2.min', 'jquery.rating', 'application.js'
   
@@ -19,11 +18,11 @@
   = yield :feed_tags
 
 %body{:class=>"#{controller.controller_name.downcase.dasherize} #{controller.controller_name.downcase.dasherize}-#{controller.action_name.downcase.dasherize}"}
-  .container.header-row
-    .column.span-16.prepend-1.append-1.header
+  .header-row
+    .header
       %a{:href => '/'}
         %img{:src => '/images/logo.jpg'}
-    .column.span-6.last.navigation
+    .navigation
       %ul
         -if logged_in?
           %li
@@ -51,20 +50,20 @@
           &middot;
           = link_to_unless_current 'chatter', chatter_users_path
 
-  .container.content-row
-    .column.span-16.prepend-1.append-1.content
-      %hr.space
+  .content-row
+    .content
+      -#%hr.space
       -if flash[:shoo]
         %h2=flash[:shoo]
       = yield
-    .column.span-6.last.sidebar
-      .column.span-6.last.user-search
+    .sidebar
+      .user-search
         %form{:action => search_users_path, :method => 'get'}
           %input{:name => 'q', :value => params[:q]}
       = yield(:sidebar)
   
-  .container.footer-row
-    .column.span-18.last.footer.quiet
+  .footer-row
+    .footer.quiet
       All content and design &copy; roro, or the individual authors.  
   
   
