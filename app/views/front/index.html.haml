@@ -1,39 +1,18 @@
--content_for(:sidebar) do
-  %h2 in the ether
-  %ul
-    =render :partial => 'shared/tweet', :collection => @tweets
+-#%h2 in the ether
+-#%ul
+-#  =render :partial => 'shared/tweet', :collection => @tweets
 
-.column.span-8
-  %h2 meetups
-  %ul
-    -@meetups.each do |meetup|
-      %li
-        %a{:href => group_meeting_path(meetup.group,meetup)}
-          =meetup.group.name
-          =meetup.to_s
 
-    -@groups.each do |group|
-      %li
-        %a{:href => group_path(group)}
-          =group.name
-          (meetup tba)
-      
--if @repo
-  .column.span-8.last
-    %h2
-      %img{:src => @repo.user.mugshot.url(:thumb)}
-      %a{:href => @repo.url}
-        =@repo.full_name
-    .span-8
-      =@repo.description
-    .span-8
-      %em.name
-        by
-        =@repo.user.name
-        -unless @repo.user.location.blank?
-          from
-          =@repo.user.location
-    .span-8
-      ==#{pluralize(@repo.watchers-1, 'watcher')},
-      ==#{pluralize(@repo.forks     , 'forks' )}
+-unless @next_meetups.blank?
+  .meetups
+    %strong
+      -#%img{:src=>'images/beer-icon.png'}
+      upcoming meetups
+    %ul
+      -@next_meetups.each do |meetup|
+        %li
+          %a{:href => group_meeting_path(meetup.group,meetup)}
+            =meetup.group.name
+            =meetup.date.to_s(:brief)
+
 

@@ -5,18 +5,13 @@
   .column.span-16.last.edit
     =link_to "Edit #{@user.nick}", edit_user_path(@user)
 
-%hr.space
-
-
-.column.span-6.mugshot
+.mugshot
   =image_tag @user.mugshot.url
-  
-  %hr.space
   
   .box.thankyous{:class => logged_in_but_other_user? ? 'highlighted' : ''}
     = render :partial => 'thankyous'
 
-.column.span-10.last
+.details
   .name-location
     %h2=@user.name_with_fallback
     
@@ -56,12 +51,10 @@
     %ul.groups
       = render :partial => 'affiliation_show', :collection => @user.affiliations
 
-
-
 %hr
 
 -if @user.facets.size > 0
-  .column.span-16.last.facets
+  .facets
     %h2 
       facets
       %span==of #{@user.nick}'s web presence.

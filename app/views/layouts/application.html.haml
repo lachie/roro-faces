@@ -23,32 +23,30 @@
       %a{:href => '/'}
         %img{:src => '/images/logo.jpg'}
     .navigation
+      -#.user-search
+      %form.user-search{:action => search_users_path, :method => 'get'}
+        %input{:name => 'q', :value => params[:q]}
       %ul
         -if logged_in?
           %li
-            %strong.large
-              Hi 
-              = link_to current_user.nick, user_path(current_user)
+            Hi 
+            = link_to current_user.nick, user_path(current_user)
             (
             = link_to 'log out', logout_path
             )
           
         -else
           %li
-            To edit your profile, please
             = link_to 'log in', login_path
-          %li
             or
             = link_to 'sign up', signup_path
 
         %li
           = link_to_unless_current 'pinboard', pinboard_users_path
-          &middot;
+        %li
           = link_to_unless_current 'hey,beers', beerating_users_path
-          &middot;
+        %li
           = link_to_unless_current 'facets', facets_path
-          &middot;
-          = link_to_unless_current 'chatter', chatter_users_path
 
   .content-row
     .content
@@ -56,11 +54,17 @@
       -if flash[:shoo]
         %h2=flash[:shoo]
       = yield
+
     .sidebar
-      .user-search
-        %form{:action => search_users_path, :method => 'get'}
-          %input{:name => 'q', :value => params[:q]}
-      = yield(:sidebar)
+      =render :partial => 'shared/sidebar_code'
+      =render :partial => 'shared/sidebar_meetups'
+ 
+      =yield(:sidebar)
+
+    .content-footer
+    -#.sidebar
+    -#  .user-search
+    -#  = yield(:sidebar)
   
   .footer-row
     .footer.quiet

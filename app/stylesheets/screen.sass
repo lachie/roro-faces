@@ -1,115 +1,37 @@
 @import blueprint.sass
 @import compass/reset.sass
+@import compass/utilities/lists.sass
+@import compass/layout.sass
 
 +blueprint
+
+!hi_colour = #a83f3f
+#d64949
+
+!light_color = #909090
+
+=hi
+  :color = !hi_colour
+  font-family: "Futura", "Helvetica Neue", Helvetica, Arial, sans-serif
+  
+=light
+  :color = !light_color
 
 ul
   :list-style-image url(/images/smiley_bullet.png)
 
+a
+  :color = !hi_colour
+  border: none
+  text-decoration: none
 
-.header-row
-  +container
-  :height 97px
-
-  .header img
-    +column(16)
-    +prepend(1)
-    +append(1)
-    :vertical-align bottom
-
-
-  .navigation
-    +column(6,true)
-    :min-height 97px
-    :height 100%
-    :vertical-align bottom
-    :text-align center
-
-    ul
-      :position relative
-      :bottom -40px
-      :list-style-type none
-      :list-style-image none
-
+  &:focus,&:visited
+    :color #5c2222
     
 
-.content-row
-  +container
-
-  .content
-    +column(16)
-    +prepend(1)
-    +append(1)
-    :border-top 1.1em solid #a0a0a0
-    :padding-top .4em
-    :background #f3f3f3
-
-    .blurb
-      :font-style italic
-
-    hr.space
-      :background #f3f3f3
-      :color #f3f3f3
-
-
-
-.footer-row
-  +container
-
-  .footer
-    +column(18,true)
-    :text-align center
-    :background #FaFaFa
-    :padding 1.5em 0
-
-
-.sidebar
-  +column(6,true)
-  :border-top 1.1em solid #f0f0f0
-  :padding-top .4em
-
-  .user-search
-    +column(6,true)
-    :text-align center
-
-    .blurred
-      :color #aaa
-
-
-.mugshot
-  :text-align center
-
-
-.facets
-  h2
-    :padding-left 34px
-    :background url(/images/facets.png) no-repeat
-
-  td.favicon
-    :width 16px
-
-  .person
-    :width 120px
-    :float left
-    :text-align center
-    :background #e0e0e0
-    :padding 4px 0
-    :margin 0 4px 4px 0
-
-
-.groups .person, .users .person
-  :width 120px
-  :float left
-  :text-align center
-  :background #e0e0e0
-  :padding 4px 0
-  :margin 0 4px 4px 0
-
-
-a
-  :border none
-  :text-decoration none
-
+strong
+  +hi
+  font-weight: normal
 
 h2 span, h3 span
   :font-size .5em
@@ -126,6 +48,180 @@ h2 a, h3 a
   :text-decoration none
   :padding-bottom -2px
   :border-bottom 1px solid #d68787
+
+
+
+.header-row
+  +container
+  :height 97px
+
+  .header img
+    +column(16)
+    +prepend(1)
+    +append(1)
+    :vertical-align bottom
+
+
+  .navigation
+    +column(6,true)
+    :min-height = 97px - 24px
+    :text-align center
+    :background #cfe9fa
+    :margin
+      :top 1em
+
+    input
+      margin:
+        top: 1em
+
+    ul
+      +inline-list
+      li
+        margin:
+          :right .5em
+          :left .5em
+
+    
+
+.content-row
+  +container
+  :border-top 1.1em solid #a0a0a0
+  :background #f3f3f3
+
+  .content-footer
+    +clearfix
+
+  .content
+    +column(15)
+    +prepend(1)
+    +colborder
+    :padding-top 1.4em
+
+    .blurb
+      :font-style italic
+
+    hr.space
+      :background #f3f3f3
+      :color #f3f3f3
+
+    .front &
+      .meetups
+        background: #f4f0b0
+        text-align: center
+
+        ul
+          +inline-list
+          :list-style-type disc
+
+    .users &
+      .mugshot
+        +column(5)
+        :text-align center
+
+      .edit
+        +column(16,true)
+
+      .details
+        +column(10,true)
+
+      .facets
+        +column(16,true)
+        h2
+          :padding-left 34px
+          :background url(/images/facets.png) no-repeat
+
+        td.favicon
+          :width 16px
+
+    .facets &
+      h2
+        :padding-left 34px
+        :background url(/images/facets.png) no-repeat
+
+      td.favicon
+        :width 16px
+
+      .person
+        :width 120px
+        :float left
+        :text-align center
+        :background #e0e0e0
+        :padding 4px 0
+        :margin 0 4px 4px 0
+
+
+  .sidebar
+    +column(7,true)
+
+
+    .meetups
+      +column(7)
+      padding:
+        top: 1em
+    .code
+      +column(7,true)
+      +border
+
+
+      :background #ebebeb
+
+      .description
+        margin: 1em
+      .user
+        +column(7,true)
+        em
+          +light
+
+      .meta
+        +column(7,true)
+
+      .repo
+        +column(5)
+
+      .mugshot
+        +column(2,true)
+        text-align: right
+
+
+#+sticky-footer(180px,".content-row",".content-footer",".footer-row")
+
+.footer-row
+  +container
+  :background #fefefe
+
+  .footer
+    +column(24,true)
+    :text-align center
+    #:background #FaFaFa
+    :padding 1.5em 0
+
+
+.sidebar-old
+  +column(6,true)
+  :border-top 1.1em solid #f0f0f0
+  :padding-top .4em
+
+  .user-search
+    +column(6,true)
+    :text-align center
+
+    .blurred
+      :color #aaa
+
+
+
+
+
+
+.groups .person, .users .person
+  :width 120px
+  :float left
+  :text-align center
+  :background #e0e0e0
+  :padding 4px 0
+  :margin 0 4px 4px 0
+
+
 
 
 .rating
