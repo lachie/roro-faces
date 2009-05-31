@@ -44,7 +44,7 @@
 require 'open4'
 
 class Albino
-  @@bin = RAILS_ENV == 'production' ? '/usr/bin/pygmentize' : 'pygmentize'
+  @@bin = ENV['RACK_ENV'] != 'production' ? 'pygmentize' : '/usr/bin/pygmentize'
 
   def self.bin=(path)
     @@bin = path
@@ -56,25 +56,37 @@ class Albino
   end
 
   def initialize(target, lexer = :text, format = :html)
-    lexer = lexer.blank? ? 'text' : lexer
+    lexer ||= 'text'
     
     @target  = File.exists?(target) ? File.read(target) : target rescue target
     @options = { :l => lexer, :f => format }
   end
 
   def execute(command)
+    puts "command: #{command}"
     pid, stdin, stdout, stderr = Open4.popen4(command)
+
+    puts "reading stdin"
     stdin.puts @target
     stdin.close
+    puts "done reading stdin"
     
     
-    err = stderr.read
+    begin
+      err = stderr.read_nonblock(0)
+    rescue EAGAIN
+      puts "nothing on err"
+      err = nil
+    end
+    puts "done reading stderr"
     
-    if !err.blank?
+    if err && !err.empty?
+      err += stderr.read
       puts "failed to convert using command #{command}"
       puts err
       "failed to convert: (#{command})"
     else
+      puts "reading stdout"
       stdout.read.strip
     end
   end
@@ -90,6 +102,56 @@ class Albino
     end
   end
 end
+
+
+module Haml::Filters::Textile
+  DELIM_RE = %r[^----*(.*)$]
+
+  def render_with_pygments(text)
+    code       = ''
+    non_code   = ''
+    formatting = false
+    language   = nil
+
+    new_text = ''
+
+    text.each do |line|
+
+      if line[DELIM_RE]
+        if !formatting
+          language = $1.strip
+
+          new_text << render_without_pygments(non_code)
+          formatting = true
+        else
+          language = nil
+
+          new_text << Albino.colorize( code, language, :O => 'linenos=table')
+          formatting = false
+        end
+
+        non_code   = ''
+        code       = ''
+
+      elsif formatting
+        code << line
+      else
+        non_code << line
+      end
+
+    end
+
+    unless non_code.strip.empty?
+      new_text << render_without_pygments(non_code)
+    end
+
+    new_text
+  end
+
+  alias :render_without_pygments :render
+  alias :render :render_with_pygments
+end
+
 
 if $0 == __FILE__
   require 'rubygems'

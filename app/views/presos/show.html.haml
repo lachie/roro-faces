@@ -4,8 +4,9 @@
     -@other_presos.each do |preso|
       %a{:href => group_meeting_preso_path(@group,@meeting,preso)}
         =preso.title
-        &mdash;
-        =preso.user.nick
+        -if preso.user
+          &mdash;
+          =preso.user.nick
 
 -if authorised?
   %a{:href => edit_group_meeting_preso_path(@group,@meeting,@preso)} edit

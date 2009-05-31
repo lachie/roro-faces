@@ -28,6 +28,15 @@ class Meeting < ActiveRecord::Base
   def to_s
     self.date.to_s(:long_nice)
   end
+
+  # feed
+  def title
+    "title"
+  end
+
+  def body_html
+    "body"
+  end
   
   def formatted_date; date.strftime('%d/%m/%Y') if date end
   def formatted_time; date.strftime('%H:%M'   ) if date end
@@ -41,8 +50,11 @@ class Meeting < ActiveRecord::Base
     end
   end
   
+  def filter_textile(text)
+  end
+
   def apply_filter
-    self.analogue_blog_html = FacesFormatter.format_as_xhtml(self.analogue_blog)
-    self.spiel_html = FacesFormatter.format_as_xhtml(self.spiel)
+    #self.analogue_blog_html = filter_textile(self.analogue_blog)
+    #self.spiel_html         = filter_textile(self.spiel)
   end
 end

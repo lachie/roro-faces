@@ -5,8 +5,13 @@
     
     =f.label :description, "Description <span>#{formatting_help}</span>"
     =f.text_area :description
+
+    =f.label :user_id, "Who's talking (user id for now)"
+    =f.text_field :user_id
     
-    =f.label :allow_feedback, "I want feedback on my talk. <span>(people can leave comments either way)</span>"
+  %fieldset
+    =f.label :allow_feedback, "Allow feedback on the talk. <span>(people can leave comments either way)</span>"
     =f.check_box :allow_feedback
     
+  %fieldset
     =f.submit

@@ -42,6 +42,9 @@ task :beta, :roles => :app, :except => { :no_release => true } do
 end
 
 
+after 'deploy:update', 'deploy:cleanup'
+
+
 desc "Link up database.yml."
 after 'deploy:symlink' do
  cmds = [

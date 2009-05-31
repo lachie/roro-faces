@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :facet_kinds
   
+  map.resources :meetings
   map.resources :facets
   map.resources :repos
 
@@ -50,6 +51,7 @@ ActionController::Routing::Routes.draw do |map|
   map.reset_password 'accounts/reset_password', :controller => 'accounts', :action => 'reset_password'
   
   
+  map.feed "/index", :controller => 'front'
   
   # The priority is based upon order of creation: first created -> highest priority.
   
