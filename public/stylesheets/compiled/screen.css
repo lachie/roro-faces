@@ -472,6 +472,8 @@ h2 a, h3 a { color: #d64949; text-decoration: none; padding-bottom: -2px; border
 * html .users .content-row .content .facets { overflow-x: hidden; }
 .users .content-row .content .facets h2 { padding-left: 34px; background: url(/images/facets.png) no-repeat; }
 .users .content-row .content .facets td.favicon { width: 16px; }
+.meetings-show .content-row .content ul.presos { list-style-image: none; margin-left: 0px; }
+.meetings-show .content-row .content ul.presos li { color: #a83f3f; font-family: "Futura", "Helvetica Neue", Helvetica, Arial, sans-serif; background: url(/images/talk-tiny.png) no-repeat 0 2px; padding-left: 18px; list-style-type: none; margin-left: 0px; }
 .facets .content-row .content h2 { padding-left: 34px; background: url(/images/facets.png) no-repeat; }
 .facets .content-row .content td.favicon { width: 16px; }
 .facets .content-row .content .person { width: 120px; float: left; text-align: center; background: #e0e0e0; padding: 4px 0; margin: 0 4px 4px 0; }

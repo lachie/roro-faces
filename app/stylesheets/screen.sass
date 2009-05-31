@@ -18,6 +18,11 @@
 =light
   :color = !light_color
 
+=tinytalk
+  :background url(/images/talk-tiny.png) no-repeat 0 2px
+  :padding-left 18px
+
+
 ul
   :list-style-image url(/images/smiley_bullet.png)
 
@@ -126,8 +131,7 @@ h2 a, h3 a
         .meetup
           :background = !light_bg
           .preso strong
-            :background url(/images/talk-tiny.png) no-repeat 0 2px
-            :padding-left 18px
+            +tinytalk
 
             span
               :font-size .9em
@@ -165,6 +169,16 @@ h2 a, h3 a
 
         td.favicon
           :width 16px
+
+    .meetings-show &
+
+      ul.presos
+        list-style-image: none
+        margin-left: 0px
+        li
+          +hi
+          +tinytalk
+          +no-bullet
 
     .facets &
       h2

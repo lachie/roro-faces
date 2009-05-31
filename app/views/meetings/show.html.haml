@@ -1,29 +1,22 @@
+%a{:href => group_path(@group)}
+  &larr;
+  =@group.name
 %h3
-  %a{:href => group_path(@group)}=@group.name
-  ,
   =@meeting
-  
-.where
-  =@meeting.where
-
-%hr.space
+  %span
+    =@meeting.where
 
 .spiel
+  %h4 spiel
   :textile
     #{@meeting.spiel}
 
--unless @meeting.analogue_blog.blank?
-  %h4 analogue blog / meeting notes
-  :textile
-    #{@meeting.analogue_blog}
-
-%hr.space
 
 %h4 presentations
 -if @meeting.presos.blank?
   hey, would you like to give a talk?
 -else
-  %ul
+  %ul.presos
     -@meeting.presos.each do |preso|
       %li
         %a{:href => group_meeting_preso_path(@group,@meeting,preso)}
@@ -31,3 +24,9 @@
           -if preso.user
             &mdash;
             =preso.user.nick
+
+-unless @meeting.analogue_blog.blank?
+  %h4 analogue blog / meeting notes
+  :textile
+    #{@meeting.analogue_blog}
+            
