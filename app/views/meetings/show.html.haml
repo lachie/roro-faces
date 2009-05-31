@@ -28,5 +28,6 @@
       %li
         %a{:href => group_meeting_preso_path(@group,@meeting,preso)}
           =preso.title
-          &mdash;
-          =preso.user.nick
+          -if preso.user
+            &mdash;
+            =preso.user.nick

@@ -8,5 +8,24 @@
 .spiel
   :textile
     #{meetup.spiel}
+
+.presos
+  -if meetup.presos.blank?
+    How about stepping up to present something you've been working on?
+
+  -else
+    %h4 presos
+    -meetup.presos.each do |preso|
+      .preso
+        %strong
+          %a{:href=>polymorphic_path([preso.meeting.group,preso.meeting,preso])}
+            =preso.title
+          -if preso.user
+            %span
+              by
+              =preso.user.nick
+        :textile
+          #{preso.description}
+
 .details
   %a{:href => group_meeting_path(meetup.group,meetup)} details &rarr;

@@ -457,6 +457,8 @@ h2 a, h3 a { color: #d64949; text-decoration: none; padding-bottom: -2px; border
 .front .content-row .content .meetups ul { list-style-type: none; margin: 0px; padding: 0px; display: inline; list-style-type: disc; }
 .front .content-row .content .meetups ul li { margin: 0px; padding: 0px; display: inline; }
 .front .content-row .content .news .meetup { background: #ebebeb; }
+.front .content-row .content .news .meetup .preso strong { background: url(/images/talk-tiny.png) no-repeat 0 2px; padding-left: 18px; }
+.front .content-row .content .news .meetup .preso strong span { font-size: .9em; color: #222222; }
 .front .content-row .content .news div { padding-left: .75em; }
 .front .content-row .content .news h3 { padding-top: .5em; }
 .front .content-row .content .news .details { margin-bottom: 1em; padding-bottom: 1em; }
