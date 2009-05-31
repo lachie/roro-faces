@@ -9,12 +9,12 @@
 %hr.space
 
 .spiel
-  :plain
-    #{@meeting.spiel_html}
+  :textile
+    #{@meeting.spiel}
 
 -unless @meeting.analogue_blog.blank?
   %h4 analogue blog / meeting notes
-  :plain
+  :textile
     #{@meeting.analogue_blog}
 
 %hr.space
