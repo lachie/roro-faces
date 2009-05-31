@@ -1,0 +1,25 @@
+.code
+  %strong
+    %a.repo{:href => @repo.url}
+      =@repo.full_name
+    %a.mugshot{:href => user_path(@repo.user)}
+      %img{:src => @repo.user.mugshot.url(:thumb)}
+  .description
+    =@repo.description
+
+  .meta
+    ==#{pluralize(@repo.watchers-1, 'watcher')},
+    ==#{pluralize(@repo.forks     , 'forks' )}
+
+  .user
+    -if !@repo.user.name.blank?
+      %em.name
+        &rarr;
+        =@repo.user.name
+        -unless @repo.user.location.blank?
+          from
+          =@repo.user.location
+      &middot;
+    %a{:href=>repos_path} more code...
+
+

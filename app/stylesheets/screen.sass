@@ -9,6 +9,7 @@
 #d64949
 
 !light_color = #909090
+!light_bg = #ebebeb
 
 =hi
   :color = !hi_colour
@@ -100,6 +101,11 @@ h2 a, h3 a
     .blurb
       :font-style italic
 
+    .pagination
+      a
+        border: 1px solid #ccc
+        padding: .5em .8em
+
     hr.space
       :background #f3f3f3
       :color #f3f3f3
@@ -108,10 +114,27 @@ h2 a, h3 a
       .meetups
         background: #f4f0b0
         text-align: center
+        margin:
+          bottom: 1em
 
         ul
           +inline-list
           :list-style-type disc
+
+      .news 
+        .meetup
+          :background = !light_bg
+        div
+          padding:
+            left: .75em
+        h3
+          padding:
+            top: .5em
+        .details
+          margin:
+            bottom: 1em
+          padding:
+            bottom: 1em
 
     .users &
       .mugshot
@@ -149,6 +172,25 @@ h2 a, h3 a
         :padding 4px 0
         :margin 0 4px 4px 0
 
+    .repos &
+      .repo
+        +column(16,true)
+        :background = !light_bg
+        :padding-top .5em
+        :margin
+          :bottom 1em
+        .mugshot
+          +column(2)
+        .details
+          +column(13)
+          .heading
+            +column(13)
+            .link
+              +column(9)
+            .watches
+              +column(3)
+          .description
+            +column(13)
 
   .sidebar
     +column(7,true)
@@ -163,7 +205,7 @@ h2 a, h3 a
       +border
 
 
-      :background #ebebeb
+      :background = !light_bg
 
       .description
         margin: 1em

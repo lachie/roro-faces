@@ -15,4 +15,7 @@
             =meetup.group.name
             =meetup.date.to_s(:brief)
 
-
+.news
+  -@meetups.each do |(partial,meetup)|
+    .meetup[meetup]
+      =render :partial => partial, :object => meetup

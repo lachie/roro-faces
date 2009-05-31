@@ -1,0 +1,12 @@
+%h3
+  next meetup :
+  =meetup.group.short_name
+  %span
+    =meetup.date.to_s(:brief).downcase
+    &middot;
+    =meetup.where
+.spiel
+  :textile
+    #{meetup.spiel}
+.details
+  %a{:href => group_meeting_path(meetup.group,meetup)} details &rarr;

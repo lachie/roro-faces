@@ -7,3 +7,4 @@ public/mugshots
 config/gmail.rb
 db/*.sqlite3
 .*.sw?
+app/stylesheets/.sass-cache

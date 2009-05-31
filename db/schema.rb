@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090531143000) do
+ActiveRecord::Schema.define(:version => 20090531161348) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "user_id"
@@ -99,6 +99,8 @@ ActiveRecord::Schema.define(:version => 20090531143000) do
     t.text     "spiel_html"
     t.text     "analogue_blog"
     t.text     "analogue_blog_html"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "mugshots", :force => true do |t|

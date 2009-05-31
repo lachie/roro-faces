@@ -1,3 +1,6 @@
+%a{:href => '/admin'} &larr; admin
+%a{:href => admin_groups_path} &larr; groups
+
 %h2=@group.name
 %h3 meetups
 =list_of_children(@group,:meetings) do |meeting|

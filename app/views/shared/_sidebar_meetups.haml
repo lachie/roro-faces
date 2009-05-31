@@ -1,0 +1,15 @@
+.meetups
+  %h3 meetups
+  %ul
+    -@next_meetups.each do |meetup|
+      %li
+        %a{:href => group_meeting_path(meetup.group,meetup)}
+          =meetup.group.name
+          =meetup.to_s
+
+    -@sidebar_groups.each do |group|
+      %li
+        %a{:href => group_path(group)}
+          =group.name
+          (meetup tba)
+

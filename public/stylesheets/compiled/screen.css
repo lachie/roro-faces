@@ -451,10 +451,15 @@ h2 a, h3 a { color: #d64949; text-decoration: none; padding-bottom: -2px; border
 .content-row .content { display: inline; float: left; margin-right: 10px; width: 590px; padding-left: 40px; padding-right: 24px; margin-right: 25px; border-right: 1px solid #eee; padding-top: 1.4em; }
 * html .content-row .content { overflow-x: hidden; }
 .content-row .content .blurb { font-style: italic; }
+.content-row .content .pagination a { border: 1px solid #ccc; padding: .5em .8em; }
 .content-row .content hr.space { background: #f3f3f3; color: #f3f3f3; }
-.front .content-row .content .meetups { background: #f4f0b0; text-align: center; }
+.front .content-row .content .meetups { background: #f4f0b0; text-align: center; margin-bottom: 1em; }
 .front .content-row .content .meetups ul { list-style-type: none; margin: 0px; padding: 0px; display: inline; list-style-type: disc; }
 .front .content-row .content .meetups ul li { margin: 0px; padding: 0px; display: inline; }
+.front .content-row .content .news .meetup { background: #ebebeb; }
+.front .content-row .content .news div { padding-left: .75em; }
+.front .content-row .content .news h3 { padding-top: .5em; }
+.front .content-row .content .news .details { margin-bottom: 1em; padding-bottom: 1em; }
 .users .content-row .content .mugshot { display: inline; float: left; margin-right: 10px; width: 190px; text-align: center; }
 * html .users .content-row .content .mugshot { overflow-x: hidden; }
 .users .content-row .content .edit { display: inline; float: left; margin-right: 0; width: 630px; }
@@ -468,6 +473,20 @@ h2 a, h3 a { color: #d64949; text-decoration: none; padding-bottom: -2px; border
 .facets .content-row .content h2 { padding-left: 34px; background: url(/images/facets.png) no-repeat; }
 .facets .content-row .content td.favicon { width: 16px; }
 .facets .content-row .content .person { width: 120px; float: left; text-align: center; background: #e0e0e0; padding: 4px 0; margin: 0 4px 4px 0; }
+.repos .content-row .content .repo { display: inline; float: left; margin-right: 0; width: 630px; background: #ebebeb; padding-top: .5em; margin-bottom: 1em; }
+* html .repos .content-row .content .repo { overflow-x: hidden; }
+.repos .content-row .content .repo .mugshot { display: inline; float: left; margin-right: 10px; width: 70px; }
+* html .repos .content-row .content .repo .mugshot { overflow-x: hidden; }
+.repos .content-row .content .repo .details { display: inline; float: left; margin-right: 10px; width: 510px; }
+* html .repos .content-row .content .repo .details { overflow-x: hidden; }
+.repos .content-row .content .repo .details .heading { display: inline; float: left; margin-right: 10px; width: 510px; }
+* html .repos .content-row .content .repo .details .heading { overflow-x: hidden; }
+.repos .content-row .content .repo .details .heading .link { display: inline; float: left; margin-right: 10px; width: 350px; }
+* html .repos .content-row .content .repo .details .heading .link { overflow-x: hidden; }
+.repos .content-row .content .repo .details .heading .watches { display: inline; float: left; margin-right: 10px; width: 110px; }
+* html .repos .content-row .content .repo .details .heading .watches { overflow-x: hidden; }
+.repos .content-row .content .repo .details .description { display: inline; float: left; margin-right: 10px; width: 510px; }
+* html .repos .content-row .content .repo .details .description { overflow-x: hidden; }
 .content-row .sidebar { display: inline; float: left; margin-right: 0; width: 270px; }
 * html .content-row .sidebar { overflow-x: hidden; }
 .content-row .sidebar .meetups { display: inline; float: left; margin-right: 10px; width: 270px; padding-top: 1em; }
