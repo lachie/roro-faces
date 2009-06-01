@@ -17,7 +17,8 @@ class Meeting < ActiveRecord::Base
   named_scope :next,  :conditions => %{date > current_date}, :order => 'date desc'
   named_scope :previous, :condiitons => %{date < current_date}, :order => 'date desc'
   named_scope :last_analogue_blog, :conditions => %{row(date,group_id) in (
-      select max(date),group_id from meetings where length(analogue_blog) > 0
+      select max(date),group_id from meetings 
+      where date < current_date
       group by group_id)}, :order => 'date desc'
   
   

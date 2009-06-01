@@ -1,11 +1,19 @@
 %h3
-  last anablog :
+  last meetup :
   =blog.group.short_name
   %span
     =blog.date.to_s(:brief).downcase
-.blog
-  :textile
-    #{blog.analogue_blog}
+
+-unless blog.presos.blank?
+  .presos
+    =render :partial => 'presos', :object => blog.presos
+
+
+-unless blog.analogue_blog.blank?
+  .blog
+    :textile
+      #{blog.analogue_blog}
+
 .details
   %a{:href => group_meeting_path(blog.group,blog)} details &rarr;
 

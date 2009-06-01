@@ -1,0 +1,13 @@
+%h4 presos
+-presos.each do |preso|
+  .preso
+    %strong
+      %a{:href=>polymorphic_path([preso.meeting.group,preso.meeting,preso])}
+        =preso.title
+      -if preso.user
+        %span
+          by
+          =preso.user.nick
+    :textile
+      #{preso.description}
+
