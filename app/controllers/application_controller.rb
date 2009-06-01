@@ -9,26 +9,72 @@ class ApplicationController < ActionController::Base
 
   before_filter :redirect_from_lachie_dot_info
     
-  include AuthenticatedSystem
-  before_filter :login_from_cookie
+  helper :all
+  helper_method :current_user_session, :current_user, :superuser?, :logged_in?
+
+  filter_parameter_logging :password, :password_confirmation
   
   before_filter :load_globals
   around_filter :add_current_user_to_thread
 
+
+  protected
+
   def logged_in_but_other_user?
-    admin? || superuser? || (@user && logged_in? && current_user != @user)
+    current_user && (admin? || superuser? || (@user && logged_in? && current_user != @user))
   end
   
   def authorized?(user=@user)
-    current_user == user || admin? || superuser?
+    current_user && current_user == user || admin? || superuser?
   end
   
   def superuser?
-    logged_in? && current_user.superuser?
+    current_user && current_user.superuser?
   end
-  helper_method :superuser?
+
   
-  protected
+  def current_user_session
+    return @current_user_session if defined?(@current_user_session)
+    @current_user_session = UserSession.find
+  end
+  
+  def current_user
+    return @current_user if defined?(@current_user)
+    @current_user = current_user_session && current_user_session.record
+  end
+
+  def logged_in?
+    !! current_user
+  end
+  
+  def require_user
+    unless current_user
+      store_location
+      flash[:notice] = "You must be logged in to access this page"
+      redirect_to new_user_session_url
+      return false
+    end
+  end
+
+  def require_no_user
+    if current_user
+      store_location
+      flash[:notice] = "You must be logged out to access this page"
+      redirect_to account_url
+      return false
+    end
+  end
+  
+  def store_location
+    session[:return_to] = request.request_uri
+  end
+  
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
+  end
+
+
   def load_globals
     @repo = Repo.front_page_random.first
     @next_meetups = Meeting.next.all(:include => :group)
