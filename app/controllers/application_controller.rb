@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # Pick a unique cookie name to distinguish our session data from others'
   #session :session_key => '_facebook_session_id'
   
-  include ApplicationHelper
+  #include ApplicationHelper
 
   before_filter :redirect_from_lachie_dot_info
     
