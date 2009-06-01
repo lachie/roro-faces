@@ -1,6 +1,7 @@
 %h3
-  next meetup :
-  =meetup.group.short_name
+  %a{:href=>polymorphic_path([meetup.group,meetup])}
+    next meetup :
+    =meetup.group.short_name
   %span
     =meetup.date.to_s(:brief).downcase
     &middot;

@@ -1,6 +1,7 @@
 %h3
-  last meetup :
-  =blog.group.short_name
+  %a{:href=>polymorphic_path([blog.group,blog])}
+    last meetup :
+    =blog.group.short_name
   %span
     =blog.date.to_s(:brief).downcase
 

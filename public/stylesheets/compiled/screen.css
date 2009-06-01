@@ -431,8 +431,6 @@ h2 span, h3 span { font-size: .5em; color: #222222; }
 
 h2, h3, h4, .title { color: #d64949; font-family: "Futura", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-h2 a, h3 a { color: #d64949; text-decoration: none; padding-bottom: -2px; border-bottom: 1px solid #d68787; }
-
 .header-row { width: 950px; margin: 0 auto; overflow: hidden; display: inline-block; height: 97px; }
 .header-row { display: block; }
 .header-row .header img { display: inline; float: left; margin-right: 10px; width: 630px; padding-left: 40px; padding-right: 40px; vertical-align: bottom; }
