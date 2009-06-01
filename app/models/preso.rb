@@ -20,7 +20,7 @@ class Preso < ActiveRecord::Base
   end
   
   def apply_filter
-    self.description_html = FacesFormatter.format_as_xhtml(self.description)
+    self.description_html = Pygments.render(self.description)
   end
   
   def avg_rating

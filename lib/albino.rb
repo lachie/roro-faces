@@ -44,7 +44,7 @@
 require 'open4'
 
 class Albino
-  @@bin = ENV['RACK_ENV'] != 'production' ? 'pygmentize' : '/usr/bin/pygmentize'
+  @@bin = ENV['RACK_ENV'] != 'production' ? '/usr/local/bin/pygmentize' : '/usr/bin/pygmentize'
 
   def self.bin=(path)
     @@bin = path
@@ -104,10 +104,10 @@ class Albino
 end
 
 
-module Haml::Filters::Textile
+class Pygments
   DELIM_RE = %r[^----*(.*)$]
 
-  def render_with_pygments(text)
+  def self.render(text)
     code       = ''
     non_code   = ''
     formatting = false
@@ -148,9 +148,14 @@ module Haml::Filters::Textile
     new_text
   end
 
-  alias :render_without_pygments :render
-  alias :render :render_with_pygments
+  def self.render_without_pygments(non_code)
+    RedCloth.new(non_code).to_html
+  end
 end
+
+#class TextileFormatter
+#  include LesstileFormatter
+#end
 
 
 if $0 == __FILE__

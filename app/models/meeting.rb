@@ -8,6 +8,8 @@ class Meeting < ActiveRecord::Base
   before_validation :parse_formatted
   
   validates_presence_of :date
+
+  before_save :apply_filter
   
   named_scope :by_date, lambda {|d| {:conditions => ['date(date)=?',d.to_date]}}
 
@@ -51,11 +53,8 @@ class Meeting < ActiveRecord::Base
     end
   end
   
-  def filter_textile(text)
-  end
-
   def apply_filter
-    #self.analogue_blog_html = filter_textile(self.analogue_blog)
-    #self.spiel_html         = filter_textile(self.spiel)
+    self.analogue_blog_html = Pygments.render(self.analogue_blog)
+    self.spiel_html         = Pygments.render(self.spiel)
   end
 end

@@ -5,8 +5,8 @@
     =blog.date.to_s(:brief).downcase
 
 .spiel
-  :textile
-    #{blog.spiel}
+  :plain
+    #{blog.spiel_html}
 
 -unless blog.presos.blank?
   .presos
@@ -16,8 +16,8 @@
 -unless blog.analogue_blog.blank?
   .blog
     %h4 analogue blog / meeting notes
-    :textile
-      #{blog.analogue_blog}
+    :plain
+      #{blog.analogue_blog_html}
 
 .details
   %a{:href => group_meeting_path(blog.group,blog)} details &rarr;

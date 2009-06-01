@@ -10,6 +10,6 @@ class Comment < ActiveRecord::Base
   
   protected 
   def apply_filter
-    self.comment_html = FacesFormatter.format_as_xhtml(self.comment)
+    self.comment_html = Pygments.render(self.comment)
   end
 end

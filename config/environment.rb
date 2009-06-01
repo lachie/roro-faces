@@ -63,6 +63,7 @@ Rails::Initializer.run do |config|
   config.gem 'addressable', :lib => 'addressable/uri'
   config.gem 'mislav-will_paginate', :lib => 'will_paginate'
   config.gem 'chriseppstein-compass', :lib => 'compass'
+  config.gem 'RedCloth'
   
   Dir.glob(File.join(RAILS_ROOT,'vendor','*','lib')).each do |dir|
     config.load_paths += [dir]

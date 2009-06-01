@@ -8,8 +8,8 @@
 
 .spiel
   %h4 spiel
-  :textile
-    #{@meeting.spiel}
+  :plain
+    #{@meeting.spiel_html}
 
 
 %h4 presentations
@@ -27,6 +27,6 @@
 
 -unless @meeting.analogue_blog.blank?
   %h4 analogue blog / meeting notes
-  :textile
-    #{@meeting.analogue_blog}
+  :plain
+    #{@meeting.analogue_blog_html}
             
