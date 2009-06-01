@@ -9,7 +9,7 @@
           =preso.user.nick
 
 -if authorised?
-  %a{:href => admin_group_meeting_preso_path(@group,@meeting,@preso)} edit
+  %a{:href => edit_group_meeting_preso_path(@group,@meeting,@preso)} edit
 
 %h3
   %a{:href => group_path(@group)}=@group.name

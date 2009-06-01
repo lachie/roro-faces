@@ -4,6 +4,10 @@
   %span
     =blog.date.to_s(:brief).downcase
 
+.spiel
+  :textile
+    #{blog.spiel}
+
 -unless blog.presos.blank?
   .presos
     =render :partial => 'presos', :object => blog.presos
