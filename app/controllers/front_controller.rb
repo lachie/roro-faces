@@ -9,7 +9,7 @@ class FrontController < ApplicationController
         @meetups += @next_meetups.map {|m| ['meetup',m]}
         @meetups += Meeting.last_analogue_blog.map {|m| ['blog',m]}
 
-        @meetups.sort! {|a,b| a[1].updated_at <=> b[1].updated_at}
+        #@meetups.sort! {|a,b| a[1].updated_at <=> b[1].updated_at}
       end
       wants.atom do
         @meetups = Meeting.all(:order => 'updated_at desc')
