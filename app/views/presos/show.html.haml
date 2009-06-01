@@ -8,13 +8,19 @@
           &mdash;
           =preso.user.nick
 
+
+%a{:href => group_path(@group)}
+  &larr;
+  =@group.name
+
+%a{:href => group_meeting_path(@group,@meeting)}
+  &larr;
+  =@meeting.date.to_s(:long_ordinal)
+
 -if authorised?
+  |
   %a{:href => edit_group_meeting_preso_path(@group,@meeting,@preso)} edit
 
-%h3
-  %a{:href => group_path(@group)}=@group.name
-  ,
-  %a{:href => group_meeting_path(@group,@meeting)}=@meeting.date.to_s(:long_ordinal)
 
 =render :partial => 'preso', :object => @preso
 

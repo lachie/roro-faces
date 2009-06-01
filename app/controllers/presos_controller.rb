@@ -1,8 +1,6 @@
 class PresosController < ApplicationController
   before_filter :load_meeting
   
-  
-  
   def index
     @meeting.presos
   end
@@ -13,6 +11,28 @@ class PresosController < ApplicationController
     @group   ||= @meeting.group
     
     @other_presos = @meeting.presos - [@preso]
+  end
+
+  def edit
+    @preso = Preso.find(params[:id])
+
+    unless authorized?(@preso.user)
+      return redirect_to('/')
+    end
+
+    @meeting ||= @preso.meeting
+    @group   ||= @meeting.group
+  end
+
+  def update
+    @preso = Preso.find(params[:id])
+
+    unless authorized?(@preso.user)
+      return redirect_to('/')
+    end
+
+    @preso.update_attributes(params[:preso]) or raise RecordNotSaved
+    redirect_to group_meeting_preso_path(@group,@meeting,@preso)
   end
   
   # moved to admin
@@ -30,9 +50,6 @@ class PresosController < ApplicationController
   #   end
   #   
   #   def update
-  #     @preso = Preso.find(params[:id])
-  #     @preso.update_attributes(params[:preso]) or raise RecordNotSaved
-  #     redirect_to group_meeting_preso_path(@group,@meeting,@preso)
   #   end
   
   protected

@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
     admin? || superuser? || (@user && logged_in? && current_user != @user)
   end
   
-  def authorized?
-    current_user == @user || admin? || superuser?
+  def authorized?(user=@user)
+    current_user == user || admin? || superuser?
   end
   
   def superuser?
