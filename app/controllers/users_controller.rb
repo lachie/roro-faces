@@ -132,20 +132,25 @@ class UsersController < ApplicationController
   
   def update
     @user.attributes = params[:user]
-    @user.save!
-    
-    redirect_to user_url(@user)
-  # rescue
-    # render :action => 'edit'
+    @user.save do |result|
+      if result
+        redirect_to user_url(@user)
+      else
+        render :action => 'edit'
+      end
+    end
   end
   
   def create
     @user = User.new(params[:user])
 
-    if @user.save
-      redirect_back_or_default user_path(@user)
-    else
-      render :action => 'new'
+    @user.save do |result|
+      if result
+        flash[:notice] = 'Successfully signed up'
+        redirect_back_or_default user_path(@user)
+      else
+        render :action => 'new'
+      end
     end
   end
   
