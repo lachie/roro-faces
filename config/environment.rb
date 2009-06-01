@@ -64,6 +64,9 @@ Rails::Initializer.run do |config|
   config.gem 'mislav-will_paginate', :lib => 'will_paginate'
   config.gem 'chriseppstein-compass', :lib => 'compass'
   config.gem 'RedCloth'
+
+  config.gem "authlogic"
+  config.gem "authlogic-oid", :lib => "authlogic_openid"
   
   Dir.glob(File.join(RAILS_ROOT,'vendor','*','lib')).each do |dir|
     config.load_paths += [dir]

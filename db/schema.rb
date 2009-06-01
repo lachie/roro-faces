@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090531161348) do
+ActiveRecord::Schema.define(:version => 20090601115736) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "user_id"
@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(:version => 20090531161348) do
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
+    t.string   "password_salt",             :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_token"
@@ -229,8 +229,18 @@ ActiveRecord::Schema.define(:version => 20090531161348) do
     t.string   "mugshot_content_type"
     t.integer  "mugshot_file_size"
     t.datetime "mugshot_updated_at"
-    t.string   "openid",                                                     :null => false
+    t.string   "openid_identifier",                                          :null => false
     t.boolean  "superuser",                               :default => false
+    t.string   "persistence_token",                       :default => "",    :null => false
+    t.string   "single_access_token",                     :default => "",    :null => false
+    t.string   "perishable_token",                        :default => "",    :null => false
+    t.integer  "login_count",                             :default => 0,     :null => false
+    t.integer  "failed_login_count",                      :default => 0,     :null => false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
   end
 
 end
