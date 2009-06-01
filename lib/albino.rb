@@ -108,6 +108,8 @@ class Pygments
   DELIM_RE = %r[^----*(.*)$]
 
   def self.render(text)
+    return '' if text.blank?
+
     code       = ''
     non_code   = ''
     formatting = false
