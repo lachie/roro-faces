@@ -1,22 +1,16 @@
 class UsersController < ApplicationController
-  #skip_before_filter :login_from_cookie, :except => [:edit]
   append_before_filter :strip_permalink
-  append_before_filter :load_user, :only => [:edit,:update, :show, :link_affiliation]
-  append_before_filter :login_required, :only => [ :edit, :update ]
+  append_before_filter :load_user, :only => [:edit, :update, :show, :link_affiliation]
+
+  append_before_filter :require_user, :only => [ :edit, :update ]
+  append_before_filter :require_no_user, :only => [ :new, :create ]
+
   
   perform_caching && after_filter do |c|
     c.cache_page if (c.action_name == 'chatter' or c.action_name == 'all_chatter') and c.params[:format] == 'svg'
   end
   cache_sweeper :user_sweeper
   
-  
-  def strip_permalink
-    params[:id].split('-').first unless params[:id].blank?
-  end
-  
-  def load_users
-    @users = User.find(:all)
-  end
   
   def index
     if nick = params[:nick]
@@ -147,12 +141,12 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    self.current_user = @user
-    @user.save!
-    
-    redirect_to user_url(@user)
-  rescue
-    render :action => 'new'
+
+    if @user.save
+      redirect_back_or_default user_path(@user)
+    else
+      render :action => 'new'
+    end
   end
   
   def link_affiliation
@@ -172,6 +166,14 @@ class UsersController < ApplicationController
   end
   
   protected
+  def strip_permalink
+    params[:id].split('-').first unless params[:id].blank?
+  end
+  
+  def load_users
+    @users = User.find(:all)
+  end
+
   def load_user
     @user = User.find(params[:id])
   end

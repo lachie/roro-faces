@@ -48,10 +48,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :user_sessions
   
-  map.logout 'accounts/logout', :controller => 'accounts', :action => 'logout'
-  map.login  'accounts/login', :controller => 'accounts', :action => 'login'
-  map.signup 'accounts/signup', :controller => 'accounts', :action => 'signup'
-  map.reset_password 'accounts/reset_password', :controller => 'accounts', :action => 'reset_password'
+  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
+  map.login  'login', :controller => 'user_sessions', :action => 'new'
+  map.signup 'signup', :controller => 'users', :action => 'new'
+
+  # map.reset_password 'accounts/reset_password', :controller => 'accounts', :action => 'reset_password'
   
   
   map.feed "/index", :controller => 'front'
