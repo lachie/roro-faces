@@ -14,7 +14,7 @@
   
   = javascript_include_tag 'jquery-1.2.6.min', 'jquery-ui-personalized-1.6rc2.min', 'jquery.rating', 'application.js'
 
-  = auto_discovery_link_tag :atom, meetings_url(:format => :atom)
+  = auto_discovery_link_tag :atom, 'http://feeds2.feedburner.com/RoRo'
   
   = yield :header
   = yield :feed_tags
