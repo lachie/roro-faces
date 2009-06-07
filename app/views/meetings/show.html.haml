@@ -21,9 +21,9 @@
       %li
         %a{:href => group_meeting_preso_path(@group,@meeting,preso)}
           =preso.title
-          -if preso.user
-            &mdash;
-            =preso.user.nick
+        -if preso.user
+          &mdash;
+          =user_link(preso.user)
 
 -unless @meeting.analogue_blog.blank?
   %h4 analogue blog / meeting notes

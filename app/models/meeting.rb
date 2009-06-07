@@ -48,11 +48,15 @@ class Meeting < ActiveRecord::Base
   end
 
   def feed_title
-    "#{group.name} meetup #{self}"
+    "#{group.name} : meetup : #{self}"
   end
 
   def feed_body
     spiel_html
+  end
+
+  def feed_partial
+    'feed_meeting'
   end
 
   def feed_url

@@ -5,7 +5,7 @@ atom_feed do |feed|
   for meetup in @meetups
     feed.entry(meetup, :url => meetup.feed_url) do |entry|
       entry.title(meetup.feed_title)
-      entry.content(meetup.feed_body, :type => 'html')
+      entry.content(render(:partial => meetup.feed_partial, :locals => {:meetup => meetup}), :type => 'html')
 
       entry.author do |author|
         author.name("roro")

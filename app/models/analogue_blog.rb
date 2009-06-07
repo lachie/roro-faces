@@ -21,6 +21,10 @@ class AnalogueBlog
     "#{group.name} : analogue blog : #{@meeting}"
   end
 
+  def feed_partial
+    'feed_blog'
+  end
+
   def feed_body
     @meeting.analogue_blog_html
   end
