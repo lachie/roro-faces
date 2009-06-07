@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :facet_kinds
   
   map.resources :meetings
+  map.resources :analogue_blogs, :controller => :meetings
   map.resources :facets
   map.resources :repos
 

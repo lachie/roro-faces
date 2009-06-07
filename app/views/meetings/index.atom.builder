@@ -3,9 +3,9 @@ atom_feed do |feed|
   feed.updated(@meetups.first.updated_at)
 
   for meetup in @meetups
-    feed.entry(meetup) do |entry|
-      entry.title(meetup.title)
-      entry.content(meetup.body_html, :type => 'html')
+    feed.entry(meetup, :url => meetup.feed_url) do |entry|
+      entry.title(meetup.feed_title)
+      entry.content(meetup.feed_body, :type => 'html')
 
       entry.author do |author|
         author.name("roro")

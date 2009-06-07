@@ -9,3 +9,13 @@ task :fix_seq => :environment do
     end
   end
 end
+
+task :fix_dates => :environment do
+  now = Time.now
+  Meeting.all.each do |m|
+    if !m.analogue_blog.blank?
+      m.blog_updated_at = m.blog_created_at = now
+      m.save!
+    end
+  end
+end
