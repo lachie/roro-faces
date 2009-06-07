@@ -25,6 +25,10 @@ class AnalogueBlog
     'feed_blog'
   end
 
+  def to_param
+    @meeting.to_param
+  end
+
   def feed_body
     @meeting.analogue_blog_html
   end

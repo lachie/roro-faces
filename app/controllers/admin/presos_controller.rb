@@ -7,12 +7,12 @@ class Admin::PresosController < Admin::ApplicationController
   
   def create
     @preso = @meeting.presos.create!(params[:preso])
-    redirect_to polymorphic_path([:admin,@group,@meeting,@preso])
+    redirect_to polymorphic_path([:admin,@group,@meeting])
   end
   
   def update
     @preso.update_attributes!(params[:preso])
-    redirect_to polymorphic_path([:admin,@group,@meeting,@preso])
+    redirect_to polymorphic_path([:admin,@group,@meeting])
   end
   
   protected
