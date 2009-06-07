@@ -168,15 +168,15 @@ ActiveRecord::Schema.define(:version => 20090601125933) do
   end
 
   create_table "repos", :force => true do |t|
+    t.string  "username"
     t.string  "name"
     t.text    "description"
     t.string  "url"
     t.boolean "fork"
     t.integer "forks"
     t.integer "watchers"
-    t.integer "user_id"
     t.integer "score"
-    t.string  "username"
+    t.integer "user_id"
   end
 
   create_table "sessions", :force => true do |t|

@@ -1,15 +1,20 @@
+
+set :dump_time, Time.now.strftime('%Y%m%d_%H%M%S')
+
 desc "get data"
 task :get_data, :role => :app do
-  now = Time.now.strftime('%Y%m%d_%H%M%S')
+  set :dumped, "faces.#{dump_time}.sql"
   
-  set :dumped, "faces.#{now}.sql"
-  set :mugs  , "faces.#{now}.tar.bz2"
-  
-  run "cd /tmp && mysqldump -u root faces > #{dumped} && bzip2 #{dumped}"
-  run "cd /tmp && tar jcvf /tmp/#{mugs} #{shared_path}/public/mugshots"
+  run "cd /tmp && pg_dump faces > #{dumped} && bzip2 #{dumped}", :env => {'PGUSER' => 'faces', 'PGPASSWORD' => 'faces', 'PGHOST' => 'localhost'}
   
   get "/tmp/#{dumped}.bz2", "./#{dumped}.bz2"
-  get "/tmp/#{mugs}"      , "./#{mugs}"
   
-  run "rm /tmp/#{dumped}.bz2 /tmp/#{mugs}"
+  run "rm /tmp/#{dumped}.bz2"
+end
+
+task :get_mugshots do
+  set :mugs  , "faces.#{dump_time}.tar.bz2"
+  run "cd /tmp && tar jcvf /tmp/#{mugs} #{shared_path}/public/mugshots"
+  get "/tmp/#{mugs}"      , "./#{mugs}"
+  run "rm  /tmp/#{mugs}"
 end
