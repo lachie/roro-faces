@@ -2,24 +2,47 @@
 %a{:href => admin_groups_path} &larr; groups
 %a{:href => polymorphic_path([:admin,@meeting.group])}== &larr; #{@meeting.group.short_name}
 
-%h2
+%h3
   %a{:href => polymorphic_path([:admin,@meeting.group])}=@meeting.group.name
   \:
   =@meeting
   
-%a{:href => group_meeting_path(@group,@meeting)} preview
+
+
+.spiel
+  %h4 spiel
+  -if @meeting.spiel.blank?
+    Enter a speil for your meetup. If something special is happening, mention it here.
+  -else
+    :plain
+      #{@meeting.spiel_html}
+
+.blog
+  %h4 analogue blog / meeting notes
+  -if @meeting.analogue_blog.blank?
+    Enter analogue blog or meeting notes as a wrap up for your meeting.
+    -else
+      :plain
+        #{@meeting.analogue_blog_html}
   
-%h3
-  %a.toggler{:href => '#edit'} edit
+[
+%a.toggler{:href => '#edit'} edit the meetup's text
+] [
+%a{:href => group_meeting_path(@group,@meeting)} preview meetup
+]
+
 #edit
   =render :partial => 'form', :locals => {:meeting => @meeting}
 
 %h3 presos
 =list_of_children(@meeting,:presos) do |preso|
   %a{:href => polymorphic_path([:admin,@meeting.group,@meeting,preso])}=preso.title
+  &mdash;
+  %span=user_link(preso.user)
   
-%h3
-  %a.toggler{:href => '#new'} new preso
+[
+%a.toggler{:href => '#new'} add preso
+]
     
 #new
   =render :partial => 'admin/presos/form', :locals => {:preso => @meeting.presos.build}

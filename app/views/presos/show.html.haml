@@ -45,12 +45,12 @@
 
 -unless @preso.comments.blank?
   %h3 you reckon...
-  =render :partial => 'comment', :collection => @preso.comments
+  =render :partial => 'comments/comment', :collection => @preso.comments
 
 
 -if logged_in?
   .span-16.last
     %h3 comment
-    =render :partial => 'comment_form', :locals => {:comment => Comment.new, :preso => @preso}
+    =render :partial => 'comments/comment_form', :locals => {:comment => Comment.new, :preso => @preso}
 -else
   log in to comment & rate.

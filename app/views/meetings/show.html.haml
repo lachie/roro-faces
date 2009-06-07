@@ -1,10 +1,15 @@
 %a{:href => group_path(@group)}
   &larr;
   =@group.name
+-if authorised?
+  |
+  %a{:href => admin_group_meeting_path(@group,@meeting)} admin
+
 %h3
   =@meeting
   %span
     =@meeting.where
+
 
 .spiel
   %h4 spiel
