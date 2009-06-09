@@ -3,7 +3,7 @@
   %ul
     -for preso in meetup.presos
       %li
-        %a{:href => group_meeting_preso_path(meetup.group,meetup,preso)}
+        %a{:href => group_meeting_preso_url(meetup.group,meetup,preso)}
           =preso.title
         -if preso.user
           &mdash;
