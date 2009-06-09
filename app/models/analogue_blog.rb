@@ -9,6 +9,10 @@ class AnalogueBlog
     @meeting = meeting
   end
 
+  def id
+    @meeting.id
+  end
+
   def updated_at
     @meeting.blog_updated_at
   end
