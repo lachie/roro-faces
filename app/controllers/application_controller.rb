@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_from_lachie_dot_info
     
   helper :all
-  helper_method :current_user_session, :current_user, :superuser?, :logged_in?, :logged_in_but_other_user?, :admin?
+  helper_method :current_user_session, :current_user, :superuser?, :logged_in?, :logged_in_but_other_user?, :admin?, :authorized?
 
   filter_parameter_logging :password, :password_confirmation
   

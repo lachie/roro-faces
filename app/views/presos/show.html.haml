@@ -17,7 +17,7 @@
   &larr;
   =@meeting.date.to_s(:long_ordinal)
 
--if authorised?
+-if authorized?(@preso.user)
   |
   %a{:href => edit_group_meeting_preso_path(@group,@meeting,@preso)} edit
 
